@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+
+/* MODAL DE AVATARES */
+
+.modal-background {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(50px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-container * {
+    color: var(--cor-carvao);
+}
+
+.modal-container {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+        'avatar input'
+        'icons icons'
+        'assignment assignment'
+        'conclude conclude';
+    row-gap: .2em;
+    z-index: 10;
+    padding: 2em 3em;
+    width: 50vw;
+    height: 80vh;
+    background: rgba(254, 254, 254, 0.507);
+    border: 1px solid var(--cor-cinza-fraco);
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgba(177, 177, 177, 0.282);
+}
+
+.modal-container>.avatar-preview {
+    grid-area: avatar;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin-left: 1em;
+    margin-bottom: .8em;
+}
+
+.modal-container>.input-file-container {
+    grid-area: input;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    column-gap: 1em;
+    align-self: center;
+    padding: 2em;
+    border: 1px solid rgba(128, 128, 128, 0.21);
+    border-radius: 20px;
+
+}
+
+.input-file-container>.title {
+    height: fit-content;
+}
+
+.input-file-mask {
+    cursor: pointer;
+    border: 1px solid var(--cor-azul-claro-3);
+    box-shadow: 2px 2px 3px rgba(70, 79, 116, 0.173);
+    background: var(--cor-azul-claro);
+    padding: 5px 30px;
+    border-radius: 20px;
+    display: flex;
+    column-gap: 1em;
+}
+
+.input-file-mask:hover {
+    background: var(--cor-azul-claro-2);
+    transition-duration: .3s;
+}
+
+.input-file-mask>svg.folder-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Icones de Avatares */
+.avatars-capsule {
+    grid-area: icons;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(204, 204, 204, 0.367);
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    flex-wrap: wrap;
+    padding: 2em 1em;
+}
+
+.avatars-capsule::before {
+    position: absolute;
+    content: 'Editar Avatar';
+    left: 1.2em;
+    top: -1.3em;
+    font-size: 1.2em;
+}
+
+.avatars-capsule>.avatar-icon:hover {
+    transform: translateY(-.3em);
+    transition-duration: .3s;
+}
+
+.avatars-capsule>.avatar-icon {
+    transform: translateY(0);
+    transition-duration: .3s;
+}
+
+.avatars-capsule>.avatar-icon,
+.avatars-capsule>.avatar-icon>button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.avatars-capsule>.avatar-icon>button>img {
+    width: 50px;
+    height: 50px;
+}
+
+.modal-container>.assignment-link {
+    grid-area: assignment;
+    font-size: .73em;
+    margin-left: 1em;
+}
+
+.modal-container>.assignment-link>a {
+    padding-left: .4em;
+    color: rgb(77, 99, 187);
+    text-decoration: underline;
+}
+
+.modal-container>.assignment-link>a:hover {
+    color: rgb(117, 128, 179);
+}
+
+.modal-container>#conclude-button {
+    transition-duration: .3s;
+    grid-area: conclude;
+    cursor: pointer;
+    width: 200px;
+    padding: .5em 1em;
+    height: fit-content;
+    justify-self: center;
+    border-radius: 25px;
+    border: 1px solid rgba(153, 103, 9, 0.566);
+    box-shadow: 2px 2px 3px rgba(131, 88, 8, 0.268);
+    background: var(--color-orange);
+    letter-spacing: 1px;
+    color: white;
+}
+
+.modal-container>#conclude-button:hover {
+    background: rgb(254, 134, 5);
+}
+
+.modal-container>#close-button {
+    cursor: pointer;
+    position: absolute;
+    top: -1em;
+    right: -1em;
+    width: fit-content;
+    height: fit-content;
+    padding: .3em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid rgba(128, 128, 128, 0.215);
+    box-shadow: -2px 2px 3px rgba(152, 152, 152, 0.307);
+}
+
+.modal-container>#close-button:hover>svg {
+    fill: var(--color-orange);
+    transition-duration: .3s;
+}
+
+.modal-container>#close-button>svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--color-gray);
+}

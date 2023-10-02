@@ -1,0 +1,17 @@
+@import url(Exports/pressets.css);
+@import url(Exports/Header.css);
+@import url(Exports/Footer.css);
+
+
+body {
+    padding-top: 10em;
+    background: var(--cor-fundo-cinza);
+}
+
+main {
+    padding: 0 2em;
+}
+
+main > p {
+    margin-bottom: 5em;
+}

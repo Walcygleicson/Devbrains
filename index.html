@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devbrains - Login / Registro</title>
+    <link rel="shortcut icon" href="Assets/Svg/dev-brain-icon-centered.svg" type="image/x-icon">
+    <link rel="stylesheet" href="Styles/login.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="Assets/Svg/dev-brain-icon-bottom.svg" alt="Logo do Site">
+        <div class="title-container">
+            <h1 class="title">
+                <span class="part1">DEV</span>
+                <span class="part2">BRAINS</span>
+            </h1>
+            <span class="title-sub-text">Challenges</span>
+        </div>
+    </header>
+    <main>
+
+        <!-- NO LOGIN CARD -->
+        <section class="no-login-card cards">
+            <h2 class="card-title">INICIAR RÁPIDO</h2>
+            <span class="card-alert">⚠️ Inicar sem login seus pontos não serão salvos ao sair do navegador!</span>
+            <ul class="challengers-container card-content-container">
+                <li id="js-challenger">
+                    <a href="">
+                        <img src="Assets/Svg/js-icon.svg" alt="Javascript logo">
+                        <span class="inner-text">JavaScript</span>
+                    </a>
+                </li>
+
+                <li id="html-css-challenger">
+                    <a href="">
+                        <img src="Assets/Svg/css-icon.svg" alt="CSS3 logo">
+                        <span class="inner-text">HTML5 & CSS3</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- LOGIN CARD -->
+        <section class="form-card cards">
+            <h2 class="card-title fade-transition">LOGIN</h2>
+            <span class="card-alert" title="Este método de save é temporário, estamos trabalhando nisso!">⚠️ Suas informações e pontos serão guardados somente neste navegador!</span>
+
+            <form class="inputs-container card-content-container " id="type-login">
+
+                <!-- NOME -->
+                <label for="name" class="input-alert" id="name-alert">
+                    <!-- Texto inserido via js -->
+                </label>
+                <div class="input fade-transition">
+                    <div class="input-icon-capsule"> <!--Icone inserido via js--> </div>
+                    <input type="text" id="name" name="name" placeholder="Nome de Usuário" minlength="3" autocomplete="off">
+                    <i class="notag"></i>
+                </div>
+                
+                <!-- SENHA -->
+                <label for="senha" class="input-alert" id="senha-alert">
+                    <!-- Texto inserido via js -->
+                </label>
+                <div class="input fade-transition">
+                    <div class="input-icon-capsule"><!--Icone inserido via js--></div>
+                   <input type="password" name="senha" id="senha" placeholder="Senha do Usuário" minlength="6" autocomplete="off">
+                   <button type="button" class="view-pass-button show-pass" id="view-senha">
+                        <!-- Icone inserido via js -->
+                   </button>
+                </div>
+
+                <!-- CONFIRMAR SENHA -->
+                <label for="confirm-senha" class="input-alert" id="confirm-alert">
+                    <!-- Texto inserido via js -->
+                </label>
+                <div class="input confirm-senha-container fade-transition">
+                    <div class="input-icon-capsule"><!--Icone inserido via js--></div>
+                    <input type="password" id="confirm-senha" name="confirm-senha" placeholder="Confirme a Senha" minlength="3" autocomplete="off">
+                    <button type="button" class="view-pass-button show-pass" id="view-confirm">
+                        <!-- Icone inserido via js -->
+                    </button>
+                </div>
+
+                <!--  -->
+                <div class="enter-automatically-container">
+                   <input type="checkbox" id="autologin" checked>
+                    <label for="autologin">Entrar automaticamente na próxima vez?</label> 
+                </div>
+               
+                <button class="confirm-button fade-transition">ENTRAR</button>
+
+                <button type="button" class="other-option-button fade-transition">
+                    <span>ou</span>
+                    <span class="inner-text">Cadastre-se!</span>
+                </button>
+            </form>
+            
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <section class="my-social-medias">
+            <ul>
+                <li>
+                    <a href="https://www.facebook.com/profile.php?id=100077914505804&mibextid=9R9pXO" target="_blank">
+                        <img src="Assets/Images/facebook-icon.png" alt="Icone do facebook">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/walcy_gleicson" target="_blank">
+                        <img src="Assets/Images/instagram-icon.png" alt="Icone do instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/Walcygleicson" target="_blank">
+                        <img src="Assets/Images/github-icon.png" alt="Icone do github">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mailto:walcygleicsonoliveira@gmail.com" target="_blank">
+                        <img src="Assets/Images/gmail-icon.png" alt="Icone do gmail">
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="footer-navigation">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Termos</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </section>
+        <div class="developed-by">Walcygleicson Oliveira / Devbrains &copy; 2023</div>
+        </div>
+    </footer>
+    <script type="module" src="Scripts/login.js"></script>
+    
+</body>
+</html>

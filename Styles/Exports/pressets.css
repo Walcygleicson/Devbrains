@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: Alexandria;
+    src: url(../../Assets/Fonts/Alexandria-VariableFont_wght.ttf) format('truetype');
+}
+
+
+
+:root {
+    --color-gray: rgb(104, 103, 103);
+    --color-orange: rgb(255, 153, 0);
+    --cor-laranja-txt-hover:rgb(237, 131, 9);
+    --cor-marrom-alaranjado:rgb(145, 78, 30);
+    --cor-cinza-fraco: rgba(223, 222, 222, 0.866);
+    --cor-cinza-fraco-2: rgb(175, 175, 175);
+    --cor-fundo-cinza: rgb(249, 249, 249);
+    --cor-azul-claro:rgb(232, 230, 253);
+    --cor-azul-claro-2:rgb(215, 211, 254);
+    --cor-azul-claro-3: rgb(189, 182, 247);
+    --cor-carvao:rgba(0, 0, 0, 0.792);
+    --font-alexandria: Alexandria;
+}
+
+* {
+    border: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 1em;
+    font-family: Alexandria;
+    font-weight: normal;
+    color: var(--color-gray);
+    text-decoration: none;
+    list-style: none;
+    user-select: none;
+}
