@@ -2,7 +2,6 @@ import svg from "./Modules/svg-icons.js";
 import { focusInOut, AUX, $, connectKey} from "./Modules/aux-tools.js";
 connectKey.create()
 
-
 // Entrar automaticamente
 // for (let index = 0; index < localStorage.length; index++) {
 //     const keys = localStorage.key(index)

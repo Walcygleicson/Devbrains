@@ -1,8 +1,9 @@
 import Footer from "./Modules/Footer.js";
 import setAvatar from "./Modules/Header.js";
 import ModalEditAvatars from "./Modules/ModalEditAvatar.js";
+import { connectKey } from "./Modules/aux-tools.js";
 import svg from "./Modules/svg-icons.js";
-
+connectKey.create()
 
 Footer('#footer-capsule')
 setAvatar('.user-avatar') // teste
