@@ -184,6 +184,7 @@ export const connectKey = {
      */
     set(user, keep) {
         let connect = JSON.parse(localStorage.getItem('connectKey'))
+        console.log(connect)
         connect.user = user==undefined? connect.user: user
         connect.keep = keep==undefined ? connect.keep : keep
         localStorage.setItem('connectKey', JSON.stringify(connect))

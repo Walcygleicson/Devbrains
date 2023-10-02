@@ -1,6 +1,6 @@
 import svg from "./Modules/svg-icons.js";
 import { focusInOut, AUX, $, connectKey} from "./Modules/aux-tools.js";
-
+connectKey.create()
 
 
 // Entrar automaticamente
@@ -155,7 +155,6 @@ enterButton.addEventListener('click', (e) => {
     if (formType('login')) {
         // Se usuário e senha forem econtrados no localStorage
         if (check.name && check.senha) {
-
                 // Sobrescreve o usuário conectado atual
                 connectKey.set(input[0].value, autologin.checked)
                 input[0].value = ''
@@ -163,7 +162,7 @@ enterButton.addEventListener('click', (e) => {
                 console.log('USUÁRIO LOGADO')
             
                 // Redireciona para a proxima página
-                window.location.href = 'Pages/main.html';
+                //window.location.href = 'Pages/main.html';
         }
 
     // REGISTRO
