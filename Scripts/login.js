@@ -161,7 +161,7 @@ enterButton.addEventListener('click', (e) => {
                 console.log('USUÁRIO LOGADO')
             
                 // Redireciona para a proxima página
-                //window.location.href = 'Pages/main.html';
+                window.location.href = 'Pages/main.html';
         }
 
     // REGISTRO
