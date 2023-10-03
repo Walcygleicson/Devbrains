@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+@import url(pressets.css);
 
 /* MODAL DE AVATARES */
 
@@ -29,7 +29,7 @@
     row-gap: .2em;
     z-index: 10;
     padding: 2em 3em;
-    width: 50vw;
+    width: 48em;
     height: 80vh;
     background: rgba(254, 254, 254, 0.507);
     border: 1px solid var(--cor-cinza-fraco);
@@ -71,6 +71,7 @@
     padding: 5px 30px;
     border-radius: 20px;
     display: flex;
+    align-items: center;
     column-gap: 1em;
 }
 
@@ -193,4 +194,96 @@
     width: 40px;
     height: 40px;
     fill: var(--color-gray);
+}
+
+/* MEDIAS */
+
+@media screen and (max-width: 850px) {
+   .modal-container {
+    width: 80vw;
+    height: 97vh;
+    place-content: center;
+    column-gap: 5%;
+    
+   }
+
+   .input-file-container > .title{
+        width: max-content;
+    }
+
+    .avatars-capsule {
+        overflow-wrap: break-word;
+        height: max-content;
+        flex-wrap: wrap;
+        width: 70vw;
+        justify-self: center;
+        margin-top: 8%;
+    }
+
+    .modal-container > .assignment-link {
+        justify-self: center;
+        overflow-wrap: break-word;
+    }
+
+    .modal-container > #conclude-button {
+        margin-top: 8%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .modal-container > .avatar-preview {
+        width: 120px;
+        height: 120px;
+    }
+
+    .modal-container > .input-file-container {
+        padding: 1em;
+    }
+
+    .modal-container > .input-file-container > * {
+        font-size: .85em;
+    }
+}
+@media screen and (max-width: 630px) {
+
+    .modal-container {
+        height: max-content;
+    }
+
+    .modal-container > .input-file-container {
+        flex-direction: column;
+        row-gap: .5em;
+        padding: .5em 1em;
+        margin-right: .5em;
+    }
+
+    
+}
+
+@media screen and (max-width: 440px) {
+    .modal-background {
+        justify-content: center;
+    }
+
+    .modal-container {
+        padding: 1em .2em;
+        width: 99vw;
+    }
+
+    .avatars-capsule {
+        height: 335px;
+        width: 90%;
+    }
+
+    .avatars-capsule::before {
+        left: 0;
+    }
+
+    .avatars-capsule::-webkit-scrollbar {
+        display: none;
+    }
+
+    .modal-container > #close-button {
+        right: 1em;
+    }
 }
