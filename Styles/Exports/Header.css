@@ -175,9 +175,9 @@ nav {
 }
 
 .profile-menu-dropdawn {
+    display: none; /*>> Flex*/
     font-family: Arial, Helvetica, sans-serif;
     position: absolute;
-    display: flex;
     flex-direction: column;
     row-gap: 1em;
     width: 400px;
@@ -211,11 +211,16 @@ nav {
     border-radius: 50%;
     display: flex;
     align-items: center;
+    justify-content: center;
     grid-area: avatar;
 }
 
 .pic-circle-container > .user-avatar {
     width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid white;
+    
 }
 .pic-circle-container > .edit-avatar-button {
     background: transparent;

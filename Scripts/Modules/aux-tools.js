@@ -135,7 +135,22 @@ export const AUX = {
             element.classList.toggle(className_b)
         }
     },
+
+    toggleDisplay(element, display_option = 'block') {
+        
+        if (element.constructor.name == 'String') {
+            element = document.querySelector(element)
+        }
+
+        if (!element.checkVisibility()) {
+            element.style.display = display_option
+        } else {
+            element.style.display = 'none'
+        }
+    }
 }
+
+
 
 
 /**

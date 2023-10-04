@@ -1,9 +1,21 @@
-import { connectKey } from "./aux-tools.js"
+import { connectKey, getUser, updateUser, AUX } from "./aux-tools.js"
+import { $ } from "./aux-tools.js"
 
-export default function setAvatar(capsule) {
-    const getUser = JSON.parse(localStorage.getItem(connectKey.get('user')))
-    console.log(getUser.avatarIdx)
-    document.querySelector(capsule).setAttribute('src', `../Assets/Avatars/default-avatar-${getUser.avatarIdx}.svg`)
+export default function Header(capsule) {
+    // Mostrar Avatar ou Foto do usuário no circle
+    $('.user-avatar').forEach((circle) => {
+        if (getUser().picture == null) {
+            circle.src =  `../Assets/Avatars/default-avatar-${getUser().avatarIdx}.svg`
+        } else {
+            circle.src = getUser().picture
+        }
+    })
+
+    //EVENTO DO ÍCONE DO PERFIL
+    $('.user-button').onclick = function (e) {
+        const dropdawn = $('.profile-menu-dropdawn')
+        AUX.toggleDisplay(dropdawn, 'flex')
+    }
 
 
     ////

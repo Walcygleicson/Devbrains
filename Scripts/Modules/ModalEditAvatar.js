@@ -1,5 +1,5 @@
 import svg from "./svg-icons.js";
-import { stringToHtml, connectKey, updateUser } from "./aux-tools.js";
+import { stringToHtml, connectKey, updateUser, getUser } from "./aux-tools.js";
 
 let previwResult = {
     avatar: undefined,
@@ -15,7 +15,7 @@ export default function ModalEditAvatars(capsule) {
     const stringElement = `
         <div class="modal-container">
             <button id="close-button">${svg.closeCircle()}</button>
-           <img class="user-avatar avatar-preview" src="../Assets/Avatars/default-avatar-${JSON.parse(localStorage.getItem(connectKey.get('user'))).avatarIdx}.svg" alt="Avatar do Usuário">
+           <img class="user-avatar avatar-preview" src="##" alt="Avatar do Usuário">
 
            <div class="input-file-container">
                <div class="title">Use sua foto</div>
@@ -40,6 +40,14 @@ export default function ModalEditAvatars(capsule) {
     `
     // Convert string em html
     const node = stringToHtml(stringElement)
+
+    //Insere O avatar ou arquivo de imagem do usuário
+    if (getUser().picture == null) {
+        node.querySelector('.avatar-preview').src = `../Assets/Avatars/default-avatar-${getUser().avatarIdx}.svg`
+    } else {
+        node.querySelector('.avatar-preview').src = getUser().picture
+    }
+
     // Inserindo os ícones de Avatares no elemento avatars-capsule
     for (let i = 0; i <= 15; i++) {
 
@@ -52,7 +60,6 @@ export default function ModalEditAvatars(capsule) {
 
         // Adiciona evento de click em cada botão da coleção de avatares
         iconNode.addEventListener('click', (e) => {
-            console.log(JSON.parse(localStorage.getItem(connectKey.get('user'))).avatarIdx == i)
             //Mostra o avtar selecionado no avatar-preview
             node.querySelector('.avatar-preview').setAttribute('src', e.target.src)
             // Guarda a informação do incone
@@ -60,7 +67,7 @@ export default function ModalEditAvatars(capsule) {
             previwResult.type = 'index'
 
             // Check se o icone da coleção selecionado é o mesmo já usado e salvo no avatarIdx
-            if (JSON.parse(localStorage.getItem(connectKey.get('user'))).avatarIdx != i) {
+            if (getUser().avatarIdx != i) {
                 // Se for um ícone difernete, salva a informação que um icone novo foi selecionado
               previwResult.change = true
             }
