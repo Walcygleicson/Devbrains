@@ -262,10 +262,10 @@ registerButton.addEventListener('click', (e) => {
         }
 
         if (canPlay) {
-            AUX.toggleClassNames(elem, 'fade-hide', 'fade-show')
+            AUX.replaceClassNames(elem, 'fade-hide', 'fade-show')
 
             setTimeout(() => {
-                AUX.toggleClassNames(elem, 'fade-hide', 'fade-show')
+                AUX.replaceClassNames(elem, 'fade-hide', 'fade-show')
                 canPlay = true
             }, 500)
         }
@@ -283,8 +283,7 @@ $('.view-pass-button').forEach((butt, i) => {
 
     //EVENTO
     butt.onclick = () => {
-        AUX.toggleClassNames(butt, 'show-pass', 'hide-pass')
-
+        AUX.replaceClassNames(butt, 'show-pass', 'hide-pass')
         if (butt.classList.contains('show-pass')) {
             butt.innerHTML = svg.view()
             butt.previousElementSibling.type = 'password'

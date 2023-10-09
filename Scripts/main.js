@@ -1,7 +1,7 @@
 import Footer from "./Modules/Footer.js";
 import Header from "./Modules/Header.js";
 import ModalEditAvatars from "./Modules/ModalEditAvatar.js";
-import { connectKey, $ } from "./Modules/aux-tools.js";
+import { connectKey, _domList, $} from "./Modules/aux-tools.js";
 import svg from "./Modules/svg-icons.js";
 connectKey.create()
 
@@ -14,4 +14,9 @@ document.querySelector('.pic-circle-container > .edit-avatar-button').addEventLi
     ModalEditAvatars('#modal-capsule')
     
 })
+
+
+// Modal de logout
+
+
 

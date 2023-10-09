@@ -126,8 +126,125 @@ export function focusInOut(targets, listener) {
 }
 
 
+/**
+ * Verifica se um número é inteiro (Int) ou decimal (Float) retornando.
+ * 
+ * @param {Number} number 
+ */
+// const _numberType = (number) => {
+//     if (_type(number) == 'Number') {
+
+//         if (Number.isInteger(number)) {
+//             return 'Int'
+//         } else {
+//             return 'Float'
+//         }
+//     } else {
+//         return console.error(`ERRO DE TIPO\n_numberType(1) >>> Param 1/1\nO argumento " ${number} " do tipo ${_type(number)} é inválido!\nEsperado o tipo Number`)
+//     }
+// }
+
+/**
+ * Retorna o tipo de um objeto.
+ * 
+ * @param {object} object O objeto a ser verificado
+ * @returns {String}
+ */
+const _type = (obj) => {
+    //Verifica se é um node element
+    if (obj.nodeType != undefined) {
+        return 'Element'
+    }
+    return obj.constructor.name
+}
+
+
+export const _domList = (arg) => {
+    let elementList = [] // Guarda os elementos prontos e tratados.
+    
+    // Converte o arg em Array caso valor passado não for um.
+    if (_type(arg) != 'Array' && _type(arg) != 'NodeList') {
+        arg = [arg]
+    } else if (_type(arg) == 'NodeList') {
+        return [...arg]
+    }
+    arg.forEach((item, i) => {
+
+        // Verificando os tipos de args passados.  
+        switch (_type(item)) {
+            case 'String':
+                elementList.push(...document.querySelectorAll(arg[i]))
+                break;
+                
+            case 'NodeList':
+                elementList.push(...item)
+                break;
+            
+            case 'Element':
+                elementList.push(item)
+                break;
+            
+            case 'Array':
+                item.every((val) => {
+
+                    if (_type(val) == 'String') {
+                        return elementList.push(...document.querySelectorAll(val))
+                    } else if (_type(val) == 'Element') {
+                        return  elementList.push(val);
+                    } else if (_type(val) == 'NodeList') {
+                        return elementList.push(...val)
+                    } else {
+                        return console.warn(`ALERTA DE TIPO!\nO valor ${val} tipo ${_type(val)} é inválido neste escopo!\nEsperado tipo Selector | Element | NodeList\n***\nEste valor "${val}" será ignorado, considere corrigí-lo!`)
+                    }
+                })
+                break
+
+            case 'Object':
+                const keys = Object.keys(item)
+                keys.forEach((val) => {
+                    if (_type(item[val]) == 'String') {
+                        elementList.push(...document.querySelectorAll(item[val]))
+                    } else if (_type(item[val]) == 'Element') {
+                        elementList.push(item[val]);
+                    } else if (_type(item[val]) == 'NodeList') {
+                        elementList.push(...item[val])
+                    } else if (_type(item[val] == 'Array')) {
+                        //Verificando a prop que recebe Array
+                        item[val].map((it) => {
+                            if (_type(it) == 'String') {
+                                elementList.push(...document.querySelectorAll(it))
+                            } else if (_type(it) == 'Element') {
+                                elementList.push(it)
+                            } else if (_type(it) == 'Array') {
+                                // Neste escopo o Array de conter apenas elementos html
+                                for (const $itm of it) {
+                                    _type($itm) == 'Element'? elementList.push($itm): console.warn(`ALERTA DE TIPO!\nO valor ${$itm} tipo ${_type($itm)} é inválido neste escopo!\nEsperado tipo Element\n***\nEste valor "${$itm}" será ignorado, considere corrigí-lo!`)
+                                }
+                            } else {
+                                console.warn(`ALERTA DE TIPO!\nO valor ${it} tipo ${_type(it)} é inválido neste escopo!\nEsperado tipo Selector | Element | NodeList\n***\nEste valor "${it}" será ignorado, considere corrigí-lo!`)
+                            }
+                        })
+                    } else {
+                        console.warn(`ALERTA DE TIPO!\nO valor ${val} tipo ${_type(val)} é inválido\nEsperado tipo Selector | Element | NodeList\n***\nEste valor "${val}" será ignorado, considere corrigí-lo!`)
+                    }
+                })
+                break
+                
+        }
+    })
+
+    
+     return elementList
+}
+
+
 export const AUX = {
-    toggleClassNames(element, className_a, className_b){
+    replaceClassNames(element, className_a, className_b) {
+        // Verifica se o arg passado é um elemento ou uma string seletor
+        if (element.nodeType == undefined) {
+            element = document.querySelector(element)
+        }
+
         if (!element.classList.contains(className_a) && !element.classList.contains(className_b)) {
             element.classList.add(className_a)
         } else if (element.classList.contains(className_a) || element.classList.contains(className_b)) {
@@ -136,8 +253,28 @@ export const AUX = {
         }
     },
 
+    /**
+     * 2 Paramentros | Obrigatórios
+     * 
+     * **Alterna entre remover e adicionar um nome de classe a cada chamada.**
+     * 
+     * Exemplo:
+     * * Na primeira chamada, se o elemento possui o className, este é removido. Na segunda chamada o className é adicionado de volta... O evento se repete a cada chamada.
+     * @param {HTMLElement|string} element O elemento
+     * @param {Selector} className 
+     */
+    toggleClassName(element, className) {
+        element = _domList(element)  // Ainda não terminado!!
+    },
+
+
+    /**
+     * Alterna o a propriedade CSS display (in-line) de um elemento entre 'none' e 'block' sempre que for cahamada.
+     * 
+     * @param {HTMLElement | string} element O elemento HTML que deve receber a propriedade
+     * @param {string} display_option **Opcional -** O valor da propriedade display. O padrão e 'block'. 
+     */
     toggleDisplay(element, display_option = 'block') {
-        
         if (element.constructor.name == 'String') {
             element = document.querySelector(element)
         }
@@ -147,6 +284,10 @@ export const AUX = {
         } else {
             element.style.display = 'none'
         }
+    },
+
+    type(obj) {
+        return _type(obj)
     }
 }
 
@@ -171,7 +312,7 @@ export function $(selector, index) {
         if (index > 0) {
             return selector[index]
         } else {
-          return selector  
+          return selector
         }
         
     }
