@@ -3,20 +3,9 @@ import { focusInOut, AUX, $, connectKey} from "./Modules/aux-tools.js";
 connectKey.create()
 
 // Entrar automaticamente
-// for (let index = 0; index < localStorage.length; index++) {
-//     const keys = localStorage.key(index)
-//     if (keys != 'currentUserLog') {
-//         const getStorage = JSON.parse(localStorage.getItem(keys))
-//         if (getStorage.enterAutomatically) {
-//             setTimeout(() => {
-//                 // window.location.href = 'Pages/main.html';
-//             }, 1000)
-//         }
-//     }
-    
-    
-// }
-
+if (connectKey.get('user') != null && connectKey.get('keep') == true) {
+    window.location.href = 'Pages/main.html'  
+}
 
 const alert = {
     warnIcon: '⚠️',

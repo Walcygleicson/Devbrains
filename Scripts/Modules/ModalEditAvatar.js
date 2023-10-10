@@ -115,7 +115,7 @@ export default function ModalEditAvatars(capsule) {
                 updateUser(name, { avatarIdx: previwResult.avatar, picture: null })
                
             } else if (previwResult.type == 'file') {
-                updateUser(name, {picture: previwResult.avatar})
+                updateUser(name, {picture: previwResult.avatar, avatarIdx: null})
                 
             }
     

@@ -238,16 +238,33 @@ nav {
     
 }
 .pic-circle-container > .edit-avatar-button {
-    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.888);
     position: absolute;
     bottom: 0;
     right: 0;
     cursor: pointer;
 }
 
-.pic-circle-container > .edit-avatar-button > img {
+.pic-circle-container > .edit-avatar-button > svg {
     width: 25px;
     height: 25px;
+    outline: 2px solid white;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    fill: white;
+}
+
+.pic-circle-container > .edit-avatar-button:hover {
+    background: var(--cor-laranja-txt-hover);
+    transition-duration: .2s;
+    box-shadow: 2px 2px 3px rgba(108, 64, 36, 0.266);
+   
 }
 
 .hello-user {

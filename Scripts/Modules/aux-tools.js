@@ -161,13 +161,14 @@ const _type = (obj) => {
 
 export const _domList = (arg) => {
     let elementList = [] // Guarda os elementos prontos e tratados.
-    
     // Converte o arg em Array caso valor passado não for um.
     if (_type(arg) != 'Array' && _type(arg) != 'NodeList') {
         arg = [arg]
     } else if (_type(arg) == 'NodeList') {
         return [...arg]
     }
+
+
     arg.forEach((item, i) => {
 
         // Verificando os tipos de args passados.  
@@ -254,21 +255,6 @@ export const AUX = {
     },
 
     /**
-     * 2 Paramentros | Obrigatórios
-     * 
-     * **Alterna entre remover e adicionar um nome de classe a cada chamada.**
-     * 
-     * Exemplo:
-     * * Na primeira chamada, se o elemento possui o className, este é removido. Na segunda chamada o className é adicionado de volta... O evento se repete a cada chamada.
-     * @param {HTMLElement|string} element O elemento
-     * @param {Selector} className 
-     */
-    toggleClassName(element, className) {
-        element = _domList(element)  // Ainda não terminado!!
-    },
-
-
-    /**
      * Alterna o a propriedade CSS display (in-line) de um elemento entre 'none' e 'block' sempre que for cahamada.
      * 
      * @param {HTMLElement | string} element O elemento HTML que deve receber a propriedade
@@ -286,9 +272,18 @@ export const AUX = {
         }
     },
 
-    type(obj) {
-        return _type(obj)
-    }
+    /**
+     * **Insere um ou mais nós em outro elemento html.**
+     * @param {Element|string_selector|object|NodeList|Array} parent_node O elemento que recebe os nós filhos.
+     * @param {Element|string_selector|object|NodeList|Array} child_nodes O elemento (s) filho a ser inserido em parent_node
+     */
+    insertNodes(parent_node, child_nodes) {
+        parent_node = _domList(parent_node)[0]
+        child_nodes = _domList(child_nodes)
+        child_nodes.forEach((el) => {
+            parent_node.appendChild(el)
+        })
+    },
 }
 
 
