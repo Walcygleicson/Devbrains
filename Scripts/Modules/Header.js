@@ -51,11 +51,31 @@ export default function Header(capsule) {
         <!-- NAVEGAÇÃO -->
         <nav>
             <ul class="nav-itens-container">
-                <li id="current-page"><a href="${LINK.home}">Home</a></li>
-                <li><a href="${LINK.challenges}">Desafios</a></li>
-                <li class="coming-soon unv"><a href="${LINK.templates}">Templates</a></li>
-                <li class="coming-soon unv"><a href="${LINK.learning}">Aprenda</a></li>
-                <li class="coming-soon unv"><a href="${LINK.auxLib}">Biblioteca AUX</a></li>
+                <li id="current-page"><a href="${LINK.home}">
+                    <span class="inner-txt">Home</span>
+                    <div class="svg-capsule"><!-- JS --></div>
+                </a></li>
+
+
+                <li><a href="${LINK.challenges}">
+                    <span class="inner-txt">Desafios</span>
+                    <div class="svg-capsule"><!-- JS --></div>
+                </a></li>
+
+                <li class="coming-soon unv"><a href="${LINK.templates}">
+                    <span class="inner-txt">Templates</span>
+                    <div class="svg-capsule"><!-- JS --></div>
+                </a></li>
+
+                <li class="coming-soon unv"><a href="${LINK.learning}">
+                    <span class="inner-txt">Aprenda</span>
+                    <div class="svg-capsule"><!-- JS --></div>
+                </a></li>
+
+                <li class="coming-soon unv"><a href="${LINK.auxLib}">
+                    <span class="inner-txt">AUX.js</span>
+                    <div class="svg-capsule"><!-- JS --></div>
+                </a></li>
             </ul>
 
             <!-- PERFIL / CONECTAR -->
@@ -104,6 +124,14 @@ export default function Header(capsule) {
     //Inserindo o nome do usuário em hello-user
     strNodes[2].$('.hello-user > .user-name').innerText = connectKey.get('user') + '!'
     strNodes[2].$('.user-name-bar').innerHTML = connectKey.get('user')
+
+    // Insere os ícones de interface svg quando a largura da tela for ideal
+    // Atualiza sempre que a largura da janela é alterada
+    window.onresize = function () {
+        insert_nav_svg($('.svg-capsule'))
+    }
+    //Atualiza quando a página carrega
+    insert_nav_svg(strNodes[2].$('.svg-capsule'))
 
     // Redefine o id do container do usuário  se estiver conectado ou n
     if (connectKey.get('user') == null) {
@@ -160,12 +188,28 @@ export default function Header(capsule) {
     // Desconectar da conta
     strNodes[2].$('#logout').onclick = function () {
         // Insere modal
-        ModalLogout('#modal-capsule')
+        modal_logout('#modal-capsule')
     }
 
     // Insere Header em seu elemento cápsula
     AUX.insertNodes(capsule, [...strNodes])
     
+    
+}
+
+
+
+// INSERE OS ÍCONES DE INTERFACE DE NAVEGAÇÃO
+function insert_nav_svg(element) {
+    const icons = [svg.home(), svg.dice(), svg.puzzle(), svg.code(), svg.flask()]
+    if (window.innerWidth <= 900) {
+        element.forEach((el, i) => {
+            // Verifica se a capsula está vazia
+            if (!AUX.hasChild(el)) {
+                el.innerHTML = icons[i]
+            }
+        })
+    }
 }
 
 
@@ -173,7 +217,7 @@ export default function Header(capsule) {
 
 
 // MODAL DE MENSAGEM DE LOGOUT
-function ModalLogout(capsule) {
+function modal_logout(capsule) {
     const node = document.querySelector(capsule)
     const stringElement = `
         <div class="logout-modal">

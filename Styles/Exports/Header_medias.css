@@ -1,0 +1,54 @@
+
+
+@media screen and (max-width: 1070px) {
+    
+    header .logo-title-container {
+        column-gap: .6em;
+    }
+    
+    .logo-title-container > .logo {
+        width: 3.5em;
+        height: 3.5em;
+    }
+    
+    
+    .title-container > h1.title > span {
+        font-size: .6em;
+    }
+    
+    header .title-container > .title-sub-text {
+        font-size: .43em;
+    }
+    
+}
+
+@media screen and (max-width: 900px) {
+    .coming-soon::before {
+        display: none;
+    }
+
+    header .svg-capsule {
+        display: flex;
+        justify-content: center;
+    }
+   
+    
+    .nav-itens-container > li > a {
+        display: flex;
+        font-size: .6em;
+        flex-direction: column-reverse;
+        row-gap: .3em;
+        
+    }
+
+    .nav-itens-container > li:hover > a .svg-capsule > svg {
+        fill: var(--cor-laranja-txt-hover);
+        transition-duration: .3s;
+    }
+    
+    header .svg-capsule > svg {
+        width: 30px;
+        height: 30px;
+        fill: rgb(119, 118, 118);
+    }
+}

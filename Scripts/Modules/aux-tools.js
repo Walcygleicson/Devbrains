@@ -284,6 +284,24 @@ export const AUX = {
             parent_node.appendChild(el)
         })
     },
+
+    /**
+     * **Confere se um ou mais elementos possui elementos filhos e retona um boolean. Se mais de um elemento for passado o retonor será um array com resultado de cada elemento seguindo a ordem.**
+     * 
+     * @param {*} element O elemento(s) a ser analisado.
+     * @returns {Boolean}
+     */
+    hasChild(element) {
+        element = _domList(element)
+        let r = []
+        element.forEach((el) => {
+            el.children.length > 0? r.push(true): r.push(false)
+        })
+
+        if (r.length == 1) {return r[0]}
+        return r
+         
+    }
 }
 
 
