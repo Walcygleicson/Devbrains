@@ -9,7 +9,9 @@
 
 :root {
     --color-gray: rgb(104, 103, 103);
+    --cor-cinza-svg:rgb(119, 118, 118);
     --color-orange: rgb(255, 153, 0);
+    --cor-logo:rgb(255, 191, 0);
     --cor-laranja-txt-hover:rgb(237, 131, 9);
     --cor-marrom-alaranjado:rgb(145, 78, 30);
     --cor-cinza-fraco: rgba(223, 222, 222, 0.866);

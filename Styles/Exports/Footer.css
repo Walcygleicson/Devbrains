@@ -3,10 +3,11 @@ html {
 }
 
 footer {
-  margin-top: 8%; 
-  position: relative;
-  display: flex;
-  justify-content: center;
+    z-index: -10;
+    margin-top: 8%; 
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .footer {

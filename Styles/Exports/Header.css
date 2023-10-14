@@ -24,6 +24,12 @@ header {
     box-shadow: 0 1px rgba(191, 190, 190, 0.193); */
     /* box-shadow: -5px 30px 5px rgba(249, 249, 249, 0.742); */
 }
+
+.mob-type {
+    display: none;
+}
+
+
 /* UNV ALERT */
 .unv-alert-card {
     position: absolute;
@@ -93,15 +99,9 @@ nav {
     width: 70%;
     justify-content: space-between;
     align-items: flex-end;
-
     display: flex;
 }
 
-/* --- Cápsula dos ícones de interface para mídias tablets e mobiles */
-.svg-capsule {
-    display: none;
-}
-/* --- */
 
 .nav-itens-container > li {
     position: relative;

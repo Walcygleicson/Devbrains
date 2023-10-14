@@ -51,35 +51,44 @@ export default function Header(capsule) {
         <!-- NAVEGAÇÃO -->
         <nav>
             <ul class="nav-itens-container">
+        
+                <li class="close-nav mob-type">
+                    <button>${svg.arrowRight()}</button>
+                </li>
+
+                <li class="profile-itens mob-type"><!-- JS --></li>
+
                 <li id="current-page"><a href="${LINK.home}">
                     <span class="inner-txt">Home</span>
-                    <div class="svg-capsule"><!-- JS --></div>
+                    <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
 
                 <li><a href="${LINK.challenges}">
                     <span class="inner-txt">Desafios</span>
-                    <div class="svg-capsule"><!-- JS --></div>
+                    <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
                 <li class="coming-soon unv"><a href="${LINK.templates}">
                     <span class="inner-txt">Templates</span>
-                    <div class="svg-capsule"><!-- JS --></div>
+                    <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
                 <li class="coming-soon unv"><a href="${LINK.learning}">
                     <span class="inner-txt">Aprenda</span>
-                    <div class="svg-capsule"><!-- JS --></div>
+                    <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
                 <li class="coming-soon unv"><a href="${LINK.auxLib}">
                     <span class="inner-txt">AUX.js</span>
-                    <div class="svg-capsule"><!-- JS --></div>
+                    <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
+
+                <li class="account-itens mob-type"></li>
             </ul>
 
             <!-- PERFIL / CONECTAR -->
-            <div class="user-set-container" id="account-log-on">
+            <div class="user-set-container" id="account-log-off">
                 <!-- Botão do perfil-->
                 <button class="user-button">
                     <img src="#js" alt="Avatar do Usuário" class="user-avatar">
@@ -106,12 +115,15 @@ export default function Header(capsule) {
                     <section class="settings-container">
                         <a class="set-itens unv" href="${LINK.notifications}">Notificações</a>
                         <button class="set-itens" id="logout">Sair da Conta</button>
-                        </section>
-                        </div>
-                        
-                        <!-- Conectar uma conta -->
-                <a href="${LINK.login}" class="account-connect" title="Faça login ou crie um conta para uma experiência melhor">Conecte-se</a>
+                    </section>
                 </div>
+                        
+                <!-- Conectar uma conta -->
+                <a href="${LINK.login}" class="account-connect" title="Faça login ou crie um conta para uma experiência melhor">Conecte-se</a>
+
+                <!-- Botão menu hamburger para mobiles -->
+                <button class="hamburguer-button mob-type">${svg.hamburguerMenu()}</button>
+            </div>
         </nav>
         `
     // Converte os elementos string para DOM
@@ -129,9 +141,19 @@ export default function Header(capsule) {
     // Atualiza sempre que a largura da janela é alterada
     window.onresize = function () {
         insert_nav_svg($('.svg-capsule'))
+
+    }
+
+    if (window.innerWidth <= 700) {
+        strNodes[2].$('.user-button').id = 'mobile-mode'
+    } else {
+        strNodes[2].$('.user-button').removeAttribute('id')
     }
     //Atualiza quando a página carrega
     insert_nav_svg(strNodes[2].$('.svg-capsule'))
+
+    //Insere clones dos itens de configurações de perfil
+    profile_menu_clone(strNodes[2].$('.appearence-container, .settings-container'), strNodes[2].$( '.profile-itens'))
 
     // Redefine o id do container do usuário  se estiver conectado ou n
     if (connectKey.get('user') == null) {
@@ -154,14 +176,25 @@ export default function Header(capsule) {
 
     // *** EVENTOS ****
 
-    //Botão do perfil - Abre menu dropdawn
+    //Botão do perfil - Abre menu dropdawn | Menu Lateral (Mobile)
     strNodes[2].$('.user-button').onclick = function (e) {
-        AUX.toggleDisplay($('.profile-menu-dropdawn'), 'flex')
+
+        if ($('.user-button').id != 'mobile-mode') {
+            AUX.toggleDisplay($('.profile-menu-dropdawn'), 'flex')
+        } else {
+            $('.nav-itens-container').style.transitionDuration = '1s'
+            $('.nav-itens-container').style.right = 0
+        }
     }
+
+    //Botão de fechar menu lateral (Mobile)
+    strNodes[2].$('.close-nav').addEventListener('click', () => {
+        $('.nav-itens-container').style.right = '-400px'
+    })
 
 
     // Botão de editar avatar - Abre modal
-    strNodes[2].$('.pic-circle-container > .edit-avatar-button').addEventListener('click', (e) => {
+    strNodes[2].$('.user-set-container .pic-circle-container > .edit-avatar-button').addEventListener('click', (e) => {
         //Insere modal
         ModalEditAvatars('#modal-capsule')
 
@@ -249,5 +282,18 @@ function modal_logout(capsule) {
 
     node.classList.add('logout-modal-background')
     node.appendChild(domElement)
+}
+
+
+// CLONE DO MENU DE PERFIL 
+function profile_menu_clone(clone, capsule) {
+    clone = _domList(clone)
+    capsule = _domList(capsule)
+
+    clone.forEach((el) => {
+        capsule[0].appendChild(el.cloneNode(true))
+    })
+
+    
 }
 

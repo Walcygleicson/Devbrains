@@ -23,6 +23,12 @@
 }
 
 @media screen and (max-width: 900px) {
+
+    .account-connect {
+        font-size: .8em;
+        align-self: center;
+    }
+
     .coming-soon::before {
         display: none;
     }
@@ -51,4 +57,127 @@
         height: 30px;
         fill: rgb(119, 118, 118);
     }
+}
+
+
+
+@media screen and (max-width: 700px) {
+
+    header .mob-type {
+        display: block;
+    }
+    header {
+        justify-content: space-between;
+    }
+
+    header > nav {
+        width: 200px
+    }
+
+    #account-log-off {
+        align-items: center;
+        column-gap: 2em;
+    }
+
+
+    #account-log-off .hamburguer-button {
+        display: flex;
+        cursor: pointer;
+        background: var(--cor-logo);
+        padding: 5px;
+        border-radius: 7px;
+        border: 1px solid white;
+        box-shadow: 2px 2px 3px rgba(164, 164, 164, 0.312);
+        align-self: center;
+    }
+
+    #account-log-off .hamburguer-button:hover {
+        background: var(--color-orange);
+        transition-duration: .3s;
+    }
+
+    #account-log-on .hamburguer-button {
+        display: none;
+    }
+
+    .hamburguer-button > svg {
+        width: 30px;
+        height: 30px;
+        fill: white;
+    }
+
+    ul.nav-itens-container {
+        position: absolute;
+        background: white;
+        z-index: 10;
+        right: -400px;
+        top: 0;
+        border-radius: 25px 0 0 25px;
+        width: 400px;
+        height: 100vh;
+        padding: 3em 3em 1em 2em;
+        flex-direction: column;
+        row-gap: .5rem;
+        justify-content: flex-start;
+        border: 1px solid rgba(233, 233, 233, 0.781);
+        box-shadow: -2px 2px 3px rgba(171, 171, 171, 0.249);
+    }
+
+    .nav-itens-container > .close-nav {
+        position: absolute;
+        left: .7em;
+        top: .7em;
+    }
+
+    .nav-itens-container > .close-nav > button {
+        background: transparent;
+        cursor: pointer;
+        padding: .3em;
+        display: flex;
+    }
+
+    .nav-itens-container > .close-nav > button > svg {
+        fill: var(--cor-cinza-svg);
+        width: 35px;
+        height: 35px;
+    }
+
+    .nav-itens-container > li {
+        width: 100%;
+        text-align: end;
+        padding: 3px;
+        border-radius: 9px;
+        border: 1px solid transparent;
+    }
+
+    .nav-itens-container > li:not(:first-child, .profile-itens):hover {
+        transition-duration: .4s;
+        padding-left: 1em;
+        box-shadow: 2px 2px 3px rgba(184, 184, 184, 0.193);
+        border-color: rgba(209, 208, 208, 0.836);
+    }
+
+    .nav-itens-container > li.profile-itens {
+        margin: 1em 0 2em 0;
+        box-shadow: 2px 2px 3px rgba(194, 194, 209, 0.241);
+        border: 1px solid rgba(199, 199, 246, 0.104);
+        background: rgb(250, 250, 255);
+    }
+
+    .nav-itens-container > li > a {
+        justify-content: start;
+        column-gap: 2em;
+        font-size: 1em;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    .nav-itens-container > li > a > .svg-capsule {
+        display: flex;
+    }
+
+    .nav-itens-container > li#current-page::after {
+        display: none;
+    }
+    
 }
