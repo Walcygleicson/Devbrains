@@ -57,11 +57,20 @@
         height: 30px;
         fill: rgb(119, 118, 118);
     }
+
+    header .unv-alert-card {
+        width: max-content;
+        left: -54vw;
+    }
 }
 
 
 
 @media screen and (max-width: 700px) {
+
+    .unv-alert-card {
+        display: none;
+    }
 
     header .mob-type {
         display: block;
@@ -71,7 +80,7 @@
     }
 
     header > nav {
-        width: 200px
+        width: fit-content;
     }
 
     #account-log-off {
@@ -177,6 +186,23 @@
     }
 
     .nav-itens-container > li#current-page::after {
+        display: none;
+    }
+
+    nav .account-connect {
+        width: max-content;
+    }
+    #user-off {
+        padding: 2em 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    #user-off > section {
+        display: none;
+    }
+
+    #user-on > .account-connect {
         display: none;
     }
     

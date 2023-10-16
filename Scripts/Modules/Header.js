@@ -114,7 +114,7 @@ export default function Header(capsule) {
                     <!-- Configurações -->
                     <section class="settings-container">
                         <a class="set-itens unv" href="${LINK.notifications}">Notificações</a>
-                        <button class="set-itens" id="logout">Sair da Conta</button>
+                        <button class="set-itens" id="logout-button-0">Sair da Conta</button>
                     </section>
                 </div>
                         
@@ -141,27 +141,30 @@ export default function Header(capsule) {
     // Atualiza sempre que a largura da janela é alterada
     window.onresize = function () {
         insert_nav_svg($('.svg-capsule'))
-
+        //Insere id 'mobile-mode no botão de abrir menu do usuário
+        user_button_mode($('.user-button'))
     }
 
-    if (window.innerWidth <= 700) {
-        strNodes[2].$('.user-button').id = 'mobile-mode'
-    } else {
-        strNodes[2].$('.user-button').removeAttribute('id')
-    }
+    //Insere id 'mobile-mode no botão de abrir menu do usuário quando a página carregar
+    user_button_mode(strNodes[2].$('.user-button'))
+
+   
     //Atualiza quando a página carrega
     insert_nav_svg(strNodes[2].$('.svg-capsule'))
 
     //Insere clones dos itens de configurações de perfil
-    profile_menu_clone(strNodes[2].$('.appearence-container, .settings-container'), strNodes[2].$( '.profile-itens'))
+    profile_menu_clone(strNodes[2].$('.appearence-container, .settings-container, .account-connect'), strNodes[2].$( '.profile-itens'))
 
     // Redefine o id do container do usuário  se estiver conectado ou n
     if (connectKey.get('user') == null) {
         user_set_container.id = 'account-log-off'
 
+        strNodes[2].$('.profile-itens').id = 'user-off'
+
         // Se houver usuário conectado...
     } else {
         user_set_container.id = 'account-log-on'
+        strNodes[2].$('.profile-itens').id = 'user-on'
         // Mostrar Avatar ou Foto do usuário no circulo de icone
         strNodes[2].$('.user-avatar').forEach((circle) => {
             // Verifica se tem foto do usuário
@@ -176,16 +179,19 @@ export default function Header(capsule) {
 
     // *** EVENTOS ****
 
-    //Botão do perfil - Abre menu dropdawn | Menu Lateral (Mobile)
-    strNodes[2].$('.user-button').onclick = function (e) {
-
-        if ($('.user-button').id != 'mobile-mode') {
-            AUX.toggleDisplay($('.profile-menu-dropdawn'), 'flex')
-        } else {
-            $('.nav-itens-container').style.transitionDuration = '1s'
-            $('.nav-itens-container').style.right = 0
+    //Botão do perfil - Abre menu dropdawn | Botão hamburguer - Menu Lateral (Mobile)
+    strNodes[2].$('.user-button, .hamburguer-button').forEach((but) => {
+        but.onclick = function (e) {
+    
+            if ($('.user-button').id != 'mobile-mode') {
+                AUX.toggleDisplay($('.profile-menu-dropdawn'), 'flex')
+            } else {
+                $('.nav-itens-container').style.transitionDuration = '1s'
+                $('.nav-itens-container').style.right = 0
+            }
         }
-    }
+        
+    })
 
     //Botão de fechar menu lateral (Mobile)
     strNodes[2].$('.close-nav').addEventListener('click', () => {
@@ -194,9 +200,12 @@ export default function Header(capsule) {
 
 
     // Botão de editar avatar - Abre modal
-    strNodes[2].$('.user-set-container .pic-circle-container > .edit-avatar-button').addEventListener('click', (e) => {
-        //Insere modal
-        ModalEditAvatars('#modal-capsule')
+    strNodes[2].$('.edit-avatar-button').forEach((but) => {
+        but.onclick = function () {
+            
+            //Insere modal
+            ModalEditAvatars('#modal-capsule')
+        }
 
     })
 
@@ -219,10 +228,13 @@ export default function Header(capsule) {
     
     
     // Desconectar da conta
-    strNodes[2].$('#logout').onclick = function () {
-        // Insere modal
-        modal_logout('#modal-capsule')
-    }
+    strNodes[2].$('#logout-button-0, #logout-button-1').forEach((but) => {
+        but.onclick = function () {
+            modal_logout('#modal-capsule')   
+        }
+        
+    })
+
 
     // Insere Header em seu elemento cápsula
     AUX.insertNodes(capsule, [...strNodes])
@@ -244,9 +256,6 @@ function insert_nav_svg(element) {
         })
     }
 }
-
-
-
 
 
 // MODAL DE MENSAGEM DE LOGOUT
@@ -288,12 +297,25 @@ function modal_logout(capsule) {
 // CLONE DO MENU DE PERFIL 
 function profile_menu_clone(clone, capsule) {
     clone = _domList(clone)
-    capsule = _domList(capsule)
+    capsule = _domList(capsule)[0]
 
     clone.forEach((el) => {
-        capsule[0].appendChild(el.cloneNode(true))
+        capsule.appendChild(el.cloneNode(true))
     })
+    capsule.$('.settings-container').children[1].id = 'logout-button-1'
 
-    
+}
+
+// Insere um id no botão do usuário para modo mobile
+const user_button_mode = (target) => {
+     if (window.innerWidth <= 700) {
+        target.id = 'mobile-mode'
+    } else {
+        target.removeAttribute('id')
+    }
+
+    if (target.id == 'mobile-mode') {
+        target.parentNode.$('.profile-menu-dropdawn').style.display = 'none'
+    }
 }
 
