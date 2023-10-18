@@ -7,6 +7,9 @@ body {
     padding-top: 10em;
     background: var(--cor-fundo-cinza);
 }
+header {
+    z-index: 10;
+}
 
 main {
     padding: 0 2em;
@@ -15,4 +18,114 @@ main {
 
 main > p {
     margin-bottom: 5em;
+}
+
+.destaque {
+    position: absolute;
+    background: var(--cor-logo);
+    left: 0;
+    right: 0;
+    padding: 1em 1em 2em 1em;
+    border: 1px solid white;
+    box-shadow: 0px 0px 3px rgba(190, 190, 190, 0.552);
+}
+
+.destaque > .title {
+    color: white;
+    margin-bottom: .5em;
+}
+
+.slide-container {
+    position: relative;
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+}
+
+.slide-container > .slider-range {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    position: absolute;
+    
+}
+
+/* ------------ ---------------*/
+/* SLIDE CARD */
+.slide-card {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    background: white;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgba(109, 93, 11, 0.296);
+}
+
+.slide-card > .logo-container {
+    text-align: center;
+   
+}
+
+.slide-card > .logo-container > img {
+    border-radius: 90px;
+    width: 100%;
+    
+}
+
+
+.slide-card > .logo-container > .go-to-challenger {
+    border: 1px solid rgb(128, 147, 160);
+    padding: 2px 1em;
+    border-radius: 20px;
+    font-size: .8em;
+    width: 100%;
+}
+
+.slide-card > .lang-content {
+    margin: .8em;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.389);
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(199, 199, 199, 0.358);
+    padding: 1em .5em .5em .5em;
+}
+
+.lang-content > .title {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.lang-content > .title > .lang-name {
+    color: var(--color-orange);
+}
+
+.lang-content > div {
+    font-size: .8em;
+    margin-bottom: .3em;
+}
+
+.lang-content > .score-rank-button {
+    padding: 2px 1em;
+    border: 1px solid rgba(201, 201, 201, 0.553);
+    cursor: pointer;
+    background: transparent;
+    font-size: .8em;
+}
+
+
+.score-rank-button > .rank-svg-capsule > svg {
+    width: 10px;
+    height: 10px;
+}
+
+/* RADIOS */
+
+.radios-container {
+    position: absolute;
+    text-align: center;
+    bottom: .5em;
+    left: 0;
+    right: 0;
 }
