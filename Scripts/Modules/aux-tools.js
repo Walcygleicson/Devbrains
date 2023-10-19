@@ -353,9 +353,8 @@ export const connectKey = {
      */
     set(user, keep) {
         let connect = JSON.parse(localStorage.getItem('connectKey'))
-        console.log(connect)
         connect.user = user==undefined? connect.user: user
-        connect.keep = keep==undefined ? connect.keep : keep
+        connect.keep = keep == undefined ? connect.keep : keep
         localStorage.setItem('connectKey', JSON.stringify(connect))
     },
 
@@ -424,4 +423,98 @@ export function updateUser(user, values) {
 export function getUser(user=connectKey.get('user')) {
     return JSON.parse(localStorage.getItem(user))
         
+}
+
+
+//Provisório
+
+/**
+ * Gerencia valores da chave "traffic" salvas em localStorage do navegador
+ */
+export const traffic = {
+    /**
+     * Cria a chave "traffic" se ela não existir em localStorage.
+     */
+    start() {
+        // Cria uma chave, se ela n existir
+        if (localStorage.getItem('traffic') == null) {
+            localStorage.setItem('traffic', JSON.stringify({}))
+        }
+    },
+
+    /**
+     * Define novas propriedades.
+     * 
+     * @param {object} props Um Object com chave e valor da nova propriedade(s)
+     */
+    define(props) {
+        let traffic = JSON.parse(localStorage.getItem('traffic'))
+        Object.keys(props).forEach((k) => {
+            if (traffic[k] === undefined) {
+                traffic[k] = props[k] 
+            }
+        })
+        localStorage.setItem('traffic', JSON.stringify(traffic))
+        traffic = null
+    },
+
+    /**
+     * Atribui novo valor a uma propriedade já existente.
+     * 
+     * @param {object} props Um Object com chave e valor da proprieade(s) a ser modificada.
+     */
+    set(props) {
+        let traffic = JSON.parse(localStorage.getItem('traffic'))
+        Object.keys(props).forEach((k) => {
+            if (traffic[k] !== undefined) {
+                traffic[k] = props[k] 
+            } else {
+                return console.error(`A propriedade "${k}" não foi encontrada em "Traffic"! Sertifique-se se foi definida primeiro!`)
+            }
+        })
+        localStorage.setItem('traffic', JSON.stringify(traffic))
+        traffic = null
+    },
+
+    /**
+     * Obtém uma propriedade existente.
+     * 
+     * @param {string} key O nome da propriedade a ser obtida.
+     * @returns {object}
+     */
+    get(key) {
+        let traffic = JSON.parse(localStorage.getItem('traffic'))
+        if (traffic[key] !== undefined) {
+            return traffic[key]
+        } else {
+            return console.error(`A propriedade "${key}" não foi encontrada em "Traffic"! Sertifique-se se foi definida primeiro!`)
+        }
+    },
+
+    /**
+     * Limpa a chave "traffic".
+     */
+    reset() {
+        localStorage.setItem('traffic', JSON.stringify({}))
+
+    },
+
+    /**
+     * Remove uma propriedade existente.
+     * 
+     * @param {string} propName O nome da propriedade a ser excluída. 
+     */
+    remove(propName) {
+        let traffic = JSON.parse(localStorage.getItem('traffic'))
+        delete traffic[propName]
+        localStorage.setItem('traffic', JSON.stringify(traffic))
+    },
+
+    /**
+     * Deleta a chave "traffic" de localStorage.
+     */
+    finish() {
+        localStorage.removeItem('traffic')
+        
+    }
 }

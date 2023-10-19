@@ -11,7 +11,7 @@ const PATH = {
 const LINK = {
     login: '../index.html',
     home: 'main.html',
-    challenges: '#',
+    challenges: 'play-challenger.html',
     templates: '#',
     learning: '#',
     auxLib: '#',
@@ -58,28 +58,28 @@ export default function Header(capsule) {
 
                 <li class="profile-itens mob-type"><!-- JS --></li>
 
-                <li id="current-page"><a href="${LINK.home}">
+                <li class="navigation-item home"><a href="${LINK.home}">
                     <span class="inner-txt">Home</span>
                     <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
 
-                <li><a href="${LINK.challenges}">
+                <li class="navigation-item challengers"><a href="${LINK.challenges}">
                     <span class="inner-txt">Desafios</span>
                     <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
-                <li class="coming-soon unv"><a href="${LINK.templates}">
+                <li class="coming-soon unv navigation-item templates"><a href="${LINK.templates}">
                     <span class="inner-txt">Templates</span>
                     <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
-                <li class="coming-soon unv"><a href="${LINK.learning}">
+                <li class="coming-soon unv navigation-item learning"><a href="${LINK.learning}">
                     <span class="inner-txt">Aprenda</span>
                     <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
 
-                <li class="coming-soon unv"><a href="${LINK.auxLib}">
+                <li class="coming-soon unv navigation-item auxjs"><a href="${LINK.auxLib}">
                     <span class="inner-txt">AUX.js</span>
                     <div class="svg-capsule mob-type"><!-- JS --></div>
                 </a></li>
@@ -136,6 +136,14 @@ export default function Header(capsule) {
     //Inserindo o nome do usuário em hello-user
     strNodes[2].$('.hello-user > .user-name').innerText = connectKey.get('user') + '!'
     strNodes[2].$('.user-name-bar').innerHTML = connectKey.get('user')
+
+    //Controle da barra inferior de indicação de página atual da nav (:before)
+    strNodes[2].$('.navigation-item').forEach((item) => {
+        if (item.classList.contains($('title').id)) {
+            item.id = 'current-page'
+            
+        }
+    })
 
     // Insere os ícones de interface svg quando a largura da tela for ideal
     // Atualiza sempre que a largura da janela é alterada
