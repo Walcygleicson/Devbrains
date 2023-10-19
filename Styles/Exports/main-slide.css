@@ -154,3 +154,40 @@
     left: 0;
     right: 0;
 }
+
+
+@media screen and (max-width: 530px){
+    .slide-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .destaque {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        padding-right: 0;
+        align-items: center;
+    }
+
+    .destaque > .title {
+        align-self: flex-start;
+        margin-left: 1em;
+    }
+
+    .slide-container {
+        width: 90vw;
+        margin: auto;
+        border: none;
+        
+    }
+
+    .slide-container > .slider-range {
+        transition: left 1.5s;
+        padding: .6em 0 .6em .2em;
+    }
+
+    .slide-card {
+        width: 88vw;
+    }
+}
+

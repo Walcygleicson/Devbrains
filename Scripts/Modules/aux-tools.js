@@ -316,13 +316,13 @@ export const AUX = {
 export function $(selector, index) {
     selector = [...document.querySelectorAll(selector)]
     if (selector.length == 1) {
-        if (index > 0) {
+        if (index >= 0) {
             console.warn(`ATENÇÃO!\n$(selector, index){}\nO param (index) é obsoleto quando o retorno é 1 único elemento!`)
         }
         return selector[0]
         
     } else {
-        if (index > 0) {
+        if (index >= 0) {
             return selector[index]
         } else {
           return selector

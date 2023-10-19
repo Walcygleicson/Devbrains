@@ -75,13 +75,37 @@ function langSlideCards() {
             traffic.set({challengerSelect: id})
         }
 
-
+       
 
         $('.slider-range').appendChild(strElement)
+        
     })
 
 }
 
+
+// Animação de slide automático do carroussel
+let left = 0
+let count = 1
+$('.slider-range').style.left = 0
+window.onresize = function () {
+    $('.slider-range').style.left = 0
+    count = 1
+    left = 0
+}
+
+setInterval(() => {
+    if (count < $('.slide-card').length) {
+        left += $('.slide-container').clientWidth + 36.5
+        $('.slider-range').style.left = -left + 'px'
+        count++ 
+    } else {
+        $('.slider-range').style.left = 0
+        count = 1
+        left = 0
+    }
+    
+}, 5000)
 
 
 
