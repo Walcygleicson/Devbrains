@@ -89,6 +89,7 @@ $('.slider-range').style.left = 0
 
 window.onresize = function () {
     $('.slider-range').style.left = 0
+    $('.slide-container').scrollLeft = 0
     count = 1
     left = 0
 }
