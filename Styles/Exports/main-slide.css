@@ -177,6 +177,7 @@
 
 .slide-buttons > button > svg {
     width: 20px;
+    pointer-events: none;
     height: 20px;
     fill: rgba(255, 255, 255, 0.79);
 }

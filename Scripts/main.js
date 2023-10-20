@@ -84,7 +84,9 @@ function langSlideCards() {
 // Animação de slide automático do carroussel
 let left = 0
 let count = 1
+let canSlide = true
 $('.slider-range').style.left = 0
+
 window.onresize = function () {
     $('.slider-range').style.left = 0
     count = 1
@@ -92,7 +94,7 @@ window.onresize = function () {
 }
 
 setInterval(() => {
-    if (window.innerWidth <= 530) {
+    if (window.innerWidth <= 530 && canSlide) {
         if (count < $('.slide-card').length) {
             left += $('.slide-container').clientWidth + 36.5
             $('.slider-range').style.left = -left + 'px'
@@ -103,13 +105,46 @@ setInterval(() => {
             left = 0
         }
     }
+
+    canSlide = true
     
-}, 5000)
+}, 6000)
 
 //Insere os icones svg nos botões de slide left e right
+//Evento de click
 $('.slide-buttons > button').forEach((but) => {
+    // Click
+    but.addEventListener('click', (e) => {
+        canSlide = false
+        if (e.target.classList.contains('left')) {
+            left -= $('.slide-container').clientWidth + 36.5
+            count--
+
+            if (count > 0) {
+                $('.slider-range').style.left = -left + 'px'
+            } else if (count <= 0) {
+                left = $('.slider-range').clientWidth - $('.slide-container').clientWidth + 2
+                count = 4
+                $('.slider-range').style.left = -left + 'px'
+            }
+        } else if (e.target.classList.contains('right')) {
+            left += $('.slide-container').clientWidth + 36.5
+            count++
+
+            if (left >= 0 && count <= 4) {
+                $('.slider-range').style.left = -left + 'px'
+            } else if (count > 4) {
+                left = 0
+                count = 1
+                $('.slider-range').style.left = -left + 'px'
+            }
+        } 
+    })
+
+    //Insere svg
     but.innerHTML = svg.chevronLeft()
 })
+
 
 
 

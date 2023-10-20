@@ -151,7 +151,6 @@ export default function Header(capsule) {
         insert_nav_svg($('.svg-capsule'))
         //Insere id 'mobile-mode no botão de abrir menu do usuário
         user_button_mode($('.user-button'))
-        console.log('id')
     })
 
     //Insere id 'mobile-mode no botão de abrir menu do usuário quando a página carregar
