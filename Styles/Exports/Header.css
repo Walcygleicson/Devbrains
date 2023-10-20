@@ -411,6 +411,7 @@ nav {
 .logout-modal-background {
     position: fixed;
     display: grid;
+    z-index: 100;
     place-items: center;
     backdrop-filter: blur(30px);
     top: 0;

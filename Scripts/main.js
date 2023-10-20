@@ -74,9 +74,6 @@ function langSlideCards() {
             traffic.define({ challengerSelect: id })
             traffic.set({challengerSelect: id})
         }
-
-       
-
         $('.slider-range').appendChild(strElement)
         
     })
@@ -95,17 +92,24 @@ window.onresize = function () {
 }
 
 setInterval(() => {
-    if (count < $('.slide-card').length) {
-        left += $('.slide-container').clientWidth + 36.5
-        $('.slider-range').style.left = -left + 'px'
-        count++ 
-    } else {
-        $('.slider-range').style.left = 0
-        count = 1
-        left = 0
+    if (window.innerWidth <= 530) {
+        if (count < $('.slide-card').length) {
+            left += $('.slide-container').clientWidth + 36.5
+            $('.slider-range').style.left = -left + 'px'
+            count++ 
+        } else {
+            $('.slider-range').style.left = 0
+            count = 1
+            left = 0
+        }
     }
     
 }, 5000)
+
+//Insere os icones svg nos botões de slide left e right
+$('.slide-buttons > button').forEach((but) => {
+    but.innerHTML = svg.chevronLeft()
+})
 
 
 

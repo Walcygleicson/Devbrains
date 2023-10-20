@@ -8,6 +8,7 @@
     display: grid;
     place-items: center;
     backdrop-filter: blur(50px);
+    z-index: 100;
     top: 0;
     left: 0;
     right: 0;
@@ -27,7 +28,7 @@
         'assignment assignment'
         'conclude conclude';
     row-gap: .2em;
-    z-index: 10;
+    
     padding: 2em 3em;
     width: 48em;
     height: 80vh;

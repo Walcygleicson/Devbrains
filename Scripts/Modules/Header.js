@@ -147,11 +147,12 @@ export default function Header(capsule) {
 
     // Insere os ícones de interface svg quando a largura da tela for ideal
     // Atualiza sempre que a largura da janela é alterada
-    window.onresize = function () {
+    window.addEventListener("resize", () => {
         insert_nav_svg($('.svg-capsule'))
         //Insere id 'mobile-mode no botão de abrir menu do usuário
         user_button_mode($('.user-button'))
-    }
+        console.log('id')
+    })
 
     //Insere id 'mobile-mode no botão de abrir menu do usuário quando a página carregar
     user_button_mode(strNodes[2].$('.user-button'))
