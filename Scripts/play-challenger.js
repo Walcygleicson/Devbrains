@@ -5,13 +5,43 @@ import svg from "./Modules/svg-icons.js";
 import { jsBasic } from "./Modules/questions-database.js";
 
 traffic.start()
-console.log(jsBasic)
+
+traffic.define({ // Gurada informações da partida em localStorage
+    usedQuest: {
+        basic: [],
+        medium: [],
+        pro: [],
+        lord: []
+    },
+
+    levelQuest: 'basic',
+    score: 0
+})
+
 Header('#header-capsule')
 Footer('#footer-capsule')
 
 // Variaveis
 var interval
-let runTime = { min: 2, sec: 60, ms: 60 }
+let runTime = { min: 0, sec: 60, ms: 60 } // 1 minuto
+
+let quest = {
+    level: traffic.get('levelQuest'),
+    used: null,
+    score: traffic.get('score'),
+    len: 0,
+    list: null
+}
+
+switch (quest.level) {
+    case 'basic':
+        quest.list = jsBasic
+        quest.len = Object.keys(jsBasic).length
+        quest.used = traffic.get('usedQuest').basic
+}
+
+
+
 //++++++++++++++++++++++++++++++++++++++
 
 //Insere o nome da linguagem do desafio selecionado na tag <title>
@@ -26,30 +56,58 @@ $('.tutorial-button').innerHTML = svg.helpCircle()
 // *** EVENTOS ***
 
 // click no botão de start/pause/resume e cronometro
-$('.start-pause-button').addEventListener('click', (e) => {
-    console.log('button')
+$('.start-button').addEventListener('click', (e) => {
     if (e.target.id == 'start') {
-        e.target.id = 'pause'
-        e.target.textContent = 'Pause'
+        e.target.id = 'running'
+        e.target.textContent = 'Go!'
         runTime.min > 0 ? $('#min').textContent = runTime.min : null
         $('#sec').textContent = runTime.sec
         $('.mls').textContent = runTime.ms
+        // Obtem o nível atual
         
-    }
-    
-    if (e.target.id == 'pause') {
-        e.target.id = 'resume'
-        e.target.textContent = 'Resume'
 
+        //Selecionar uma quest aleatória
+        let randomQues
+        while (true) {
+            //Seleciona apenas a quest que ainda n foi selecionada
+             randomQues = 'q' + parseInt(Math.random() * quest.len)
+            if (!quest.used.includes(randomQues)) {
+                quest.used.push(randomQues) // Guarda a chave de questão
+                break
+            }
+        }
+
+        // Inserir as questões nos elementos
+
+        //Texto
+        $('.quest-area').innerHTML = quest.list[randomQues]['text']
+        //Alternativas
+        $('.resp-text').forEach((e, i) => {
+            const opt = ['a', 'b', 'c', 'd']
+            e.innerHTML = quest.list[randomQues]['options'][opt[i]]
+        })
+        console.log(quest.list[randomQues]['code'])
+
+        // Bloco de código 
+        if (quest.list[randomQues]['code'] != null) {
+            console.warn('jhjk')
+            $('.code-capsule').innerHTML = quest.list[randomQues]['code']
+            $('.code-block').classList.remove('code-empty')
+            $('.code-block').classList.add('code-full')
+        }
+        
+
+
+        
         interval = setInterval(() => {
-
+    
             // Contagem dos milissegundos
             if (runTime.ms > 0) {
                 runTime.ms --
             } else { // Segundos
                 runTime.sec --
                 runTime.ms = 60
-
+    
                 //Minutos
                 if (runTime.min > 0 && runTime.sec <= 0) {
                     runTime.min--
@@ -57,7 +115,7 @@ $('.start-pause-button').addEventListener('click', (e) => {
                 }
             }
             
-
+    
             //Qunado o contador zerar, limpar intervalo e resetar cronometro
             if (runTime.min <= 0 && runTime.sec <= 0) {
                 runTime.ms = 0
@@ -65,18 +123,12 @@ $('.start-pause-button').addEventListener('click', (e) => {
                 runTime.min = 0
                 clearInterval(interval)
             }
-
+    
             $('#mls').textContent = formatTime(runTime.ms)
             $('#sec').textContent = formatTime(runTime.sec)
             $('#min').textContent = formatTime(runTime.min)
         
         }, 12)
-
-
-    } else if (e.target.id == 'resume') {
-        e.target.id = 'pause'
-        e.target.textContent = 'Pause'
-        clearInterval(interval)
     }
 })
 
@@ -84,113 +136,7 @@ function formatTime(value) {
     if (value < 10) { return '0' + value }
     return value
 }
-//---------------
 
-
-
-
-function stringToCodeJs() {
-    
-    let strCode = `
-    ${js.function('teste', 'values, oi')}{
-        ${js.var('const', 'number', 34)}
-        ${js.useConst('number')} = ${js.nVal(null)}
-    }
-
-    ${js.call('teste', js.bool(true))}
-    ${js.op('if')}(${js.useVar('number')} >= ${js.numb(5)}){
-        ${js.useVar('console')}.${js.call('log', js.str('Olá Mundo'))}
-    }
-
-    ${js.var('var', 'temp')} = ${js.templateStr(`Olá ${js.dollarFunc(js.useConst('number'))}`)}
-    `
-    $('.code-capsule').innerHTML = strCode
-
-}
-
-const span = (className, content) => {
-    return `<span class='${className}'>${content}</span>`
-}
-
-const js = {
-    function(name = '', params = '') {
-        if (params.includes(',')) {
-            params = params.replaceAll(/,\s*/g, '%,% ').split('%')
-            params.map((it, i) => {
-                if (it != ',') {
-                    params[i] = span('param', it)
-                }
-            })
-            params = params.join('')
-        } else {
-            params = span('param', params)
-        }
-        name = span('func-method-name', name)
-        return `${span('def', 'function')} ${name}(${params})`
-    },
-    call(name, arg='') {
-        return `${span('func-method-name', name)}(${arg})`
-    },
-
-    var(def = 'var', name, value) {
-        if (value != undefined) {
-            
-            switch (value.constructor.name) {
-                case 'Number':
-                    value = span('number', value)
-                    break
-                case 'String':
-                    value = `"${span('str-text', value)}"`
-                    break
-                case 'Boolean':
-                    value = span('bool', value)
-                    break
-            }
-        }
-
-        def == 'const' ? name = span('const-name', name) : name = span('var-name', name)
-        def = span('def', def)
-        value==undefined? value='': value='= ' + value
-        return `${def} ${name} ${value}`
-
-    },
-    useVar(name) {
-        return span('var-name', name)
-        
-    },
-
-    useConst(name) {
-        return span('const-name', name)
-    },
-
-    numb(value=0) {
-        return span('number', value)
-    },
-
-    str(value='') {
-        return `"${span('str-text', value)}"`
-    },
-
-    bool(value = true) {
-        return span('bool', value)
-    },
-
-    nVal(value) {
-        return span('none-value', value)
-    },
-
-    op(name) {
-        return span('statement', name)
-    },
-    templateStr(value) {
-        return span('template-str', `´${span('str-text', value)}´`)
-    },
-    dollarFunc(value) {
-        return `${span('dollar-func', '${' + value + '}')}`
-    }
-}
-
-stringToCodeJs()
 
 
 

@@ -12,7 +12,7 @@
     padding: 5px 0;
 }
 
-.cronometer > .start-pause-button {
+.cronometer > .start-button {
     margin-right: 1em;
     width: 80px;
     padding: 1px 0;
@@ -24,7 +24,15 @@
     border: 1px solid white;
 }
 
-.cronometer > .start-pause-button:hover {
+.cronometer > #running{
+    color: white;
+    opacity: 40%;
+    background: transparent;
+    border-color: white;
+    cursor: default;
+}
+
+.cronometer > .start-button:hover {
     background: rgb(250, 250, 250);
     border-color: rgb(232, 230, 230);
     color: var(--color-orange);
@@ -252,6 +260,11 @@
     word-wrap: break-word;
 }
 
+.frag{
+    color: var(--color-orange);
+    font-family: var(--font-code-italic);
+}
+
 
 
 
@@ -391,6 +404,10 @@ label:hover > .input-box > span {
         justify-content: space-between;
     }
 
+    .code-block > .code-capsule {
+        font-size: .7em;
+    }
+
     .quest-header > .lang-logo {
         width: 40px;
         height: 40px;
@@ -414,7 +431,7 @@ label:hover > .input-box > span {
         width: max-content;
     }
 
-    .quest-header > .cronometer > .start-pause-button {
+    .quest-header > .cronometer > .start-button {
         width: fit-content;
         padding: 1px 1em;
     }
