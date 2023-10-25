@@ -3,11 +3,6 @@
 @import url(Exports/main-slide.css);
 @import url(Exports/Footer.css);
 
-
-body {
-    padding-top: 8em;
-    background: var(--cor-fundo-cinza);
-}
 header {
     z-index: 10;
 }

@@ -71,9 +71,13 @@ function langSlideCards() {
 
         // Botão de iniciar desafio
         strElement.$('.go-to-challenger').onclick = function () {
-            traffic.define({ challengerSelect: id })
-            traffic.set({challengerSelect: id})
+
+            // Salva a o nome da linguagem do desafio selecionado pelo usuário
+            traffic.define({ quizLang: lang[id]['name'] })
+            traffic.set({quizLang: lang[id]['name']})
         }
+        // -------------------------------------------------
+
         $('.slider-range').appendChild(strElement)
         
     })

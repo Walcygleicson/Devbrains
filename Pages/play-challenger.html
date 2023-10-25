@@ -7,11 +7,88 @@
     <link rel="stylesheet" href="../Styles/play-challenger.css">
 </head>
 <body>
-    <header id="header-capsule"></header>
+    <header id="header-capsule"><!-- JS --></header>
+    <main>
+        <section class="quest-card">
+            <div class="quest-header">
+                <img class="lang-logo" src="../Assets/Svg/js-icon.svg" alt="Logo da Linguagem">
+                <h1 class="quest-number">
+                    <span class="inner-txt">Questão</span>
+                    <span class="symbol">#</span>
+                    <span class="number">01</span>
+                </h1>
 
+                <div class="cronometer">
+                    <button class="start-pause-button target-tutorial" id="start">Start</button>
+                    <div class="timer target-tutorial">
+                        <div id="min">00</div>:
+                        <div id="sec">00</div>:
+                        <div id="mls">00</div>
+                    </div>
+                </div>
+                <button class="tutorial-button" title="Dúvidas de como funciona? Clique aqui!"></button>
 
-    dev challenger
+                <div class="dificulty-levels">
+                    <div class="basic">Basic</div>
+                    <div class="medium" id="current-level">Medium</div>
+                    <div class="pro">Pro</div>
+                    <div class="lord">Lord</div>
+                </div>
+            </div>
 
+            <p class="quest-area js"><!-- JS --> Start para começar!</p>
+
+            <pre class="code-block code-full">
+                <code class="code-capsule">
+                    <!-- JS -->
+                </code>
+            </pre>
+
+            <form class="alternatives" for="q01">
+
+                <label class="response-label" for="q-01">
+                    <div class="input-box">
+                        <input type="radio" name="resp" id="q-01">
+                        <div class="radio-mask"></div>
+                        <span>A &#41</span>
+                    </div>
+                    <span class="resp-text"> Alternativa 1</span>
+                </label>
+
+                <label class="response-label" id="correct" for="q-02">
+                    <div class="input-box">
+                        <input type="radio" name="resp" id="q-02">
+                        <div class="radio-mask"></div>
+                        <span>B &#41</span>
+                    </div>
+                    <span class="resp-text">Alternativa 2</span>
+                </label>
+
+                <label class="response-label" for="q-03">
+                    <div class="input-box">
+                        <input type="radio" name="resp" id="q-03">
+                        <div class="radio-mask"></div>
+                        <span>C &#41</span>
+                    </div>
+                    <span class="resp-text">Alternativa 3</span>
+                </label>
+
+                <label class="response-label" for="q-04">
+                    <div class="input-box">
+                        <input type="radio" name="resp" id="q-04">
+                        <div class="radio-mask"></div>
+                        <span>D &#41</span>
+                    </div>
+                    <span class="resp-text">Alternativa 4</span>
+                </label>
+            </form>
+            <button class="confirm-resp-button">Confirmar</button>
+        </section>
+    </main>
+
+    <footer id="footer-capsule"></footer>
+
+    <div id="modal-capsule"><!-- JS --></div>
     <script type="module" src="../Scripts/play-challenger.js"></script>
 </body>
 </html>

@@ -1,1 +1,434 @@
 @import url(Exports/Header.css);
+@import url(Exports/Footer.css);
+
+
+.quest-header > .cronometer{
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    background: var(--color-orange);
+    border-radius: 17px;
+    height: fit-content;
+    padding: 5px 0;
+}
+
+.cronometer > .start-pause-button {
+    margin-right: 1em;
+    width: 80px;
+    padding: 1px 0;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: white;
+    border-radius: 18px;
+    font-size: .75em;
+    border: 1px solid white;
+}
+
+.cronometer > .start-pause-button:hover {
+    background: rgb(250, 250, 250);
+    border-color: rgb(232, 230, 230);
+    color: var(--color-orange);
+    transition-duration: .3s;
+}
+
+.cronometer > .timer {
+    display: inline-flex;
+    column-gap: 3px;
+    color: white;
+}
+
+.cronometer > .timer > div {
+    color: white;
+    text-align: center;
+    width: 22px;
+}
+
+.quest-header > .tutorial-button {
+    cursor: pointer;
+    background: transparent;
+    height: fit-content;
+    padding: 2px;
+    display: inline-flex;
+    align-self: center;
+}
+
+.quest-header > .tutorial-button > svg {
+    width: 15px;
+    height: 15px;
+    fill: var(--cor-cinza-fraco-2);
+}
+
+.quest-header > .tutorial-button:hover > svg{
+    fill: var(--cor-marrom-alaranjado);
+}
+
+
+/* Card de perguntas */
+
+.quest-card {
+    border: 1px solid rgba(199, 199, 199, 0.478);
+    box-shadow: 0px 0px 2px rgba(196, 196, 196, 0.323);
+    margin: 0 2%;
+    padding: 1.5em;
+}
+
+.quest-card > .quest-header {
+    border-bottom: 1px solid rgba(208, 208, 208, 0.674);
+    box-shadow: 0 2px 1px rgba(218, 218, 218, 0.148);
+    display: flex;
+    column-gap: 2em;
+    align-items: center;
+}
+
+.quest-header > .lang-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.quest-header > .quest-number {
+    height: fit-content;
+    display: inline-flex;
+    font-size: 1.4em;
+}
+
+.quest-number > .inner-txt {
+    margin-right: .5em;
+}
+
+.quest-header > .quest-number > span:not(.inner-txt){
+    color: var(--color-orange);
+}
+
+.quest-header > .dificulty-levels {
+    z-index: -1;
+    display: flex;
+    column-gap: .1em;
+    margin-left: auto;
+    align-self: flex-start;
+    height: fit-content;
+    font-size: .6em;
+}
+
+.quest-header > .dificulty-levels > div {
+    opacity: 15%;
+    width: 45px;
+    text-align: center;
+    color: white;
+}
+
+.quest-header > .dificulty-levels > .basic {
+    background: rgb(164, 161, 161);
+
+}
+
+.quest-header > .dificulty-levels > .medium {
+    background: rgb(154, 113, 237);
+}
+
+.quest-header > .dificulty-levels > .pro {
+    background: rgb(240, 71, 167);
+}
+
+.quest-header > .dificulty-levels > .lord {
+    background: rgb(247, 216, 13);
+}
+
+.quest-header > .dificulty-levels > #current-level {
+    opacity: 1;
+    position: relative;
+}
+
+.quest-header > .dificulty-levels > #current-level::after {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    content: '';
+    padding: .4px;
+    width: 100%;
+    background: var(--color-orange);
+}
+
+.quest-card > .quest-area {
+    position: relative;
+    z-index: -1;
+    border: 1px solid rgb(225, 225, 225);
+    color: var(--cor-carvao);
+    background: white;
+    margin: 1em;
+    padding: 1em 2em;
+    text-indent: 1.5em;
+}
+
+.quest-card > .quest-area::before {
+    position: absolute;
+    height: 18px;
+    left: 2em;
+    top: .6em;
+    content: '';
+    padding: 3px;
+}
+
+.quest-card > p.js::before {
+    background: var(--cor-amarelo-js);
+}
+
+.quest-card > p.py::before {
+    background:var(--cor-azul-py);
+}
+/* Bloco de código */
+
+.quest-card > .code-block {
+    margin: 0 1em;
+    background-color: var(--cor-code-dracula);
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.code-block > .code-capsule {
+    color: rgb(162, 182, 203);
+    font-size: 1.124em;
+    user-select: text;
+    font-family: var(--font-code-regular);
+}
+
+.code-block > .code-capsule * {
+    font-family: var(--font-code-regular);
+    font-weight: 300;
+    user-select: text;
+}
+
+
+.code-capsule .def {
+    font-family: var(--font-code-italic);
+    color: var(--cor-code-azul);
+}
+
+.code-capsule .func-method-name,
+.code-capsule .dollar-func {
+    color: rgb(98, 221, 22);
+}
+
+.code-capsule .param {
+    font-family: var(--font-code-italic);
+    color:rgb(255, 151, 23);
+}
+
+.code-capsule .var-name {
+    color: white;
+}
+
+.code-capsule .str-text {
+    color: rgb(230, 217, 107);
+}
+
+.code-capsule .const-name {
+    color: rgb(184, 108, 224);
+}
+
+.code-capsule .number {
+    color: rgb(51, 88, 255);
+}
+
+.code-capsule .none-value {
+    color: rgb(255, 137, 135);
+}
+
+.code-capsule .bool {
+    color: rgb(253, 51, 213);
+}
+
+.code-capsule .statement,
+.code-capsule .template-str,
+.code-capsule .brace {
+    color: rgb(248, 59, 59)
+}
+
+.quest-card > .code-empty {
+    display: none;
+}
+
+.quest-card > .code-full {
+    display: block;
+    word-wrap: break-word;
+}
+
+
+
+
+
+/* Alternativas */
+
+.alternatives {
+    border: 1px solid rgb(225, 225, 225);
+    margin: 1em;
+    padding: 1em 2em;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    row-gap: .4em;
+}
+
+.alternatives > label {
+    display: flex;
+    align-items: start;
+    column-gap: .5em;
+    cursor: pointer;
+    
+}
+
+.alternatives > label > * {
+    color: var(--cor-carvao);
+}
+
+label > .input-box {
+    display: flex;
+    column-gap: .4em;
+    align-items: center;
+}
+
+label > .input-box > input {
+    display: none;
+}
+
+label > .input-box > .radio-mask {
+    outline: 1px solid gray;
+    border: 2px solid white;
+    opacity: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+
+label > .input-box > span {
+    width: max-content;
+    color: var(--cor-carvao);
+}
+
+
+label > .input-box > input:checked + .radio-mask {
+    background: var(--color-orange);
+    opacity: 1;
+    outline-color: var(--color-orange);
+    transition-duration: .3s;
+}
+
+
+label:hover > .input-box > .radio-mask {
+    background: var(--cor-cinza-fraco-2);
+    opacity: 1;
+    transition-duration: .3s;
+}
+
+label:hover > *,
+label:hover > .input-box > span {
+    color: rgb(128, 128, 128);
+    transition-duration: .3s;
+}
+
+.confirm-resp-button {
+    margin-left: 1em;
+    background: var(--color-orange);
+    color: white;
+    padding: 2px 1em;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 1px solid white;
+    box-shadow: 0 0 2px rgba(128, 128, 128, 0.448);
+}
+
+.confirm-resp-button:hover{
+    background: var(--cor-laranja-button-hover);
+}
+
+
+@media screen and (max-width: 900px) {
+
+    header {
+        z-index: 100;
+    }
+    .quest-header {
+        z-index: 0;
+        margin-top: .5em;
+        position: relative;
+    }
+    .dificulty-levels {
+        position: absolute;
+        right: 2em;
+        top: -2.5em;
+    }
+    
+}
+
+@media screen and (max-width: 660px) {
+    .quest-card {
+        margin: 0;
+    }
+
+    main {
+        padding: 0 .2em;
+    }
+    .quest-header > .quest-number {
+        font-size: 1.3em;
+    }
+
+    .quest-card > .code-block,
+    .quest-card > .quest-area,
+    .quest-card > .alternatives{
+        margin: .6em 0;
+    }
+
+    .quest-card > .confirm-resp-button {
+        font-size: .8em;
+    }
+
+    
+}
+
+@media screen and (max-width: 570px) {
+    .quest-card > .quest-header {
+        column-gap: 0;
+        justify-content: space-between;
+    }
+
+    .quest-header > .lang-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .quest-header > .quest-number {
+        margin-right: auto;
+        margin-left: .5em;
+        font-size: 1.1em;
+    }
+
+    .quest-header > .tutorial-button {
+        position: absolute;
+        top: -1.7em;
+        right: -1em;
+    }
+
+    .quest-header > .cronometer{
+        padding: 3px 1em;
+        font-size: .8em;
+        width: max-content;
+    }
+
+    .quest-header > .cronometer > .start-pause-button {
+        width: fit-content;
+        padding: 1px 1em;
+    }
+}
+
+@media screen and (max-width:410px){
+    .quest-header > .quest-number {
+        position: absolute;
+        font-size: .9em;
+        top: -1.9em;
+        left: -1.5em;
+    }
+    
+}
+
+
+

@@ -5,6 +5,15 @@
     src: url(../../Assets/Fonts/Alexandria-VariableFont_wght.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: CodeItalic;
+    src: url(../../Assets/Fonts/code-ubuntu-italic.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: CodeRegular;
+    src: url(../../Assets/Fonts/code-ubuntu-regular.ttf) format('truetype');
+}
 
 
 :root {
@@ -21,7 +30,15 @@
     --cor-azul-claro-2:rgb(215, 211, 254);
     --cor-azul-claro-3: rgb(189, 182, 247);
     --cor-carvao:rgba(0, 0, 0, 0.792);
+    --cor-azul-py: rgb(66, 108, 207);
+    --cor-amarelo-js: rgb(255, 225, 0);
+    --cor-laranja-button-hover: orange;
+    --cor-code-dracula:rgba(49, 41, 58, 0.978);
+    --cor-code-azul:rgb(75, 189, 255);
     --font-alexandria: Alexandria;
+    --font-code-regular: CodeRegular;
+    --font-code-italic: CodeItalic;
+    --size-code-italic:1.123em;
 }
 
 * {
@@ -37,4 +54,13 @@
     text-decoration: none;
     list-style: none;
     user-select: none;
+}
+
+body {
+    background: var(--cor-fundo-cinza);
+    padding-top: 8em;
+}
+
+main {
+    padding: 0 2em;
 }
