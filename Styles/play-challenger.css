@@ -277,8 +277,6 @@
 
 
 
-
-
 /* Alternativas */
 
 .alternatives {
@@ -353,7 +351,12 @@ label:hover > .input-box > span {
     transition-duration: .3s;
 }
 
-.confirm-resp-button {
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-container > .confirm-resp-button {
     margin-left: 1em;
     background: var(--color-orange);
     color: white;
@@ -363,12 +366,13 @@ label:hover > .input-box > span {
     box-shadow: 0 0 2px rgba(128, 128, 128, 0.448);
 }
 
-.confirm-resp-button:disabled {
+.btn-container > .confirm-resp-button:disabled {
     background: transparent;
+    cursor: default;
     color: rgb(221, 221, 221);
 }
 
-.confirm-resp-button:not(:disabled):hover{
+.btn-container > .confirm-resp-button:not(:disabled):hover{
     cursor: pointer;
     background: var(--cor-laranja-button-hover);
 }
@@ -392,6 +396,7 @@ label.wrong-anim {
     position: relative;
 }
 
+
 label.wrong-anim::before {
     position: absolute;
     left: -1.7em;
@@ -408,6 +413,14 @@ label.happy-face-emoji::before {
     animation: ease-in-out emoji-bounce 1s infinite alternate;
 }
 
+label.warn-emoji::before {
+    position: absolute;
+    content: '⚠️';
+    transform: translateY(-26%);
+    left: -1.7em;
+    animation: ease-in-out emoji-bounce 1s infinite alternate;
+}
+
 .wrong-anim {
     border: 1px solid rgb(248, 2, 2);
     padding-left: 1em;
@@ -416,11 +429,73 @@ label.happy-face-emoji::before {
 
 }
 
+
 label.wrong-anim > .input-box>.radio-mask {
     opacity: 1;
     background: rgb(250, 1, 1) !important;
     outline-color: rgb(243, 5, 5) !important;
 }
+
+.warn-text {
+    display: none;
+    border: 1px solid rgb(255, 55, 55);
+    margin: .3em 2% 0 2%;
+    column-gap: .5em;
+    padding: 2px 1em;
+    font-size: .8em;
+    animation: border-flash 1s infinite;
+    background: rgb(255, 239, 239);
+}
+
+.warn-text > .inner-text {
+    color: var(--cor-carvao);
+}
+
+/* Botão de Next Quest */
+.btn-container > .next-quest-button {
+    display: none;
+    cursor: pointer;
+    align-items: center;
+    column-gap: .5em;
+    background: transparent;
+    margin-right: 1em;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 2px 1em;
+}
+
+.btn-container > .next-quest-button:hover {
+    border-color: var(--color-orange);
+    transition-duration: .4s;
+}
+
+.next-quest-button:hover :is(.inner-text, svg) {
+    color: var(--color-orange);
+    fill: var(--color-orange);
+    transition-duration: .3s;
+}
+
+.next-quest-button > .inner-text {
+    font-size: .9em;
+}
+
+.next-quest-button > .svg-capsule {
+    display: flex;
+}
+
+.next-quest-button > .svg-capsule > svg {
+    width: 25px;
+    height: 25px;
+    fill: var(--color-gray);
+}
+
+@keyframes border-flash {
+    50% {
+        background: rgb(251, 182, 182);
+        border-color: transparent;
+    }
+}
+
 
 @keyframes emoji-bounce {
     0% {
@@ -439,6 +514,7 @@ label.wrong-anim > .input-box>.radio-mask {
     50%  {opacity: 0;}
     100% {opacity: 1;}
 }
+/* **************************** */
 
 
 @media screen and (max-width: 900px) {
@@ -477,7 +553,7 @@ label.wrong-anim > .input-box>.radio-mask {
         margin: .6em 0;
     }
 
-    .quest-card > .confirm-resp-button {
+    .btn-container > .confirm-resp-button {
         font-size: .8em;
     }
 
