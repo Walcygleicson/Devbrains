@@ -16,25 +16,29 @@ langSlideCards()
 function langSlideCards() {
     const lang = {
         js: {
-            name: 'Javascript',
+            name: 'js',
             img: '../Assets/Svg/js-icon.svg'
         },
 
         css: {
-            name: 'HTML5 & CSS3',
+            name: 'css',
             img: '../Assets/Svg/css-icon.svg'
         },
 
         py: {
-            name: 'Python',
-            img: '../Assets/Svg/python-icon.svg'
+            name: 'py',
+            img: '../Assets/Svg/py-icon.svg'
         },
 
         gd: {
-            name: 'GDScript',
-            img: '../Assets/Svg/godot-icon.svg'
+            name: 'gds',
+            img: '../Assets/Svg/gds-icon.svg'
         }
     }
+
+    // Slavar lista de linguagens
+    traffic.define({ langList: [] })
+    traffic.set({langList: [...Object.keys(lang)]})
 
     Object.keys(lang).forEach((id) => {
         let strElement = `
@@ -74,7 +78,7 @@ function langSlideCards() {
 
             // Salva a o nome da linguagem do desafio selecionado pelo usuário
             traffic.define({ quizLang: lang[id]['name'] })
-            traffic.set({quizLang: lang[id]['name']})
+            traffic.set({ quizLang: lang[id]['name'] })
         }
         // -------------------------------------------------
 

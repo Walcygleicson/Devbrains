@@ -15,7 +15,8 @@ traffic.define({ // Gurada informações da partida em localStorage
     },
 
     levelQuest: 'basic',
-    score: 0
+    score: 0,
+    quesCount: 0
 })
 
 Header('#header-capsule')
@@ -24,19 +25,28 @@ Footer('#footer-capsule')
 // Variaveis
 var interval
 let runTime = { min: 0, sec: 60, ms: 60 } // 1 minuto
+let started = false
+let response = {
+    correct: null, // Letra da alternativa correta
+    chosen: null //Letra da alternativa escolhida pelo usuário
+}
 
-let quest = {
+let questList // Guarda as questões do nível atual
+let len // Tamanho da questList
+
+
+let quest = { // Dados a serem atualizados em traffic
     level: traffic.get('levelQuest'),
     used: null,
     score: traffic.get('score'),
-    len: 0,
-    list: null
+    count: traffic.get('quesCount')
+    
 }
 
 switch (quest.level) {
     case 'basic':
-        quest.list = jsBasic
-        quest.len = Object.keys(jsBasic).length
+        questList = jsBasic
+        len = Object.keys(jsBasic).length
         quest.used = traffic.get('usedQuest').basic
 }
 
@@ -51,6 +61,14 @@ $('.tab-title').textContent = `Devbrains - Quiz de ${traffic.get('quizLang')}`
 // Insere icone de help no botão de tutorial
 $('.tutorial-button').innerHTML = svg.helpCircle()
 
+//Icone da linguagem
+$('.lang-logo').src = `../Assets/Svg/${traffic.get('quizLang')}-icon.svg`
+
+// Cor da barra lateral da area de perguntas | Insere um class Name da linguagem
+$('.quest-area').classList.add(traffic.get('quizLang'))
+
+// Barra de indicação de nível | Insere id current-level
+$(`.${quest.level}`).id = 'current-level'
 
 
 // *** EVENTOS ***
@@ -70,35 +88,35 @@ $('.start-button').addEventListener('click', (e) => {
         let randomQues
         while (true) {
             //Seleciona apenas a quest que ainda n foi selecionada
-             randomQues = 'q' + parseInt(Math.random() * quest.len)
+             randomQues = 'q' + parseInt(Math.random() * len)
             if (!quest.used.includes(randomQues)) {
+                started = true
+                quest.count ++
                 quest.used.push(randomQues) // Guarda a chave de questão
                 break
             }
         }
 
+        response.correct = questList[randomQues].correct
+
         // Inserir as questões nos elementos
 
         //Texto
-        $('.quest-area').innerHTML = quest.list[randomQues]['text']
+        $('.quest-area').innerHTML = questList[randomQues]['text']
         //Alternativas
         $('.resp-text').forEach((e, i) => {
             const opt = ['a', 'b', 'c', 'd']
-            e.innerHTML = quest.list[randomQues]['options'][opt[i]]
+            e.innerHTML = questList[randomQues]['options'][opt[i]]
         })
-        console.log(quest.list[randomQues]['code'])
 
         // Bloco de código 
-        if (quest.list[randomQues]['code'] != null) {
-            console.warn('jhjk')
-            $('.code-capsule').innerHTML = quest.list[randomQues]['code']
+        if (questList[randomQues]['code'] != null) {
+            $('.code-capsule').innerHTML = questList[randomQues]['code']
             $('.code-block').classList.remove('code-empty')
             $('.code-block').classList.add('code-full')
         }
         
-
-
-        
+        //Timer
         interval = setInterval(() => {
     
             // Contagem dos milissegundos
@@ -136,6 +154,36 @@ function formatTime(value) {
     if (value < 10) { return '0' + value }
     return value
 }
+
+//****************************************** */
+// Evento de click na seleção de alternativa
+$('.response-label').forEach((alt) => {
+    alt.addEventListener('click', () => {
+        if (started) {
+            // Envia a letra da alternatica escolhida pelo usuário
+            response.chosen = alt.querySelector('input[type=radio]').id
+
+            $('.confirm-resp-button').disabled = false // Habilita o botão de confirmar resposta
+        }
+    })
+})
+
+//*************************** */
+//Evento do botão de confirmar reposta
+$('.confirm-resp-button').addEventListener('click', (ev) => {
+    clearInterval(interval)
+    started = false
+    $('.confirm-resp-button').disabled = true
+    // Animação marcar reposta correta
+    $(`#${response.correct}`).parentElement.parentElement.classList.add('correct-anim')
+    
+    if (response.chosen == response.correct) {
+        $(`#${response.chosen}`).parentElement.parentElement.classList.add('happy-face-emoji')
+    } else {
+        //Animaçao marcar reposta errada
+        $(`#${response.chosen}`).parentElement.parentElement.classList.add('wrong-anim')
+    }
+})
 
 
 

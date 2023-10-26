@@ -84,7 +84,7 @@ const js = {
 const jsCodeBasic = {
     q3: `
     ${js.var('const', 'names')}= [${js.str('Jhon')}, ${js.str('Philip')}, ${js.str('Mary')}]
-    ${js.useVar('console')}.${js.call('log', js.str('Olá, meu nome é ') + " + " + js.useVar('name') + '['+ js.numb(3) + ']')}`
+    ${js.useVar('console')}.${js.call('log', js.str('Olá, meu nome é ') + " + " + js.useVar('names') + '['+ js.numb(3) + ']')}`
 }
 
 export {jsCodeBasic}

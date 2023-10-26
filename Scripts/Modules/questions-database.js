@@ -44,7 +44,8 @@ const jsBasic = {
             b: 'Olá, meu nome é Jhon',
             c: 'Olá, meu nome é undefined',
             d: 'Erro de console'
-        }
+        },
+        correct: 'c'
     }
 }
 
