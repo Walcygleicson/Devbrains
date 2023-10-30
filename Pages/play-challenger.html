@@ -31,8 +31,8 @@
                 <div class="dificulty-levels">
                     <div class="basic">Basic</div>
                     <div class="medium">Medium</div>
+                    <div class="advanced">Advanced</div>
                     <div class="pro">Pro</div>
-                    <div class="lord">Lord</div>
                 </div>
             </div>
 
@@ -94,6 +94,77 @@
             <span class="emoji">⚠️</span>
             <span class="inner-text">Tempo expirou! Nenhuma alternativa foi selecionada! Este turno será contado como resposta errada!</span>
         </div>
+
+        <!-- Tablea de Ranking de Pontuação -->
+        <div class="modal-ranking-background">
+            <div class="table-container">
+
+                <!-- Pontuação atual -->
+                <table class="current-round-score-table">
+                    <caption class="current-round-title">Classificação desta Partida</caption>
+                    <thead class="current-round-thead">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Nível</th>
+                            <th>Pontuação</th>
+                            <th class="table-icon-capsule">✔</th>
+                            <th class="table-icon-capsule">-</th>
+                            <th>Data e Hora</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="current-round-tbody">
+                        <tr class="d-row">
+                            <td class="rank-number">#0</td>
+                            <td class="level">Basic</td>
+                            <td class="score">000.0 pts</td>
+                            <td class="correct-number">00</td>
+                            <td class="errors-number">00</td>
+                            <td class="date-hours">00/00/0000 - 00:00 AM</td>
+                        </tr>
+                    </tbody> 
+                </table>
+
+                <!-- RANKING -->
+                <div class="ranking-table-container">
+
+                    <table class="ranking-table">
+                        <caption class="table-title">
+                            Classificação por Ranking
+                        </caption>
+
+                        <thead class="table-head">
+                            <tr>
+                                <th title="Posição no Ranking">Rank</th>
+                                <th title="Nível de Conhecimento">Nível</th>
+                                <th title="Pontos da Partida">Pontuação</th>
+                                <th class="table-icon-capsule" title="Número de Acertos"></th>
+                                <th class="table-icon-capsule" title="Número de Erros"></th>
+                                <th title="Data e Hora do Término da Partida">Data e Hora</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody class="table-body">
+                            <tr class="data-row dr0">
+                                <td class="rank-number"></td>
+                                <td class="level"></td>
+                                <td class="score"></td>
+                                <td class="correct-number"></td>
+                                <td class="error-number"></td>
+                                <td class="date-hours"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="but-container">
+                    <button class="play-again-button" title="Jogar Outra Partida">De Novo</button>
+                    <button class="exit-button" title="Fechar Partida">Sair</button>
+                </div>
+
+            </div>
+        </div>
+
     </main>
 
     <footer id="footer-capsule"></footer>

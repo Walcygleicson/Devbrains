@@ -153,17 +153,16 @@ enterButton.addEventListener('click', (e) => {
                 window.location.href = 'Pages/main.html';
         }
 
-    // REGISTRO
+    // REGISTRO ***************************
     } else if (formType('register')) {
         if (check.name && check.senha && check.confirm) {
 
             // Salva os dados do usuário
             localStorage.setItem(input[0].value, JSON.stringify({
                 senha: input[1].value,
-                score: 0,
-                level: 'basic',
-                avatarIdx: parseInt(Math.random() * 15),
-                picture: null
+                ranking: {}, // Guarda as ponstuações dos desafios do usuário
+                avatarIdx: parseInt(Math.random() * 15), // Id do avatar
+                picture: null // Salva a foto do usuário em Base64
             }))
 
             // Salva o usuário conectado atual
@@ -177,7 +176,7 @@ enterButton.addEventListener('click', (e) => {
 })
 
 
-
+//************************************************ */
 // Verificação de preenchemento dos campos NOME e SENHA
 input.forEach((elem, i) => {
     elem.addEventListener('input', (e) => {

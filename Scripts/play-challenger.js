@@ -1,26 +1,33 @@
 import Header from "./Modules/Header.js";
-import { traffic, $ } from "./Modules/aux-tools.js";
+import { traffic, $, getUser, updateUser,connectKey, stringToHtml } from "./Modules/aux-tools.js";
 import Footer from "./Modules/Footer.js"
 import svg from "./Modules/svg-icons.js";
-import { jsBasic } from "./Modules/questions-database.js";
+import RankingTable from "./Modules/RankingTable.js";
+
+import { jsBasic } from "./Modules/quest-data-base/js-questions-basic.js";
+import { jsMedium } from "./Modules/quest-data-base/js-questions-medium.js"
+import { jsAdvanced } from "./Modules/quest-data-base/js-questions-advanced.js";
+import { jsPro } from "./Modules/quest-data-base/js-questions-pro.js"
 
 Header('#header-capsule')
 Footer('#footer-capsule')
 traffic.start()
+connectKey.create()
 
 // Definindo informações da partida em localStorage | Informações serão limpas ao fechar aba do navegador
 traffic.define({ 
     usedQuest:[],
     levelQuest: 'basic',
     score: 0,
-    quesCount: 1
+    quesCount: 1,
+    quesNumber: 1
 })
 
 // Variaveis
 var interval
 let runTime = { min: 0, sec: 10, ms: 60 } // 1 minuto
 let started = false
-const levels = ['basic', 'medium', 'pro', 'lord']
+const levels = ['basic', 'medium', 'advanced', 'pro']
 
 let response = {
     correct: null, // Letra da alternativa correta
@@ -29,14 +36,22 @@ let response = {
 
 let questList // Guarda as questões do nível atual
 let len // Tamanho da questList
-let scoreValue // O valor da pontuação do nível
+
+const scoreValue = {// O valor da pontuação de cada nível
+    basic: 1.4,
+    medium: 2.1,
+    advanced: 2.7,
+    pro: 3.5
+}
 
 
 let quest = { // Dados a serem atualizados em traffic
     level: traffic.get('levelQuest'), // Nível atual
     used: traffic.get('usedQuest'), // Quests já usadas
     score: traffic.get('score'), // Socore do jogador
-    count: traffic.get('quesCount') // Número de rodadas
+    count: traffic.get('quesCount'), // Número de rodadas
+    lang: traffic.get('quizLang'),
+    number: traffic.get('quesNumber')
     
 }
 
@@ -44,14 +59,20 @@ switch (quest.level) {
     case 'basic':
         questList = jsBasic
         len = Object.keys(jsBasic).length
-        scoreValue = 5.4
         break;
     
     case 'medium':
-        console.log('Nível médio')
-        questList = jsBasic // teste
-        len = Object.keys(jsBasic).length // teste
-        scoreValue = 7.7
+        questList = jsMedium
+        len = Object.keys(jsMedium).length
+        break
+    case 'advanced':
+        questList = jsAdvanced
+        len = Object.keys(jsAdvanced).length
+        break
+    case 'pro':
+        questList = jsPro
+        len = Object.keys(jsPro).length
+        break
 }
 
 
@@ -80,12 +101,12 @@ $(`.${quest.level}`).id = 'current-level'
 $('.next-quest-button > .svg-capsule').innerHTML = svg.arrowRight()
 
 //Texto número da questão atual
-$('.quest-number > .number').textContent = formatTime(quest.count)
+$('.quest-number > .number').textContent = formatTime(quest.number)
 
 
 // *** EVENTOS ***
 
-// click no botão de start/pause/resume e cronometro
+// click no botão de start e cronometro
 $('.start-button').addEventListener('click', (e) => {
     if (e.target.id == 'start') {
         //Ativar os inputs radio
@@ -106,17 +127,16 @@ $('.start-button').addEventListener('click', (e) => {
              randomQues = 'q' + parseInt(Math.random() * len)
             if (!quest.used.includes(randomQues)) {
                 started = true
-                quest.count ++
+                quest.count++
+                quest.number ++
                 quest.used.push(randomQues) // Guarda a chave de questão
                 break
             }
         }
-        console.log(randomQues)
 
         response.correct = questList[randomQues].correct
 
-        // Inserir as questões nos elementos
-
+        // Inserir as questões nos elementos >>
         //Texto
         $('.quest-area').innerHTML = questList[randomQues]['text']
         //Alternativas
@@ -205,11 +225,12 @@ $('.next-quest-button').addEventListener('click', () => {
         score: quest.score,
         quesCount: quest.count,
         levelQuest: quest.level,
-        usedQuest: quest.used
+        usedQuest: quest.used,
+        quesNumber: quest.number
     })
 
-    //Subir para próximo nível quando todas as 10 quest forem respondidas
-    if (quest.count >= 4) {
+    //Subir para próximo nível quando todas as 10 quest de cada nível forem respondidas
+    if (quest.count > 3) {
         // Setar informações de nível
         traffic.set({
             quesCount: 1,
@@ -217,10 +238,91 @@ $('.next-quest-button').addEventListener('click', () => {
             levelQuest:  levels[levels.indexOf(quest.level) + 1]// Atualizar para próximo nível
         })
     }
+    
 
-    location.reload()
+    // Contagem de pontuação ao final do desafio
+    //teste
+    if (quest.number > 12) { // 12 Teste
+        // Data e Hora
+        const data = `${new Date().getDate()}/${formatTime(new Date().getMonth() + 1)}/${new Date().getFullYear()}`
+        const hora = `${new Date().getHours()}:${formatTime(new Date().getMinutes())} ${Number(new Date().getHours()) > 11? 'PM': 'AM'}`
+
+        // Salvando dados da partida na chave do perfil do usuário em localStorage
+        var getScore = getUser().ranking
+        let roundLevel
+        // Cria tabela de informações da partida da linguagem se ela não existir ainda
+        if (getScore[quest.lang] == undefined) {
+            getScore[quest.lang] = []
+        }
+
+        
+        // Deve-se acertar 100% do nível basico e metade do nível médio para receber pontuação do nível médio. etc
+        if (quest.score <= (scoreValue.basic * 3) + ((scoreValue.medium * 3) /2)) {
+            roundLevel = 'basic'
+            console.log('Seu nível é basico')
+            
+        } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3)) + ((scoreValue.pro * 3) / 2)) {
+            roundLevel = 'medium'
+            console.log('Seu nível é medio')
+        } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3) + (scoreValue.advanced * 3) + ((scoreValue.pro * 3) / 2))) {
+            roundLevel = 'advanced'
+            console.log('Seu nível é avançado')
+        } else {
+            roundLevel = 'pro'
+            console.log('Seu nível é Pro')
+        }
+
+        // Atualizando dados ******
+        // Setando a prop current dos rounds anteriores para false
+        getScore[quest.lang].forEach((round, i) => {
+            if (round.current == true) {
+                getScore[quest.lang][i].current = false
+            }
+        })
+
+
+        //Lista de ranking >> pontos | nível | data e hora | atual
+        getScore[quest.lang].push({
+            score: quest.score,
+            level: roundLevel,
+            data: data,
+            hora: hora,
+            current: true // Marca o ultimo round jogado
+
+        })
+
+        // Ordenando a lista do maior para menor com base na pontuação
+        getScore[quest.lang].sort(function (a, b) {
+            if (a.score > b.score) {
+                return -1;
+            }
+            if (a.score < b.score) {
+                return 1;
+            }
+            return 0;
+        });
+
+        console.log(getScore)
+
+        // Salvando os dados no perfil do usuário em LocalStorage
+        updateUser(connectKey.get('user'), { ranking: getScore })
+
+        //Abre tabela de Classificação e Ranking
+        RankingTable()
+        // Setar infos de trafic e preparar para nova partida
+        traffic.set({
+            quesCount: 1,
+            quesNumber: 1,
+            score: 0,
+            usedQuest: []
+        })
+  
+    } else {
+        location.reload()
+    }
+    
+    
 })
-
 
 
 //*****FUNÇÕES AUXILIAR *** */
@@ -241,7 +343,7 @@ function resCorrection() {
         $(`#${response.chosen}`).parentElement.parentElement.classList.add('happy-face-emoji')
 
         // Atribuição de pontos
-        quest.score += scoreValue
+        quest.score += scoreValue[quest.level]
 
     // Resposta incorreta ou nula
     } else {
@@ -270,15 +372,18 @@ function resCorrection() {
 }
 
 
-
-//********************************* */
-
+//*********************************
 
 
+//teste de bloco de código
+function testeCodeBlock(code, active = true) {
+    if (active) {
+        
+        $('.code-block').classList.remove('code-empty')
+        $('.code-block').classList.add('code-full')
+        $('.code-capsule').innerHTML = code
+    }
 
+}
 
-
-
-
-
-
+testeCodeBlock(jsBasic.q16.code, false)

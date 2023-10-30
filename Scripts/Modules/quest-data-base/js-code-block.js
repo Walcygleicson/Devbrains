@@ -78,13 +78,66 @@ const js = {
                 },
     dollarFunc(value) {
         return `${span('dollar-func', '${' + value + '}')}`
+    },
+
+    consoleLog(value) {
+        return `${span('var-name', 'console')}.${span('func-method-name', 'log')}(${value})`
     }
 }
 
-const jsCodeBasic = {
+
+const codeBasic = {
     q3: `
     ${js.var('const', 'names')}= [${js.str('Jhon')}, ${js.str('Philip')}, ${js.str('Mary')}]
-    ${js.useVar('console')}.${js.call('log', js.str('Olá, meu nome é ') + " + " + js.useVar('names') + '['+ js.numb(3) + ']')}`
+    ${js.useVar('console')}.${js.call('log', js.str('Olá, meu nome é ') + " + " + js.useVar('names') + '[' + js.numb(3) + ']')}`,
+    
+    q4: `
+    ${js.var('const', 'soma')}= ${js.str(2) + ' + ' + js.numb(3) + ' + ' + js.numb(5) }
+    ${js.useVar('console')}.${js.call('log', js.useConst('soma'))}
+    `,
+
+
+    q8: `
+    ${js.var('const', 'name', 'Maria')
+    + '\n    ' +
+    js.var('let', 'idade', 18)
+    }
+
+    ${js.op('if')}(${js.useConst('name') + ' == ' + js.str('Maria') + ' && ' + js.useVar('idade') + ' > ' + js.numb(18)}){
+        ${js.useVar('console')+'.'+js.call('log', js.str('A'))}
+    }${js.op('else if')}(${js.useConst('name') + ' != ' + js.str('Maria') + ' || ' + js.useVar('idade') + ' >= ' + js.numb(18)}){
+        ${js.useVar('console')+'.'+js.call('log', js.str('B'))}
+    }${js.op('else if')}(${js.useConst('name') + ' == ' + js.str('Maria') + ' && ' + js.useVar('idade') + ' == ' + js.numb(18)}){
+        ${js.useVar('console')+'.'+js.call('log', js.str('C'))}
+    }${js.op('else')}{
+        ${js.useVar('console')+'.'+js.call('log', js.str('D'))}
+    }
+    `,
+
+    q12: `
+    ${js.var('var', 'foo')}
+    ${js.consoleLog(js.useVar('foo'))}
+    `,
+
+    q13: `
+    ${js.var('var', 'arr')}= [${js.numb(3) + ', ' + js.numb(10) + ', ' + js.numb(1.8) + ', ' + js.numb(9)}]
+    ${js.useVar('arr')}[${js.numb(1)}] = ${js.numb()}
+    ${js.useVar('arr')}.${js.call('push', js.numb(10))}
+
+    ${js.consoleLog(js.useVar('arr'))}
+    `,
+
+    q15: `
+    ${js.var('var', 'mes', 12)}
+    ${js.var('var', 'texto')}= ${js.str('Nós estamos no mês')} + ${js.useVar('mes')}`,
+
+    q16: `
+    ${js.consoleLog(js.call('isNaN', js.str('5')))}
+    ${js.consoleLog(js.call('isNaN', js.str('1,5')))}`
 }
 
-export {jsCodeBasic}
+export function frag(content) {
+    return `<code class="frag">${content}</code>`
+}
+
+export {codeBasic}

@@ -540,3 +540,18 @@ export function isMobile() {
         return false;
     }
 }
+
+
+export function captalize(content) {
+    return content.charAt(0).toUpperCase() + content.slice(1);
+}
+
+/**
+ * 
+ * @param {number | string} number Um valor float
+ * @param {number} fixed Número de casas decimais após o ponto flutuante
+ * @returns {number}
+ */
+export function floatFormat(number, fixed=0) {
+    return parseFloat(number).toFixed(fixed);
+}

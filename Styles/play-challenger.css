@@ -1,5 +1,6 @@
 @import url(Exports/Header.css);
 @import url(Exports/Footer.css);
+@import url(Exports/play-challenges-rank-table.css);
 
 
 .quest-header > .cronometer{
@@ -114,12 +115,13 @@
     margin-left: auto;
     align-self: flex-start;
     height: fit-content;
-    font-size: .6em;
+    font-size: .46em;
 }
 
 .quest-header > .dificulty-levels > div {
     opacity: 15%;
-    width: 45px;
+    width: 47px;
+    padding: 1px 0;
     text-align: center;
     color: white;
 }
@@ -133,11 +135,11 @@
     background: rgb(154, 113, 237);
 }
 
-.quest-header > .dificulty-levels > .pro {
+.quest-header > .dificulty-levels > .advanced {
     background: rgb(240, 71, 167);
 }
 
-.quest-header > .dificulty-levels > .lord {
+.quest-header > .dificulty-levels > .pro {
     background: rgb(247, 216, 13);
 }
 
@@ -561,6 +563,10 @@ label.wrong-anim > .input-box>.radio-mask {
 }
 
 @media screen and (max-width: 570px) {
+    .dificulty-levels {
+        top: -3em;
+    }
+
     .quest-card > .quest-header {
         column-gap: 0;
         justify-content: space-between;
@@ -605,6 +611,10 @@ label.wrong-anim > .input-box>.radio-mask {
         font-size: .9em;
         top: -1.9em;
         left: -1.5em;
+    }
+
+    .dificulty-levels {
+        top: -3.2em;
     }
     
 }
