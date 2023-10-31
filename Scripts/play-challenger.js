@@ -11,6 +11,8 @@ import { jsPro } from "./Modules/quest-data-base/js-questions-pro.js"
 
 Header('#header-capsule')
 Footer('#footer-capsule')
+
+
 traffic.start()
 connectKey.create()
 
@@ -20,7 +22,9 @@ traffic.define({
     levelQuest: 'basic',
     score: 0,
     quesCount: 1,
-    quesNumber: 1
+    quesNumber: 1,
+    errorNumb: 0,
+    correctNumb: 0
 })
 
 // Variaveis
@@ -31,7 +35,7 @@ const levels = ['basic', 'medium', 'advanced', 'pro']
 
 let response = {
     correct: null, // Letra da alternativa correta
-    chosen: null //Letra da alternativa escolhida pelo usuário
+    chosen: null, //Letra da alternativa escolhida pelo usuário.
 }
 
 let questList // Guarda as questões do nível atual
@@ -51,7 +55,9 @@ let quest = { // Dados a serem atualizados em traffic
     score: traffic.get('score'), // Socore do jogador
     count: traffic.get('quesCount'), // Número de rodadas
     lang: traffic.get('quizLang'),
-    number: traffic.get('quesNumber')
+    number: traffic.get('quesNumber'),
+    correctNumb: traffic.get('correctNumb'),
+    errorNumb: traffic.get('errorNumb'),
     
 }
 
@@ -226,7 +232,9 @@ $('.next-quest-button').addEventListener('click', () => {
         quesCount: quest.count,
         levelQuest: quest.level,
         usedQuest: quest.used,
-        quesNumber: quest.number
+        quesNumber: quest.number,
+        correctNumb: quest.correctNumb,
+        errorNumb: quest.errorNumb
     })
 
     //Subir para próximo nível quando todas as 10 quest de cada nível forem respondidas
@@ -259,17 +267,16 @@ $('.next-quest-button').addEventListener('click', () => {
         // Deve-se acertar 100% do nível basico e metade do nível médio para receber pontuação do nível médio. etc
         if (quest.score <= (scoreValue.basic * 3) + ((scoreValue.medium * 3) /2)) {
             roundLevel = 'basic'
-            console.log('Seu nível é basico')
+            
             
         } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3)) + ((scoreValue.pro * 3) / 2)) {
             roundLevel = 'medium'
-            console.log('Seu nível é medio')
+            
         } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3) + (scoreValue.advanced * 3) + ((scoreValue.pro * 3) / 2))) {
             roundLevel = 'advanced'
-            console.log('Seu nível é avançado')
+            
         } else {
             roundLevel = 'pro'
-            console.log('Seu nível é Pro')
         }
 
         // Atualizando dados ******
@@ -287,7 +294,9 @@ $('.next-quest-button').addEventListener('click', () => {
             level: roundLevel,
             data: data,
             hora: hora,
-            current: true // Marca o ultimo round jogado
+            current: true, // Marca o ultimo round jogado
+            correctNumb: quest.correctNumb,
+            errorNumb: quest.errorNumb
 
         })
 
@@ -302,19 +311,21 @@ $('.next-quest-button').addEventListener('click', () => {
             return 0;
         });
 
-        console.log(getScore)
+        
 
         // Salvando os dados no perfil do usuário em LocalStorage
         updateUser(connectKey.get('user'), { ranking: getScore })
 
-        //Abre tabela de Classificação e Ranking
-        RankingTable()
+        //Abre modal de Parabéns >> Tabela de Ranking
+        openCongratModal()
         // Setar infos de trafic e preparar para nova partida
         traffic.set({
             quesCount: 1,
             quesNumber: 1,
             score: 0,
-            usedQuest: []
+            usedQuest: [],
+            correctNumb: 0,
+            errorNumb:0
         })
   
     } else {
@@ -344,9 +355,13 @@ function resCorrection() {
 
         // Atribuição de pontos
         quest.score += scoreValue[quest.level]
+        // Contagem de respotas corretas
+        quest.correctNumb ++
+    
 
     // Resposta incorreta ou nula
     } else {
+        quest.errorNumb ++
         //Animaçao marcar reposta errada
         if (response.chosen != null) {
             $(`#${response.chosen}`).parentElement.parentElement.classList.add('wrong-anim')
@@ -369,6 +384,51 @@ function resCorrection() {
     // Habilitar botão de next
     $('.next-quest-button').style.display = 'flex'
 
+}
+
+
+function openCongratModal() {
+
+    //Insere modal na capsula
+    let strElem = `
+        <div class="congrat-modal">
+            <div class="stars-container"></div>
+            <h1 class="title">Parabéns!</h1>
+            <p class="text">Você concluiu o desafio! Segue para ver sua classificação e pontos.</p>
+            <button class="open-rank-button">Avançar</button>
+        </div>`
+    
+    strElem = stringToHtml(strElem)
+    $('#modal-capsule').classList.add('congrat-modal-background')
+    $('#modal-capsule').appendChild(strElem)
+    
+
+    //Adicionar estrelas
+    for (let i = 0; i < 5; i++) {
+        $('.stars-container').innerHTML += svg.starSolid()
+    }
+
+    //Animação fade in das estrelas
+    let interval
+    let c = 0
+    interval = setInterval(() => {
+        $('.stars-container').children[c].classList.add('fade-animation')
+        c++
+
+        if (c > 4) {
+            clearInterval(interval)
+        }
+    }, 200)
+
+    //Evento no botão Avançar
+    strElem.querySelector('.open-rank-button').addEventListener('click', () => {
+        // Remover Modal
+        $('#modal-capsule').classList.remove('congrat-modal-background')
+        $('#modal-capsule').removeChild($('.congrat-modal'))
+        // Abrir Tabela de Ranking
+        RankingTable()
+        
+    })
 }
 
 

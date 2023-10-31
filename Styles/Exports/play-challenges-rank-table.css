@@ -237,6 +237,90 @@
     box-shadow: 0 0 4px rgba(240, 211, 104, 0.279);
 }
 
+/* CONGRATULATIONS MODAL */
+.congrat-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    backdrop-filter: blur(30px);
+    display: grid;
+    place-items: center;
+}
+
+.congrat-modal {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgba(195, 195, 195, 0.43);
+    border: 1px solid rgba(208, 208, 208, 0.319);
+    padding: 1em 1.5em;
+    font-size: .9em;
+    display: flex;
+    flex-direction: column;
+}
+.stars-container {
+    width: fit-content;
+    height: 25px;
+    margin-bottom: 5px; 
+}
+
+.stars-container > svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    fill: var(--color-orange);
+}
+
+.stars-container > svg + svg {
+    margin-left: .2em;
+}
+
+h1.title {
+    color: var(--color-orange);
+    font-size: 1.2em;
+}
+
+p.text {
+    margin: .3em 0;
+}
+
+.open-rank-button {
+    background: var(--color-orange);
+    color: white;
+    padding: 2px 1em;
+    border-radius: 6px;
+    margin: .4em .5em 0 auto;
+    cursor: pointer;
+}
+
+.open-rank-button:hover {
+    background: var(--cor-laranja-button-hover);
+}
+
+.fade-animation{
+    animation: fade-in 1s ease-in-out both;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        width: 10px;
+        height: 10px;
+    }
+
+    80% {
+        opacity: 1;
+        width: 21px;
+        height: 21px;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 
 @media screen and (max-width: 865px) {
     .table-head th {

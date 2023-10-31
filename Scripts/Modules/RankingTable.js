@@ -40,9 +40,9 @@ export default function RankingTable() {
             // Pontuação
             $('.d-row .score').textContent = floatFormat(round.score, 1) + ' pts'
             // Número de respostas corretas
-            $('.d-row .correct-number').textContent = '00'
+            $('.d-row .correct-number').textContent = round.correctNumb
             // Número de respostas erradas
-            $('.d-row .error-number').textContent = '00'
+            $('.d-row .errors-number').textContent = round.errorNumb
             // Data e Hora
             $('.d-row .date-hours').textContent = round.data + ' - ' + round.hora 
         }
@@ -75,9 +75,9 @@ export default function RankingTable() {
         // Pontuação
         $(row + ' .score').textContent = floatFormat(round.score, 1) + ' pts'
         // Número de respostas corretas
-        $(row + ' .correct-number').textContent = '00'
+        $(row + ' .correct-number').textContent = round.correctNumb
         // Número de respostas erradas
-        $(row + ' .error-number').textContent = '00'
+        $(row + ' .error-number').textContent = round.errorNumb
         // Data e Hora
         $(row + ' .date-hours').textContent = round.data + ' - ' + round.hora
     })
