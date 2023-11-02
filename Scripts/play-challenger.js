@@ -29,7 +29,7 @@ traffic.define({
 
 // Variaveis
 var interval
-let runTime = { min: 0, sec: 10, ms: 60 } // 1 minuto
+let runTime = { min: 0, sec: 60, ms: 60 } // 1 minuto
 let started = false
 const levels = ['basic', 'medium', 'advanced', 'pro']
 
@@ -88,7 +88,7 @@ switch (quest.level) {
 disableInput()
 
 //Insere o nome da linguagem do desafio selecionado na tag <title>
-$('.tab-title').textContent = `Devbrains - Quiz de ${traffic.get('quizLang')}`
+$('.tab-title').textContent = `Devbrains - Quiz de ${traffic.get('langName')}`
 
     
 // Insere icone de help no botão de tutorial

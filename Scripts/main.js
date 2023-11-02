@@ -1,7 +1,9 @@
 import Header from "./Modules/Header.js";
 import Footer from "./Modules/Footer.js";
-import { connectKey, $, stringToHtml, traffic } from "./Modules/aux-tools.js";
+import AlertModalDefault from "./Modules/AlertModalDefault.js";
+import { connectKey, $, stringToHtml, traffic, getUser, captalize, floatFormat } from "./Modules/aux-tools.js";
 import svg from "./Modules/svg-icons.js";
+import RankingTable from "./Modules/RankingTable.js";
 
 connectKey.create()
 traffic.start()
@@ -11,31 +13,55 @@ Footer('#footer-capsule')
 langSlideCards()
 
 
-
 // Insere os cards de desafios das linguagens
 function langSlideCards() {
-    const lang = {
+    var lang = {
         js: {
-            name: 'js',
+            name: 'Javascript',
             img: '../Assets/Svg/js-icon.svg'
         },
-
+    
         css: {
-            name: 'css',
+            name: 'HTML5 & CSS3',
             img: '../Assets/Svg/css-icon.svg'
         },
-
+    
         py: {
-            name: 'py',
+            name: 'Python',
             img: '../Assets/Svg/py-icon.svg'
         },
-
-        gd: {
-            name: 'gds',
+    
+        gds: {
+            name: 'GDScript',
             img: '../Assets/Svg/gds-icon.svg'
+        },
+
+        cs: {
+            name: 'C Sharp',
+            img: '../Assets/Svg/cs-icon.svg'
+        },
+
+        cpp: {
+            name: 'C++',
+            img: '../Assets/Svg/cpp-icon.svg'
+        },
+
+        rjs: {
+            name: 'React.js',
+            img: '../Assets/Svg/rjs-icon.svg'
+        },
+
+        njs: {
+            name: 'Node.js',
+            img: '../Assets/Svg/njs-icon.svg'
+        },
+
+        php: {
+            name: 'PHP',
+            img: '../Assets/Svg/php-icon.svg'
         }
     }
-
+    
     // Slavar lista de linguagens
     traffic.define({ langList: [] })
     traffic.set({langList: [...Object.keys(lang)]})
@@ -49,18 +75,18 @@ function langSlideCards() {
                         <a href="play-challenger.html" class="go-to-challenger" id="${id}">Começar</a>
                     </div>
 
-                    <div class="lang-content">
+                    <div class="lang-content ${best_score(id).className}">
                         <h2 class="title">
                             <span>Desafio</span>
                             <span class="lang-name">${lang[id]['name']}</span>
                         </h2>
                         <div class="score-container">
                             <span class="inner-txt">Melhor Pontuação: </span>
-                            <span class="score">--.--</span>
+                            <span class="score">${best_score(id).score}</span>
                         </div>
                         <div class="level-container">
                             <span class="inner-txt">Nível: </span>
-                            <span class="level">--.--</span>
+                            <span class="level">${best_score(id).level}</span>
                         </div>
                         <button class="score-rank-button">
                             <span class="rank-svg-capsule">${svg.rank()}</span>
@@ -77,9 +103,20 @@ function langSlideCards() {
         strElement.$('.go-to-challenger').onclick = function () {
 
             // Salva a o nome da linguagem do desafio selecionado pelo usuário
-            traffic.define({ quizLang: lang[id]['name'] })
-            traffic.set({ quizLang: lang[id]['name'] })
+            traffic.define({ quizLang: id, langName: lang[id]['name'] })
+            traffic.set({ quizLang: id, langName: lang[id]['name'] })
         }
+
+        //Botão de Ver Ranking
+        strElement.$('.score-rank-button').addEventListener('click', () => {
+
+            if (getUser(connectKey.get('user')).ranking[id] !== undefined) {
+                RankingTable(id)
+            } else {
+                //Abrir modal de alerta
+                AlertModalDefault('Você ainda não jogou este desafio! Inicie para ter acesso ao ranking!', 'Ops!')
+            }
+        })
         // -------------------------------------------------
 
         $('.slider-range').appendChild(strElement)
@@ -87,6 +124,18 @@ function langSlideCards() {
     })
 
 }
+
+// Obter potuações para mostrar no card
+function best_score(id) {
+    let userData = getUser(connectKey.get('user')).ranking
+    return {
+        score: userData[id] == undefined ? '--.--' : floatFormat(userData[id][0].score, 1) + ' pts',
+        level: userData[id] == undefined ? '--.--' : captalize(userData[id][0].level),
+        className: userData[id] == undefined ? '' : 'score-full'
+    }
+    
+}
+
 
 
 // Animação de slide automático do carroussel
@@ -153,6 +202,7 @@ $('.slide-buttons > button').forEach((but) => {
     //Insere svg
     but.innerHTML = svg.chevronLeft()
 })
+
 
 
 

@@ -2,6 +2,8 @@
 @import url(Exports/Header.css);
 @import url(Exports/main-slide.css);
 @import url(Exports/Footer.css);
+@import url(Exports/play-challenges-rank-table.css);
+
 
 header {
     z-index: 10;

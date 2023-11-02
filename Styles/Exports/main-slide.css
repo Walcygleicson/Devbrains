@@ -138,6 +138,11 @@
     transition-duration: .3s;
 }
 
+.score-full span.score,
+.score-full span.level {
+    color: var(--color-orange);
+}
+
 
 .score-rank-button>.rank-svg-capsule>svg {
     width: 10px;

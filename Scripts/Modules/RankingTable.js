@@ -3,28 +3,31 @@ import { $, traffic, getUser, captalize, floatFormat } from "./aux-tools.js";
 
 
 
-export default function RankingTable() {
+export default function RankingTable(lang) {
     let infos = {
-        lang: traffic.get('quizLang')
+        lang: lang==undefined?traffic.get('quizLang'): lang
     }
 
-
+    
     //Mostrar Tabela
     $('.modal-ranking-background').style.display = 'grid'
 
     //Inserir linhas vazias na tabela | Clones da primeira linha
     for (let i = 0; i < 15; i++) {
-        const dataRowClone = $('.dr0').cloneNode(true)
-        dataRowClone.classList.remove('dr0')
-        dataRowClone.classList.add('dr' + (i+1))
-        $('.table-body').appendChild(dataRowClone)
-
-        // Insere icones svg dos numeros de repostas certas e erradas
-        if (i < 4) {
-            i==0 || i==2? $('.table-icon-capsule')[i].innerHTML = svg.checkCircle('class', 'correct-icon'): $('.table-icon-capsule')[i].innerHTML = svg.crossCircle('class', 'error-icon')   
-        }
-        
+        if ($('.table-body').children.length < 16) {
+            
+            const dataRowClone = $('.dr0').cloneNode(true)
+            dataRowClone.classList.remove('dr0')
+            dataRowClone.classList.add('dr' + (i+1))
+            $('.table-body').appendChild(dataRowClone)
+    
+            // Insere icones svg dos numeros de repostas certas e erradas
+            if (i < 4) {
+                i==0 || i==2? $('.table-icon-capsule')[i].innerHTML = svg.checkCircle('class', 'correct-icon'): $('.table-icon-capsule')[i].innerHTML = svg.crossCircle('class', 'error-icon')   
+            }
+        } 
     }
+
 
     //Inserir informações nas linhas | Obter infos das partidas da linguagem corrente
     const userRanking = getUser().ranking
@@ -84,25 +87,40 @@ export default function RankingTable() {
 
     //*** EVENTOS */
     // Botão de sair
-    $('.exit-button').addEventListener('click', () => {
+    $('.exit-button').addEventListener('click', (e) => {
         //Fechar tabela
         $('.modal-ranking-background').style.display = 'none'
-        // Resetar traffic
-        traffic.reset()
-        window.location.href = 'main.html';
+        $('html').removeAttribute('style')
+
+        if (!e.target.classList.contains('no-reload')) {
+            
+            // Resetar traffic
+            traffic.reset()
+            window.location.href = 'challenges.html';
+        }
+
+         //Limpar linhas e ids
+        $('.table-body > .data-row > td').forEach((td) => {
+            td.textContent = ''
+            td.parentNode.removeAttribute('id')
+        })
+
     })
 
     // Botão de Jogar Novamente
-    $('.play-again-button').addEventListener('click', () => {
-        // // Setar infos de trafic e preparar para nova partida
-        // traffic.set({
-        //     quesCount: 1,
-        //     quesNumber: 1,
-        //     score: 0,
-        //     usedQuest: []
-        // })
+    $('.play-again-button').addEventListener('click', (e) => {
+       
+        if (e.target.textContent == 'Jogar') {
+            if ($('title').id == 'home') {
+                $('.logo-container > a#' + lang).click()
+            } else if ($('title').id == 'challengers') {
+                $('.a-container > a#' + lang).click()
+            }
 
-        location.reload()
+        } else {
+            location.reload()
+        }
+
     })
 
 }

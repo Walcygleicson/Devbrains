@@ -11,7 +11,7 @@ const PATH = {
 const LINK = {
     login: '../index.html',
     home: 'main.html',
-    challenges: 'play-challenger.html',
+    challenges: 'challenges.html',
     templates: '#',
     learning: '#',
     auxLib: '#',
