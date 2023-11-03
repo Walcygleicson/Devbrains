@@ -1,6 +1,7 @@
 import svg from "./Modules/svg-icons.js";
-import { focusInOut, AUX, $, connectKey} from "./Modules/aux-tools.js";
+import { focusInOut, AUX, $, connectKey, noLoginUser} from "./Modules/aux-tools.js";
 connectKey.create()
+noLoginUser.create()
 
 // Entrar automaticamente
 if (connectKey.get('user') != null && connectKey.get('keep') == true) {

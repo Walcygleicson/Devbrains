@@ -184,7 +184,8 @@
     background: var(--cor-amarelo-js);
 }
 
-.quest-card > p.py::before {
+.quest-card > p.py::before,
+.quest-card>p.cpp::before {
     background:var(--cor-azul-py);
 }
 
@@ -194,6 +195,19 @@
 
 .quest-card > p.gds::before {
     background: var(--cor-azul-gds);
+}
+
+.quest-card > p.cs::before {
+    background: rgb(87, 87, 103);
+}
+
+.quest-card > p.rjs::before,
+.quest-card > p.php::before {
+    background: rgb(87, 110, 200)
+}
+
+.quest-card > p.njs::before {
+    background: rgb(63, 168, 103);
 }
 /* Bloco de código */
 

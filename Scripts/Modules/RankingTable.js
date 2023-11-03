@@ -1,5 +1,5 @@
 import svg from "./svg-icons.js";
-import { $, traffic, getUser, captalize, floatFormat } from "./aux-tools.js";
+import { $, traffic, getUser, captalize, floatFormat, connectKey, noLoginUser } from "./aux-tools.js";
 
 
 
@@ -30,7 +30,10 @@ export default function RankingTable(lang) {
 
 
     //Inserir informações nas linhas | Obter infos das partidas da linguagem corrente
-    const userRanking = getUser().ranking
+
+    // Ontem infos do usuário ou de noLoginUser
+    const userRanking = connectKey.get('user') == null ? noLoginUser.get('ranking') : getUser().ranking
+    
     userRanking[infos.lang].forEach((round, i) => {
         const row = '.dr' + i
 

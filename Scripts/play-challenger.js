@@ -1,5 +1,5 @@
 import Header from "./Modules/Header.js";
-import { traffic, $, getUser, updateUser,connectKey, stringToHtml } from "./Modules/aux-tools.js";
+import { traffic, $, getUser, updateUser,connectKey, stringToHtml, noLoginUser } from "./Modules/aux-tools.js";
 import Footer from "./Modules/Footer.js"
 import svg from "./Modules/svg-icons.js";
 import RankingTable from "./Modules/RankingTable.js";
@@ -14,6 +14,8 @@ Footer('#footer-capsule')
 
 
 traffic.start()
+noLoginUser.create()
+noLoginUser.define({ranking: {}})
 connectKey.create()
 
 // Definindo informações da partida em localStorage | Informações serão limpas ao fechar aba do navegador
@@ -255,9 +257,15 @@ $('.next-quest-button').addEventListener('click', () => {
         const data = `${new Date().getDate()}/${formatTime(new Date().getMonth() + 1)}/${new Date().getFullYear()}`
         const hora = `${new Date().getHours()}:${formatTime(new Date().getMinutes())} ${Number(new Date().getHours()) > 11? 'PM': 'AM'}`
 
-        // Salvando dados da partida na chave do perfil do usuário em localStorage
-        var getScore = getUser().ranking
+        // Salvando dados da partida na chave do perfil do usuário em localStorage | Ou em traffic em caso de não logado
+        var getScore
         let roundLevel
+        if (connectKey.get('user') != null) {
+            getScore = getUser().ranking // Obtem os dados do usuário se estiver logado
+        } else {
+            getScore = noLoginUser.get('ranking') // Obtem os dados de noLoginUser se não estiver logado
+        }
+
         // Cria tabela de informações da partida da linguagem se ela não existir ainda
         if (getScore[quest.lang] == undefined) {
             getScore[quest.lang] = []
@@ -311,10 +319,13 @@ $('.next-quest-button').addEventListener('click', () => {
             return 0;
         });
 
-        
-
-        // Salvando os dados no perfil do usuário em LocalStorage
-        updateUser(connectKey.get('user'), { ranking: getScore })
+        //SAVE
+        // Salvando os dados no perfil do usuário em LocalStorage | Login
+        if (connectKey.get('user') != null) { 
+            updateUser(connectKey.get('user'), { ranking: getScore })
+        } else { // Sem Login | Salvar em noLoginUser
+            noLoginUser.set({ranking: getScore})
+        }
 
         //Abre modal de Parabéns >> Tabela de Ranking
         openCongratModal()

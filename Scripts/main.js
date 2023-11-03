@@ -1,9 +1,13 @@
 import Header from "./Modules/Header.js";
 import Footer from "./Modules/Footer.js";
 import AlertModalDefault from "./Modules/AlertModalDefault.js";
-import { connectKey, $, stringToHtml, traffic, getUser, captalize, floatFormat } from "./Modules/aux-tools.js";
+import { connectKey, $, stringToHtml, traffic, getUser, captalize, floatFormat, noLoginUser} from "./Modules/aux-tools.js";
 import svg from "./Modules/svg-icons.js";
 import RankingTable from "./Modules/RankingTable.js";
+
+noLoginUser.create()
+noLoginUser.define({ ranking: {} })
+
 
 connectKey.create()
 traffic.start()
@@ -110,7 +114,8 @@ function langSlideCards() {
         //Botão de Ver Ranking
         strElement.$('.score-rank-button').addEventListener('click', () => {
 
-            if (getUser(connectKey.get('user')).ranking[id] !== undefined) {
+            if (connectKey.get('user') != null && getUser(connectKey.get('user')).ranking[id] !== undefined || connectKey.get('user') == null && noLoginUser.get('ranking')[id] !== null) {
+                //Abre atbela de ranking
                 RankingTable(id)
             } else {
                 //Abrir modal de alerta
@@ -125,9 +130,13 @@ function langSlideCards() {
 
 }
 
+
 // Obter potuações para mostrar no card
 function best_score(id) {
-    let userData = getUser(connectKey.get('user')).ranking
+    let userData = []
+    //Buscar dados se houver usuário logado
+    userData = connectKey.get('user') == null ? noLoginUser.get('ranking'): getUser(connectKey.get('user')).ranking
+    
     return {
         score: userData[id] == undefined ? '--.--' : floatFormat(userData[id][0].score, 1) + ' pts',
         level: userData[id] == undefined ? '--.--' : captalize(userData[id][0].level),
@@ -135,6 +144,7 @@ function best_score(id) {
     }
     
 }
+
 
 
 
@@ -202,7 +212,6 @@ $('.slide-buttons > button').forEach((but) => {
     //Insere svg
     but.innerHTML = svg.chevronLeft()
 })
-
 
 
 

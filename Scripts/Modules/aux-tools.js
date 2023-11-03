@@ -555,3 +555,67 @@ export function captalize(content) {
 export function floatFormat(number, fixed=0) {
     return parseFloat(number).toFixed(fixed);
 }
+
+
+export const noLoginUser = {
+    /**
+     * Cria uma chave 'noLoginUser' caso não houver usuário conectado | Se houver, a chave é deletada
+     */
+    create() {
+        if (connectKey.get('user') == null) {
+            if (sessionStorage.getItem('noLoginUser') == null) {
+                sessionStorage.setItem('noLoginUser', JSON.stringify({}))
+            }
+
+            window.addEventListener('beforeunload', (e) => {
+                sessionStorage.removeItem('noLoginUser')
+            })
+
+        } else {
+            sessionStorage.removeItem('noLoginUser')
+        }
+    },
+
+    /**
+     * Deleta a chave 'noLoginUser' de localStorage
+     */
+    delete() {
+        sessionStorage.removeItem('noLoginUser');
+    },
+
+    get(key) {
+        let get = JSON.parse(sessionStorage.getItem('noLoginUser'))
+        if (get[key] == undefined) {
+            return console.error(`ERRO DE CHAVE!\nA chave "${key}" não foi encontrada em "noLoginUser"!\n Certifique se foi definida primeiro`)
+        } else {
+            return get[key];
+        }
+    },
+
+    define(props) {
+        let get = JSON.parse(sessionStorage.getItem('noLoginUser'))
+        if (get != null) {
+            
+            Object.keys(props).forEach((k) => {
+                if (get[k] === undefined) {
+                    get[k] = props[k] 
+                }
+            })
+            sessionStorage.setItem('noLoginUser', JSON.stringify(get))
+            get = null
+        }
+    },
+
+     set(props) {
+        let get = JSON.parse(sessionStorage.getItem('noLoginUser'))
+        Object.keys(props).forEach((k) => {
+            if (get[k] !== undefined) {
+                get[k] = props[k] 
+            } else {
+                return console.error(`A propriedade "${k}" não foi encontrada em "noLoginUser"! Sertifique-se se foi definida primeiro!`)
+            }
+        })
+        sessionStorage.setItem('noLoginUser', JSON.stringify(get))
+        get = null
+    },
+}
