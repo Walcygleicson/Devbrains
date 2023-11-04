@@ -34,6 +34,7 @@ header {
     padding: 5px 1em;
     border-radius: 10px;
     background: rgb(81, 111, 200);
+    width: max-content;
     top: -4em;
     left: 50%;
     transform: translateX(-50%);
@@ -41,6 +42,7 @@ header {
 
 .aux-apresentation > .card-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     border-radius: 10px 7em 10px 10px;
     padding: 1em 3em;
@@ -123,5 +125,94 @@ header {
     color: rgb(216, 91, 230);
     border-color: rgba(255, 255, 255, 0.682);
     transition-duration: .3s;
+}
+
+@media screen and (max-width: 700px) {
+    .aux-apresentation > h1.title {
+        font-size: .9em;
+    }
+
+    .card-container > .description > h2 {
+        font-size: 1.3em;
+    }
+
+    .card-container > .description > h3 {
+        font-size: 1em;
+    }
+
+    .card-container > .description > p {
+        font-size: .8em;
+    }
+}
+
+
+
+@media screen and (max-width: 730px) {
+    .aux-apresentation {
+        height: max-content;
+        padding-bottom: 5em;
+    }
+
+    .aux-apresentation > .card-container {
+        border-bottom-left-radius: 3em;
+    }
+
+    .aux-apresentation > .card-container > section {
+        width: 100%;
+    }
+
+    .aux-apresentation > .card-container > .lib-options {
+        margin-top: 1em;
+    }
+
+    .aux-apresentation > .card-container > .lib-options > .lib-logo-container {
+        width: 200px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lib-options > .lib-logo-container > img {
+        width: 50%;
+    }
+
+    .card-container > .lib-options > a {
+        margin: 1em 0 0 3em;
+    }
+}
+
+
+@media screen and (max-width: 447px) {
+
+    main {
+        padding-left: .2em;
+        padding-right: .2em;
+    }
+
+    .aux-apresentation>h1.title {
+        font-size: .8em;
+    }
+
+    .aux-apresentation > .card-container > .lib-options > .lib-logo-container {
+            width: 100%;
+    }
+
+    .card-container > .lib-options > .lib-logo-container > h1 {
+        font-size: 1.1em;
+    }
+
+    .lib-options>.lib-logo-container>img {
+        width: 40%;
+    }
+    .card-container > .lib-options > a {
+        margin: 1em auto 0 auto;
+        font-size: .8em;
+    }
+
+    .card-container > .description > p {
+        font-size: .7em;
+    }
+
 }
 
