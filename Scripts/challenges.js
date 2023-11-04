@@ -54,7 +54,6 @@ function insertCards() {
         element = stringToHtml(element)
         element.style.backgroundImage = `url(../Assets/Svg/${key}-icon.svg)`
 
-
         //** Eventos */
 
         //Click no botão ver ranking

@@ -12,7 +12,34 @@ header {
     column-gap: 2em;
     row-gap: 2em;
     margin-top: 1em;
+}
 
+.challenges-title-container {
+    width: 100%;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.378);
+}
+
+.challenges-title-container > h2 {
+    font-size: 1.3em;
+    color: var(--color-orange);
+}
+.challenges-title-container > h3 {
+    font-size: .8em;
+    text-indent: 1.5em;
+    position: relative;
+}
+
+.challenges-title-container > h3::before{
+    content: '';
+    position: absolute;
+    padding: 1px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgb(117, 117, 117);
+    left: .4em;
+    bottom: 25%;
 }
 
 .background {
@@ -127,4 +154,34 @@ header {
     width: 10px;
     height: 10px;
     fill: var(--cor-carvao);
+}
+
+@media screen and (max-width: 580px) {
+    .challenges-list {
+        border: 1px solid rgb(235, 235, 235);
+        border-radius: 15px;
+        box-shadow: 2px 2px 3px rgba(178, 178, 178, 0.252);
+        margin-top: 0;
+        padding: 1em;
+        background: white;
+    }
+
+    .challenges-title-container > h2 {
+        font-size: 1em;
+    }
+
+    .challenges-title-container > h3 {
+        font-size: .6em;
+    }
+
+    .challenges-title-container > h3::before {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .challenges-title-container > h3::before {
+        bottom: 65%;
+    }
 }

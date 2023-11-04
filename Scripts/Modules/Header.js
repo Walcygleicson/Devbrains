@@ -194,7 +194,7 @@ export default function Header(capsule) {
             if ($('.user-button').id != 'mobile-mode') {
                 AUX.toggleDisplay($('.profile-menu-dropdawn'), 'flex')
             } else {
-                $('.nav-itens-container').style.transitionDuration = '1s'
+                $('.nav-itens-container').style.transitionDuration = '.7s'
                 $('.nav-itens-container').style.right = 0
             }
         }
@@ -203,7 +203,7 @@ export default function Header(capsule) {
 
     //Botão de fechar menu lateral (Mobile)
     strNodes[2].$('.close-nav').addEventListener('click', () => {
-        $('.nav-itens-container').style.right = '-400px'
+        $('.nav-itens-container').style.right = '-420px'
     })
 
 

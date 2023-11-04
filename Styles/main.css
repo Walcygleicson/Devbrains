@@ -6,15 +6,122 @@
 
 
 header {
-    z-index: 10;
+    z-index: 100;
 }
 
-main {
-    padding: 0 2em;
-    height: 100vh;
+/* main {
+    border: 1px solid red;
+} */
+
+
+/* AUX APRESETATION */
+
+.aux-apresentation {
+    border-radius: 10PX 10em 10px 10em;
+    background: url(../Assets/Images/aux-print.png) no-repeat fixed;
+    background-size: cover;
+    filter: drop-shadow(2px 2px 3px);
+    box-shadow: inset 0px 0px 500px black, inset 0 0 300px black, inset 0 0 100px black;
+    margin-top: 25em;
+    height: 450px;
+    position: relative;
+    padding: 2em;
 }
 
-main > p {
-    margin-bottom: 5em;
+.aux-apresentation > h1.title {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    padding: 5px 1em;
+    border-radius: 10px;
+    background: rgb(81, 111, 200);
+    top: -4em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.aux-apresentation > .card-container {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px 7em 10px 10px;
+    padding: 1em 3em;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.168);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.511);
+    backdrop-filter: blur(8px);
+
+}
+
+.aux-apresentation > .card-container * {
+    color: white;
+}
+
+.card-container > .description {
+    width: 70%;
+}
+
+.card-container > .description > h2 {
+    font-size: 1.5em;
+    color: rgb(216, 91, 230);
+    border: 1px solid rgba(255, 255, 255, 0.082);
+    width: fit-content;
+    padding: 2px 1em;
+    border-radius: 5px;
+    margin-bottom: .7em;
+}
+
+.card-container > .description > h2 > span {
+    font-size: .9em;
+    font-family: var(--font-code-italic);
+}
+
+.card-container > .description > h3 {
+    font-size: 1.1em;
+    font-family: var(--font-code-normal);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.121);
+    padding-bottom: 4px;
+    margin-bottom: .5em;
+}
+
+.card-container > .description > p {
+    font-size: .9em;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+}
+
+
+.card-container > .lib-options > .lib-logo-container {
+    border: 1px solid rgba(255, 255, 255, 0.186);
+    padding: .5em;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.37);
+    border-radius: 10px 3.3em 10px 10px;
+
+}
+
+.card-container > .lib-options > .lib-logo-container > h1 {
+    color: rgb(216, 91, 230);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.card-container > .lib-options > .lib-logo-container > h1 > span {
+    font-family: var(--font-code-italic);
+}
+
+.card-container > .lib-options > a {
+    display: flex;
+    width: fit-content;
+    margin: .7em auto 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.171);
+    color: rgba(238, 238, 238, 0.597);
+    padding: 3px 2em;
+    font-size: .9em;
+    letter-spacing: 1.2px;
+    border-radius: 20px;
+}
+
+.card-container > .lib-options > a:hover {
+    color: rgb(216, 91, 230);
+    border-color: rgba(255, 255, 255, 0.682);
+    transition-duration: .3s;
 }
 
