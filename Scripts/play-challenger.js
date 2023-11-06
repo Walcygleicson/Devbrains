@@ -1,5 +1,5 @@
 import Header from "./Modules/Header.js";
-import { traffic, $, getUser, updateUser,connectKey, stringToHtml, noLoginUser } from "./Modules/aux-tools.js";
+import { traffic, $, getUser, updateUser,connectKey, stringToHtml, noLoginUser, AUX } from "./Modules/aux-tools.js";
 import Footer from "./Modules/Footer.js"
 import svg from "./Modules/svg-icons.js";
 import RankingTable from "./Modules/RankingTable.js";
@@ -119,6 +119,8 @@ $('.start-button').addEventListener('click', (e) => {
     if (e.target.id == 'start') {
         //Ativar os inputs radio
         disableInput(false)
+        //Desativar botão de tutorial
+        $('.tutorial-button').disabled = true
 
         e.target.id = 'running'
         e.target.textContent = 'Go!'
@@ -345,6 +347,80 @@ $('.next-quest-button').addEventListener('click', () => {
     
     
 })
+
+
+// Click no botão de tutorial
+const tutoText = [
+    `Neste desafio você reposnderá 40 questões envolvendo a tecnologia ${traffic.get('langName')}. Serão 10 questões para cada Nível.`,
+
+    'Esta barra marca o nível atual das questões. São 4 níveis, do Básico ao Pro.',
+
+    'Pressione Start para começar a partida. Cada questão é cronometrada. Responda antes que o tempo zere!',
+
+    'Neste campo aparecerá a pergunta quando a partida for iniciada!',
+
+    'Um exemplo de código referente à pergunta será mostrado neste campo caso for necessário. Questões podem ou não mostrar exemplos de códigos!',
+
+    'As alternativas serão liberadas quando a partida for iniciada!',
+
+    'O botão de Confirmar reposta será liberado assim que uma alternativa for marcada! Pressione para confirmar sua reposta e prosseguir! Se o tempo zerar e houver uma alternativa marcada e o botão no for pressionado, a alternativa marcada será avaliada mesmo assim. Se o tempo zerar e nenhuma alternativa for marcada, automaticamente será considerado como respota errada!',
+
+    'O botão de Próximo será liberado assim que sua reposta for confirmada e avaliada. Pressione para seguir para as próximas questões. Ao final do desafio sua pontuação e classificação serão exibidos na tela. Boa sorte!'
+]
+
+
+$('.tutorial-button').addEventListener('click', () => {
+    let tc = 0
+
+    const el = () => {
+        const card = stringToHtml(`
+        <div class="tuto-card"><h1>Tutorial</h1><p>${tutoText[tc]}</p><button class="next-tuto">${svg.arrowRight()}</button></div>
+        `)
+
+        //Click no botão de próximo tutorial
+        card.$('.next-tuto').addEventListener('click', () => {
+            // Deletar o card de tutorial e class do alvo antigo
+            const oldTarget = $('.target-tutorial-' + tc)
+            oldTarget.removeChild(oldTarget.querySelector('.tuto-card'))
+            oldTarget.classList.remove('current-tuto')
+
+            if (tc < tutoText.length - 1) {
+                tc++
+                // Inserir card de tutorial e class no proximo alvo
+                $('.target-tutorial-' + tc).appendChild(el())
+                $('.target-tutorial-' + tc).classList.add('current-tuto')
+            } else {
+
+                //Resetar elementos
+                $('.start-button').id = 'start'
+                $('.next-quest-button').disabled = false
+                $('.tutorial-button').disabled = false
+                $('.next-quest-button').style.display = 'none'
+                $('.code-block').classList.remove('code-full')
+                $('.code-block').classList.add('code-empty')
+                tc = 0
+            }
+        })
+        
+        return card
+    } 
+
+
+    //Desabilitar botões
+    $('.start-button').id = 'running'
+    $('.next-quest-button').disabled = true
+    $('.tutorial-button').disabled = true
+    $('.next-quest-button').style.display = 'flex'
+    $('.code-capsule').innerHTML = `
+    <span class="def">var</span> <span class="var-name">example</span> = "<span class="str-text">Hello, world!</span>"
+    <span class="var-name">console</span>.<span class="func-method-name">log</span>(<span class="var-name">example</span>)`
+    AUX.replaceClassNames($('.code-block'), 'code-empty', 'code-full')
+
+    $('.target-tutorial-0').classList.add('current-tuto')
+    $('.target-tutorial-0').appendChild(el())
+
+})
+
 
 
 //*****FUNÇÕES AUXILIAR *** */

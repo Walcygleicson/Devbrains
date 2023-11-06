@@ -2,6 +2,9 @@
 @import url(Exports/Footer.css);
 @import url(Exports/play-challenges-rank-table.css);
 
+header {
+    z-index: 10;
+}
 
 .quest-header > .cronometer{
     display: flex;
@@ -11,6 +14,11 @@
     border-radius: 17px;
     height: fit-content;
     padding: 5px 0;
+}
+
+.quest-header > .cronometer > .tuto-card {
+    font-size: .7em;
+    left: 0;
 }
 
 .cronometer > .start-button {
@@ -109,7 +117,7 @@
 }
 
 .quest-header > .dificulty-levels {
-    z-index: -1;
+    
     display: flex;
     column-gap: .1em;
     margin-left: auto;
@@ -118,7 +126,13 @@
     font-size: .46em;
 }
 
-.quest-header > .dificulty-levels > div {
+.quest-header > .dificulty-levels > .tuto-card {
+    font-size: 1.5em;
+    top: 2em;
+    right: 0;
+}
+
+.quest-header > .dificulty-levels > div:not(.tuto-card) {
     opacity: 15%;
     width: 47px;
     padding: 1px 0;
@@ -169,6 +183,11 @@
     text-indent: 1.5em;
 }
 
+.quest-card > .quest-area > .tuto-card {
+    font-size: .7em;
+    top: 5em;
+}
+
 .quest-card > .quest-area::before {
     position: absolute;
     height: 18px;
@@ -217,6 +236,20 @@
     border-radius: 10px;
     overflow-x: auto;
 }
+
+.quest-card > .code-block:has(.tuto-card){
+    overflow-x: inherit;
+}
+
+.quest-card > .code-block > .tuto-card {
+    top: 8em;
+    font-size: .65em;
+}
+
+.quest-card > .code-block > .tuto-card > p {
+    text-wrap: wrap;
+}
+
 
 .code-block > .code-capsule {
     color: rgb(162, 182, 203);
@@ -305,6 +338,12 @@
     row-gap: .4em;
 }
 
+.alternatives > div.tuto-card {
+    font-size: .8em;
+    top: -7em;
+    left: 0;
+}
+
 .alternatives > label {
     display: flex;
     align-items: start;
@@ -380,6 +419,13 @@ label:hover > .input-box > span {
     border-radius: 15px;
     border: 1px solid white;
     box-shadow: 0 0 2px rgba(128, 128, 128, 0.448);
+}
+
+.btn-container > .confirm-resp-button > .tuto-card {
+    font-size: .7em;
+    left: 0;
+    top: initial;
+    bottom: 3.5em;
 }
 
 .btn-container > .confirm-resp-button:disabled {
@@ -480,6 +526,14 @@ label.wrong-anim > .input-box>.radio-mask {
     padding: 2px 1em;
 }
 
+.btn-container > .next-quest-button > .tuto-card {
+    font-size: .7em;
+    top: initial;
+    left: initial;
+    right: 0;
+    bottom: 3.5em;
+}
+
 .btn-container > .next-quest-button:hover {
     border-color: var(--color-orange);
     transition-duration: .4s;
@@ -504,6 +558,80 @@ label.wrong-anim > .input-box>.radio-mask {
     height: 25px;
     fill: var(--color-gray);
 }
+
+
+/* Tutorial */
+
+.current-tuto {
+    position: relative;
+    z-index: 5 !important;
+    outline: 1px dashed orangered;
+    animation: tuto-flash 1s infinite ease-in-out;
+}
+
+.current-tuto > .tuto-card {
+    position: absolute;
+    top: 3em;
+    max-width: max-content;
+    width: 70vw;
+    border: 1px dashed rgb(255, 115, 0);
+    padding: .5em .8em;
+    background: white;
+    font-size: .5em;
+}
+
+.current-tuto > .tuto-card > h1 {
+    font-size: 1.2em;
+    color: var(--color-orange);
+}
+
+.current-tuto > .tuto-card > p {
+    color: var(--cor-carvao);
+    margin: .5em 0 .5em;
+}
+
+.current-tuto > .tuto-card > button {
+    background: transparent;
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 5px;
+    padding: 0 1em;
+    display: flex;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.current-tuto > .tuto-card > button:hover,
+.current-tuto > .tuto-card > button:hover > svg {
+    fill: var(--color-orange);
+    border-color: var(--color-orange);
+}
+
+.current-tuto > .tuto-card > button > svg {
+    width: 20px;
+    height: 15px;
+    fill: var(--color-gray);
+}
+
+
+.dificulty-levels > .tuto-card {
+    opacity: 1;
+}
+
+@keyframes tuto-flash {
+    0% {
+        outline-color: transparent;
+        background: rgb(255, 234, 196);
+    }
+
+    50% {
+        outline-color: var(--color-orange);
+    }
+
+    100% {
+        outline-color: transparent;
+    }
+}
+
 
 @keyframes border-flash {
     50% {
@@ -532,6 +660,13 @@ label.wrong-anim > .input-box>.radio-mask {
 }
 /* **************************** */
 
+@media screen and (max-width:960px){
+    .quest-header > .cronometer > .tuto-card {
+        width: 50vw;
+    }
+
+}
+
 
 @media screen and (max-width: 900px) {
 
@@ -549,6 +684,15 @@ label.wrong-anim > .input-box>.radio-mask {
         top: -2.5em;
     }
     
+}
+
+@media screen and (max-width:800px) {
+    .quest-header > .cronometer > .tuto-card {
+        left: initial;
+        right: -12vw;
+        max-width: max-content;
+        width: 70vw;
+    }
 }
 
 @media screen and (max-width: 660px) {
@@ -579,6 +723,10 @@ label.wrong-anim > .input-box>.radio-mask {
 @media screen and (max-width: 570px) {
     .dificulty-levels {
         top: -3em;
+    }
+
+    .quest-header > .cronometer > .tuto-card {
+        right: 0;
     }
 
     .quest-card > .quest-header {
