@@ -11,6 +11,7 @@ noLoginUser.define({ ranking: {} })
 
 connectKey.create()
 traffic.start()
+traffic.reset()
 
 Header('#header-capsule')
 Footer('#footer-capsule')

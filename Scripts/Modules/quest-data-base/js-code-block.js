@@ -80,6 +80,24 @@ const js = {
         return `${span('dollar-func', '${' + value + '}')}`
     },
 
+    param(value) {
+        return span('param', value)
+    },
+
+    case(value) {
+        if (value.constructor.name == 'Number') {
+            value = span('number', value)
+        } else {
+            value = `"${span('str-text', value)}"`
+        }
+        return span('statement', 'case ') + value + ':'
+        
+    },
+
+    ternary(cond, _true, _false) {
+        return cond + span('statement', '? ') + _true + span('statement', ': ') + _false
+    },
+
     consoleLog(value) {
         return `${span('var-name', 'console')}.${span('func-method-name', 'log')}(${value})`
     }
@@ -133,11 +151,78 @@ const codeBasic = {
 
     q16: `
     ${js.consoleLog(js.call('isNaN', js.str('5')))}
-    ${js.consoleLog(js.call('isNaN', js.str('1,5')))}`
+    ${js.consoleLog(js.call('isNaN', js.str('1,5')))}`,
+
+    q17: `
+    ${js.var('var', 'myObject')}= {
+        ${js.useVar('nome') + ': ' + js.str('Pedro')},
+        ${js.useVar('idade') + ': ' + js.numb(17)},
+    }
+    `,
+
+    q20: `
+    ${js.var('const', 'soma')}= (${js.param('val1') + ', ' + js.param('val2')})=>{
+        ${js.op('return ') + js.useVar('val1') + ' + ' + js.useVar('val2')}
+    }`,
+
+    q24: `
+    ${js.var('const', 'result', 0)}
+    ${js.useConst('result')} = ${js.numb(1)+ ' + ' + js.str(3)}
+    ${js.op('switch')}(${js.useConst('result')}){
+        ${js.case(3)}
+            ${js.consoleLog(js.str('Hello, world!'))}
+            ${js.op('break')}
+        ${js.case(4)}
+            ${js.consoleLog(js.str('Bom dia!'))}
+            ${js.op('break')}
+        ${js.case('13')}
+            ${js.consoleLog(js.str('Boa tarde!'))}
+            ${js.op('break')}
+        ${js.case(5)}
+            ${js.consoleLog(js.str('Boa noite!'))}
+            ${js.op('break')}
+    }`
+}
+
+//MEDIUM
+const codeMedium = {
+    q1: `
+    ${js.var('const', 'number', 5)}
+    ${js.var('var', 'result')}= ${js.ternary(js.useConst('number') + ' > ' + js.numb(5), js.str('Liberado'), js.str('Bloqueado'))}
+    ${js.consoleLog(js.useVar('result'))}`,
+
+    q2: `
+    ${js.var('const', 'number', 5)}
+    ${js.var('var', 'result')}= ${js.ternary(js.useConst('number') + ' > ' + js.numb(5), js.str('Liberado'), js.str('Bloqueado'))}`,
+
+    q4: `
+    ${js.var('let', 'moreNumbers')}= [${js.numb(2)}, ${js.numb(4)}, ${js.numb(6)}, ${js.numb(8)}]
+    ${js.var('let', 'numbers')}= [${js.numb(0)}, ${js.numb(1)}, ${js.numb(2)}, ${js.numb(3)}, ${js.op('...') + js.useVar('moreNumbers')}]
+    ${js.consoleLog(js.useVar('numbers'))}`,
+
+    q9: `
+    ${js.function('test', 'arg1, arg2')}{
+        ${js.consoleLog(js.useVar('arg1') + ', ' + js.useVar('arg2'))}
+    }
+
+    ${js.var('const', 'arr')}= [${js.str('Teste')}, ${js.numb(123)}, ${js.str('Olá')}]
+    ${js.call('test', '...' + js.useConst('arr'))}
+    `,
+
+    q12: `
+    ${js.var('var', 'array')}= [${js.numb(3)}, ${js.numb(12)}, ${js.numb(4)}, ${js.numb(3)}, ${js.numb(0)}]
+    ${js.useVar('array')} = ${js.useVar('array')}.${js.call('replace', js.numb(3) + ', ' + js.numb(999))}
+    ${js.consoleLog(js.useVar('array'))}`,
+
+    q16: `
+    ${js.var('const', 'child')}= ${js.useVar('document')}.${js.call('getElementById', js.str('element-child'))}
+    ${js.var('const', 'parent')}= ${js.useVar('document')}.${js.call('getElementById', js.str('element-parent'))}
+    ${js.useConst('parent')}.${js.call('appendChild', js.useConst('child'))}`
+    
 }
 
 export function frag(content) {
     return `<code class="frag">${content}</code>`
 }
 
-export {codeBasic}
+export {codeBasic, codeMedium}

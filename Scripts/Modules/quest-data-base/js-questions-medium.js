@@ -1,221 +1,223 @@
+import { frag } from "./js-code-block.js"
+import { codeMedium } from "./js-code-block.js"
 
 const jsMedium = {
     q0: {
-        text: 'Teste Teste Teste?',
+        text: 'O que é um Operador Condicional Ternário em JavaScript?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'É o nome dado às operações executadas com ' + frag('switch case') + '.',
+            b: 'Operador JavaScript que possui três operações em uma linha. Este operador é um atalho para a instrução ' + frag('if') + ' e ' + frag('else') + '.',
+            c: `São denominados Condicionais Ternárias os operadores ${frag('&&')} (e) e ${frag('||')} (ou) em JavaScript.`,
+            d:'Qualquer condição que use os operadores de cálculo.'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q1: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Marque a alternativa correta para a sáida do seguinte trecho de código.',
+        code: codeMedium.q1,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Bloqueado',
+            b: 'Liberado',
+            c: 'True',
+            d:'False'
         },
 
         correct: 'a'
     },
 
     q2: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Marque a alternativa correta para o seguinte trecho de código.',
+        code: codeMedium.q2,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Trata-se de uma operação Spread',
+            b: 'Trata-se de uma condição binária',
+            c: 'Trata-se de uma condição ternária',
+            d:'Trata-se de uma condição imediata'
         },
 
-        correct: 'a'
+        correct: 'c'
     },
 
     q3: {
-        text: 'Teste Teste Teste?',
+        text: 'O que é um Operador Spread?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Operador que permite verificar se valores numéricos são do tipo inteiro ou decimal',
+            b: 'Permite espalhar valores de um objeto iterável, como um Array em outro',
+            c: 'Permite percorrer um objeto não iterável',
+            d:'Permite reorganizar um Array por ordem crescente ou decrescente'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q4: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Qual é a saída para o seguinte trecho de código?',
+        code: codeMedium.q4,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: '[0, 1, 2, 3, [2, 4, 6, 8]]',
+            b: '[0, 1, 2, 3, 4, 6, 8]',
+            c: '[0, 1, 3]',
+            d:'[0, 1, 2, 3, 2, 4, 6, 8]'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q5: {
-        text: 'Teste Teste Teste?',
+        text: 'O que é o ECMAScript?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Um conjunto de ferramentas usadas para adaptar navegadores às novas atualizações do JavaScript.',
+            b: 'O ECMAScript é a própria linguagem JavaScript e sua padronização.',
+            c: 'É a documentação oficial de cada versão do JavaScript.',
+            d:'É o nome dados às novas atualizações do JavaScript como, por exemplo, ES6..etc.'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q6: {
-        text: 'Teste Teste Teste?',
+        text: 'O que significa um objeto ser iterável?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Um objeto capaz de retornar seus membros um de cada vez.',
+            b: 'Um objeto capaz de receber múltiplos valores.',
+            c: 'Um objeto que não pode ser modificado, excluído ou receber novos valores.',
+            d:'Um objeto que pode ser modificado, excluído ou receber novos valores.'
         },
 
         correct: 'a'
     },
 
     q7: {
-        text: 'Teste Teste Teste?',
+        text: 'O que é um HTMLCollection em JavaScript?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Uma coleção (Array) de clones de elementos que podem ser reaproveitados em outras partes do documento.',
+            b: 'É uma coleção de atributos de um determinado elemento. Sendo possível obtê-los por métodos como, por exemplo, ' + frag('.qetAttribute()')+'.',
+            c: 'Uma coleção genérica (Array) de elementos que podem ser acessados um a um com métodos como, por exemplo, ' + frag('.forEach()') + ' e/ou ' + frag('.map()') + '.',
+            d:'Uma coleção genérica (Array) de elementos na ordem em que aparecem no documento e oferece métodos e propriedades para selecioná-los da lista.'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q8: {
-        text: 'Teste Teste Teste?',
+        text: 'Qual a direfença entre os métodos' + frag('forEach()') + ' e ' + frag('map()') + ' em JavaScript?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: `${frag('forEach()')} percore objetos iteráveis e executa uma função para cada elemento. ${frag('map()')} percorre apenas nodeList e HTMLCollection e executa uma dunção para cada elemento.`,
+            b: `${frag('forEach()')} é capaz de percorrer Arrays e Strings e executa uma dada função para cada elemento. ${frag('map()')} faz o mesmo que o forEach, porém não é capaz de percorrer objetos do tipo string.`,
+            c: `${frag('forEach()')} executa uma dada função em cada elemento de um array. ${frag('map()')} invoca a função callback passada por argumento para cada elemento do Array e devolve um novo Array como resultado.`,
+            d:'Nenhuma das alternativas acima.'
         },
 
-        correct: 'a'
+        correct: 'c'
     },
 
     q9: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Marque a alternativa correta para a saída do seguinte trecho de código.',
+        code: codeMedium.q9,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: '[Teste, 123, Olá]',
+            b: 'Teste 123',
+            c: 'Teste 123 Olá',
+            d:'Teste 123 Olá undefined'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q10: {
-        text: 'Teste Teste Teste?',
+        text: 'O que o método ' + frag('stopPropagation()') + ' faz?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: `Desabilita o evento de click em um ${frag('button')} ou ${frag('a href=""')}, impedindo que o usuário o use até que seja liberado.`,
+            b: 'Remove um evento de um elemento passando como parâmetro o tipo de evento e a função que é executada.',
+            c: 'Evita que um elemento que esteja escondido ou atrás de outro elemento dispare qualquer evento.',
+            d:'Evita que o evento seja processado por outros elementos da hierarquia (elemento-pai, e elemento-filho) e se espalhe.'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q11: {
-        text: 'Teste Teste Teste?',
+        text: 'Qual a função JavaScript é responsável por capturar eventos disparados na página?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'getEventListenner()',
+            b: 'mouseEvent()',
+            c: 'addEventListenner()',
+            d: 'preventDefault()'
         },
 
-        correct: 'a'
+        correct: 'c'
     },
 
     q12: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Marque a alternativa correta para a sáida do seguinte trecho de código.',
+        code: codeMedium.q12,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: '[999, 12, 4, 3, 0]',
+            b: '[999, 12, 4, 999, 0]',
+            c: '[3, 12, 4, 999, 0]',
+            d:'Nenhuma das alternativas acima.'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q13: {
-        text: 'Teste Teste Teste?',
+        text: 'O que o método ' + frag('replace()') + ' faz?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Permite que você encontre todas as ocorrências de uma determinada sequência de caracteres em uma string e as substitua por outra sequência de caracteres especificada.',
+            b: 'Permite que você encontre apenas a primeira ocorrência de uma determinada sequência de caracteres em uma string e as substitua por outra sequência de caracteres especificada.',
+            c: 'Permite que você encontre todas as ocorrências de um determinado valor em um Array e as substitua por outro valor especificado',
+            d:'Permite que você encontre apenas a primeira ocorrência de um determinado valor em um Array e as substitua por outro valor especificado'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q14: {
-        text: 'Teste Teste Teste?',
+        text: 'O que é um método na programação?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Determinam o comportamento dos objetos de uma classe ou propriedades de um objeto e são análogos a funções ou procedimentos da programação estruturada.',
+            b: 'Quando uma propriedade de um objeto recebe uma função sem retorno esta se torna um método.',
+            c: 'São funções que modificam as propriedades de um determinado objeto e retorna uma nova propriedade',
+            d:'Nenhuma das alternativas acima.'
         },
 
         correct: 'a'
     },
 
     q15: {
-        text: 'Teste Teste Teste?',
+        text: 'Qual método JavaScript adiciona um nó ao final da lista de filhos de um nó especificado?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'appendNode()',
+            b: 'insertNode()',
+            c: 'addChild()',
+            d:'appendChild()'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q16: {
-        text: 'Teste Teste Teste?',
-        code: null,
+        text: 'Marque a alternativa correta para o seguinte trecho de código.',
+        code: codeMedium.q16,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Remove o nó filho de seu pai e o adiciona em outro nó pai.',
+            b: 'Apenas adiciona o nó filho em um nó pai',
+            c: 'Adiciona um clone do nó filho em um nó pai.',
+            d:'Insere o nó filho no início da lista de nós filhos de um nó pai.'
         },
 
         correct: 'a'

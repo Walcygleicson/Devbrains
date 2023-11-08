@@ -43,6 +43,11 @@ header {
     display: none;
 } */
 
+
+li.unavaliable {
+    display: none;
+}
+
 .logo {
     width: 7em;
     border-radius: 10px;

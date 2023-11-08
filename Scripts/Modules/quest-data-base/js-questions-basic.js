@@ -198,7 +198,102 @@ const jsBasic = {
             d: 'false, true'
         },
         correct: 'd'
+    },
+    q17: {
+        text: 'Marque a alternativa correta para se atribuir uma propriedade nova ao objeto abaixo.',
+        code: codeBasic.q17,
+        options: {
+            a: 'myObject.sexo = "masculino"',
+            b: 'myObject[2]["sexo"] = "masculino"',
+            c: 'myObject.push(sexo: "masculino")',
+            d: 'myObject["sexo"]: "masculino"'
+        },
+        correct: 'a'
+    },
+
+    q18: {
+        text: 'Qual a forma correta de se declarar um objeto em Javascript?',
+        code: null,
+        options: {
+            a: 'let obj = []',
+            b: 'let obj = ()',
+            c: 'let obj = {}',
+            d: 'Nenhuma das alternativas acima.'
+        },
+        correct: 'c'
+    },
+
+    q19: {
+        text: 'O que são funções em Javascript?',
+        code: null, 
+        options: {
+            a: 'São comandos que executam uma determinada tarefa.',
+            b: 'São pedaços de códigos que podem ser reutilizados várias vezes.',
+            c: 'São repetições de uma tarefa.',
+            d: 'São um tipo de laço de repetição que executam uma tarefa e retorna um valor.'
+        },
+        correct: 'b'
+    },
+
+    q20: {
+        text: 'Marque a alterniva correta para o seguinte trecho de código.',
+        code: codeBasic.q20,
+        options: {
+            a: 'Função de soma',
+            b: 'Função anônima',
+            c: 'Arrow function',
+            d: 'Função imediata'
+        },
+        correct: 'c'
+    },
+
+    q21: {
+        text: 'Para que serve a declaração ' + frag('return') + '?',
+        code: null,
+        options: {
+            a: 'Retorna a execução de um bloco de código para o início.',
+            b: 'Finaliza a execução de um loop e retorna para a execução normal do script.',
+            c: 'Congela e execução de uma função até que esta retorne algum valor, então prossegue com a execução normal.',
+            d: 'Finaliza a execução de uma função e especifica os valores que devem ser retonados para onde a função foi chamada.'
+        },
+        correct: 'd'
+    },
+
+    q22: {
+        text: `Marque a alternativa correta que defina as declarações ${frag('if')}, ${frag('else if')} e ${frag('else')}.`,
+        code: null,
+        options: {
+            a: 'Verifica se uma condição é verdadeira - Verifica se uma nova condição é verdadeira se a anterior for falsa - Verifica se uma condição é verdadeira se todas as anteriores forem falsas',
+            b: 'Verifica se uma condição é verdadeira - A condição else if não existe neste contexto - Verifica se uma condição é verdadeira se todas as anteriores forem falsas',
+            c: 'Verifica se uma condição é verdadeira - Verifica se uam condição é verdadeira somente se os ifs forem falsos - Verifica se uma condição é verdadeira se todas as anteriores forem falsas',
+            d: 'Verifica se uma condição é verdadeira - Verifica se uma condição é verdadeira se a anterior for falsa - Verifica se uma condição é verdadeira somente se o else if anterior for falso.'
+        },
+        correct: 'a'
+    },
+
+    q23: {
+        text: 'O que são parâmetros de uma função?',
+        code: null,
+        options: {
+            a: 'Variáveis declaradas na definição da função e que recebem argumentos, sendo eles opcionais ou obrigatórios.',
+            b: 'Variáveis declaradas que só podem ser acessadas de dentro da função.',
+            c: 'Variáveis que permitem pasar valores para dentro da função.',
+            d: 'Todas as alternativas acima.'
+        }
+    },
+
+    q24: {
+        text: 'Qual a saída correta para o seguinte trecho de código?',
+        code: codeBasic.q24,
+        options: {
+            a: 'Hello, world!',
+            b: 'Bom dia!',
+            c: 'Boa tarde!',
+            d: 'Boa noite!'
+        },
+        correct: 'c'
     }
+
 }
 
 

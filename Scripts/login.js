@@ -1,7 +1,10 @@
 import svg from "./Modules/svg-icons.js";
-import { focusInOut, AUX, $, connectKey, noLoginUser} from "./Modules/aux-tools.js";
+import { focusInOut, AUX, $, connectKey, noLoginUser, traffic} from "./Modules/aux-tools.js";
 connectKey.create()
 noLoginUser.create()
+traffic.start()
+traffic.reset()
+traffic.define({langName: null, quizLang: null})
 
 // Entrar automaticamente
 if (connectKey.get('user') != null && connectKey.get('keep') == true) {
@@ -16,14 +19,15 @@ const alert = {
     passLen: ` Senha deve conter pelo menos ${$('#senha').getAttribute('minLength')} caracteres!`,
     incorrectName: ' Usuário não encontrado!',
     incorrectPass: ' Senha está incorreta!',
-    confirmError: ' As senhas não correspondem!'
+    confirmError: ' As senhas não correspondem!',
+    spaceName: ' Nome de usário não deve conter espaços!'
 }
 
 const loginIconsList = [svg.user(), svg.lock(), svg.shieldSheck()]
 const inputIconCapsule = document.querySelectorAll('.input-icon-capsule')
 const enterButton = document.querySelector('.confirm-button')
 const inputAlerts = [...document.querySelectorAll('.input-alert')]
-const confirmPass = document.querySelector('#confirm-senha')
+// const confirmPass = document.querySelector('#confirm-senha')
 const registerButton = document.querySelector('.other-option-button')
 const form = document.querySelector('.inputs-container')
 const input = document.querySelectorAll('.input > input')
@@ -46,7 +50,7 @@ let fail = false
 enterButton.addEventListener('click', (e) => {
     e.preventDefault()
     const autologin = document.querySelector('#autologin')
-    const password = document.querySelector('#senha')
+    // const password = document.querySelector('#senha')
     const getUser = JSON.parse(localStorage.getItem(input[0].value))
 
     const checkInput = (i, idName, checkVal) => {
@@ -75,6 +79,7 @@ enterButton.addEventListener('click', (e) => {
     // verifica os requisitos dos campos e dispara o texto de alerta
     input.forEach((elem, i) => {
         const minLength = elem.getAttribute('minLength')
+
         // Para LOGIN
         if (formType('login') && elem.id != 'confirm-senha') {
             // Alerta de campo vazio
@@ -119,6 +124,12 @@ enterButton.addEventListener('click', (e) => {
                 checkInput(i, 'confirm-senha', false)
                 elem.id == 'name' ? setAlertMsg(i, alert.icon + alert.nameLen): null
                 elem.id == 'senha' ? setAlertMsg(i, alert.icon + alert.passLen) : null
+
+             // Alerta de espaços em nome de usuário
+            } else if (input[0].value.includes(' ')) {
+                setAlertMsg(0, alert.icon + alert.spaceName)
+                checkInput(1, 'name', false)
+
             } else {
                 setAlertMsg(i, '')
                 checkInput(i, 'name', true)
@@ -281,6 +292,14 @@ $('.view-pass-button').forEach((butt, i) => {
             butt.previousElementSibling.type = 'text'
         }
     }
+})
+
+
+//Evento de click nas opções de INICIAR RÁPIDO
+$('.lang-item').forEach((li) => {
+    li.addEventListener('click', () => {
+        traffic.set({langName: li.querySelector('.inner-text').innerText, quizLang: li.id})
+    })
 })
 
 

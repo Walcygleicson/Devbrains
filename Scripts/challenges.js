@@ -8,6 +8,7 @@ import svg from "./Modules/svg-icons.js";
 Header('#header-capsule')
 Footer('#footer-capsule')
 traffic.start()
+traffic.reset()
 noLoginUser.create()
 noLoginUser.define({ranking: {}})
 connectKey.create()

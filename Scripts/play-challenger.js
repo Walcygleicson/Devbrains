@@ -533,4 +533,6 @@ function testeCodeBlock(code, active = true) {
 
 }
 
-testeCodeBlock(jsBasic.q16.code, false)
+//testeCodeBlock(jsMedium.q16.code)
+
+
