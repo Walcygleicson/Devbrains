@@ -107,7 +107,7 @@ const jsMedium = {
     },
 
     q8: {
-        text: 'Qual a direfença entre os métodos' + frag('forEach()') + ' e ' + frag('map()') + ' em JavaScript?',
+        text: 'Qual a direfença entre os métodos ' + frag('forEach()') + ' e ' + frag('map()') + ' em JavaScript?',
         code: null,
         options: {
             a: `${frag('forEach()')} percore objetos iteráveis e executa uma função para cada elemento. ${frag('map()')} percorre apenas nodeList e HTMLCollection e executa uma dunção para cada elemento.`,
@@ -224,43 +224,69 @@ const jsMedium = {
     },
 
     q17: {
-        text: 'Teste Teste Teste?',
+        text: 'O que o método' + frag(' insertBefore() ') + 'faz?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Insere um nó depois do nó de referência como um filho de um nó pai especificado.',
+            b: 'Insere um valor em um Array antes do valor de referência especificado pelo seu index.',
+            c: 'Insere uma propriedade em um Object antes da propriedade de referência especificado.',
+            d:'Insere um nó antes do nó de referência como um filho de um nó pai especificado.'
         },
 
-        correct: 'a'
+        correct: 'd'
     },
 
     q18: {
-        text: 'Teste Teste Teste?',
+        text: 'Em JavaScript quando tentamos referenciar um nó usando um dos métodos como, por exemplo,' + frag(' getElementById() ') + 'e este nó não existe no documento qual tipo de valor nos é retornado?',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'undefined.',
+            b: 'null.',
+            c: 'NaN.',
+            d:'Reference Error.'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
 
     q19: {
-        text: 'Teste Teste Teste?',
+        text: 'É correto afirmar que:',
         code: null,
         options: {
-            a: 'Teste',
-            b: 'Teste',
-            c: 'Teste',
-            d:'Teste'
+            a: 'Java e JavaScript são a mesma linguagem de programação',
+            b: 'JavaScript é uma linguagem de scripts OOP. Seu código é executado apenas em browsers.',
+            c: 'JavaScript é uma linguagem compilada de alta tipagem tendo sua sintaxe baseada na linguagem Java.',
+            d:'JavaScript não é uma linguagem OOP, sendo utilizada apenas em estilização de páginas web.'
         },
 
-        correct: 'a'
+        correct: 'b'
     },
+
+    q20: {
+        text: 'Qual método JavaScript é reponsável por dividir uma string em substrings e retorná-las em um Array?',
+
+        code: null,
+        options: {
+            a: 'divide()',
+            b: 'replace()',
+            c: 'split()',
+            d: 'slice()'
+        },
+
+        correct: 'c'
+    },
+
+    q21: {
+        text: 'O que a função' + frag(' setTimeout()') + ' faz?',
+
+        code: null,
+        options: {
+            a: 'Atrasa a execução de um trecho de código por um determinado período de tempo',
+            b: 'Executa um determinado código repetidamente em um intervalo de tempo definido.',
+            c: 'Define um tempo de espera para cada iteração de um loop for.',
+            d: 'Executa um decremento em um objeto do tipo Number até que seu valor chegue a zero.'
+        }
+    }
     
 }
 

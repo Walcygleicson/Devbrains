@@ -533,6 +533,37 @@ function testeCodeBlock(code, active = true) {
 
 }
 
-//testeCodeBlock(jsMedium.q16.code)
+//testeCodeBlock(jsAdvanced.q6.code)
+
+
+
+function resolveAfter2Seconds(x) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(x);
+    }, 2000);
+  });
+}
+
+async function f1() {
+  var x = await resolveAfter2Seconds(10);
+  console.log(x); // 10
+}
+f1();
+
+
+///
+
+function* foo() {
+  var index = 0;
+  while (index <= 2) yield index++;
+}
+
+var iterator = foo();
+console.log(iterator.next()); // { value: 0, done: false }
+console.log(iterator.next());
+
+
+
 
 

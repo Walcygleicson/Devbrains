@@ -221,8 +221,19 @@ const codeMedium = {
     
 }
 
+
+const codeAdvanced = {
+    q4: `
+    ${js.function(js.op('*') + 'foo')}{}`,
+
+    q6: `
+    ${js.var('var', 'choose')}= ${js.call('parseInt', js.useVar('Math') + '.' + js.call('random') + ' * ' + js.numb(10))}
+    ${js.consoleLog(js.useVar('choose'))}`
+
+}
+
 export function frag(content) {
     return `<code class="frag">${content}</code>`
 }
 
-export {codeBasic, codeMedium}
+export {codeBasic, codeMedium, codeAdvanced}
