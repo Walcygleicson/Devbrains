@@ -31,7 +31,7 @@ traffic.define({
 
 // Variaveis
 var interval
-let runTime = { min: 0, sec: 60, ms: 60 } // 1 minuto
+let runTime = { min: 1, sec: 20, ms: 60 } // 1 minuto
 let started = false
 const levels = ['basic', 'medium', 'advanced', 'pro']
 
@@ -80,6 +80,7 @@ switch (quest.level) {
     case 'pro':
         questList = jsPro
         len = Object.keys(jsPro).length
+        runTime.sec = 30
         break
 }
 
@@ -160,6 +161,9 @@ $('.start-button').addEventListener('click', (e) => {
             $('.code-capsule').innerHTML = questList[randomQues]['code']
             $('.code-block').classList.remove('code-empty')
             $('.code-block').classList.add('code-full')
+
+            //Adicionar tempo quando houver bloco de código
+            runTime.sec = 60
         }
         
         //Timer
@@ -195,7 +199,7 @@ $('.start-button').addEventListener('click', (e) => {
             $('#sec').textContent = formatTime(runTime.sec)
             $('#min').textContent = formatTime(runTime.min)
         
-        }, 12)
+        }, 20)
     }
 })
 
@@ -242,7 +246,7 @@ $('.next-quest-button').addEventListener('click', () => {
     })
 
     //Subir para próximo nível quando todas as 10 quest de cada nível forem respondidas
-    if (quest.count > 3) {
+    if (quest.count > 10) {
         // Setar informações de nível
         traffic.set({
             quesCount: 1,
@@ -254,7 +258,7 @@ $('.next-quest-button').addEventListener('click', () => {
 
     // Contagem de pontuação ao final do desafio
     //teste
-    if (quest.number > 12) { // 12 Teste
+    if (quest.number > 40) {
         // Data e Hora
         const data = `${new Date().getDate()}/${formatTime(new Date().getMonth() + 1)}/${new Date().getFullYear()}`
         const hora = `${new Date().getHours()}:${formatTime(new Date().getMinutes())} ${Number(new Date().getHours()) > 11? 'PM': 'AM'}`
@@ -275,14 +279,14 @@ $('.next-quest-button').addEventListener('click', () => {
 
         
         // Deve-se acertar 100% do nível basico e metade do nível médio para receber pontuação do nível médio. etc
-        if (quest.score <= (scoreValue.basic * 3) + ((scoreValue.medium * 3) /2)) {
+        if (quest.score <= (scoreValue.basic * 10) + ((scoreValue.medium * 10) /2)) {
             roundLevel = 'basic'
             
             
-        } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3)) + ((scoreValue.pro * 3) / 2)) {
+        } else if (quest.score <= ((scoreValue.basic * 10) + (scoreValue.medium * 10)) + ((scoreValue.pro * 10) / 2)) {
             roundLevel = 'medium'
             
-        } else if (quest.score <= ((scoreValue.basic * 3) + (scoreValue.medium * 3) + (scoreValue.advanced * 3) + ((scoreValue.pro * 3) / 2))) {
+        } else if (quest.score <= ((scoreValue.basic * 10) + (scoreValue.medium * 10) + (scoreValue.advanced * 10) + ((scoreValue.pro * 10) / 2))) {
             roundLevel = 'advanced'
             
         } else {
@@ -522,48 +526,14 @@ function openCongratModal() {
 //*********************************
 
 
-//teste de bloco de código
-function testeCodeBlock(code, active = true) {
-    if (active) {
+// (function(code, active = true) {
+//     if (active) {
         
-        $('.code-block').classList.remove('code-empty')
-        $('.code-block').classList.add('code-full')
-        $('.code-capsule').innerHTML = code
-    }
+//         $('.code-block').classList.remove('code-empty')
+//         $('.code-block').classList.add('code-full')
+//         $('.code-capsule').innerHTML = code
+//     }
 
-}
-
-//testeCodeBlock(jsAdvanced.q6.code)
-
-
-
-function resolveAfter2Seconds(x) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(x);
-    }, 2000);
-  });
-}
-
-async function f1() {
-  var x = await resolveAfter2Seconds(10);
-  console.log(x); // 10
-}
-f1();
-
-
-///
-
-function* foo() {
-  var index = 0;
-  while (index <= 2) yield index++;
-}
-
-var iterator = foo();
-console.log(iterator.next()); // { value: 0, done: false }
-console.log(iterator.next());
-
-
-
-
-
+// })(jsPro.q17.code)
+//base64
+//includes

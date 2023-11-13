@@ -285,8 +285,22 @@ const jsMedium = {
             b: 'Executa um determinado código repetidamente em um intervalo de tempo definido.',
             c: 'Define um tempo de espera para cada iteração de um loop for.',
             d: 'Executa um decremento em um objeto do tipo Number até que seu valor chegue a zero.'
-        }
-    }
+        },
+
+        correct: 'a'
+    },
+
+    q22: {
+        text: 'O qué um DOM em JavaScript?',
+        code: null,
+        options: {
+            a: 'É a sigla para Document Object Manipulation (Manipulação de Objetos do Documento).',
+            b: '(Document Object Model) Fornece uma representação do documento como um grupo estruturado de nós e objetos.',
+            c: 'Representa um grupo hierárquico dos nós de um documento onde se pode obter um nó especificando seu nível na árvore de nós.',
+            d: 'DOM é a maneira como o JavaScript lida com a manipulação de elementos html.'
+        },
+        correct: 'b'   
+    },
     
 }
 

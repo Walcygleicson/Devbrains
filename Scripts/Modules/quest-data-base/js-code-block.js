@@ -83,6 +83,10 @@ const js = {
     param(value) {
         return span('param', value)
     },
+    this(prop) {
+        prop==undefined? prop='': prop = '.'+span('var-name', prop)
+        return span('this', 'this')+prop
+    },
 
     case(value) {
         if (value.constructor.name == 'Number') {
@@ -92,6 +96,10 @@ const js = {
         }
         return span('statement', 'case ') + value + ':'
         
+    },
+
+    prop(name, value) {
+        return span('var-name', name) + ': ' + value + ','
     },
 
     ternary(cond, _true, _false) {
@@ -228,12 +236,103 @@ const codeAdvanced = {
 
     q6: `
     ${js.var('var', 'choose')}= ${js.call('parseInt', js.useVar('Math') + '.' + js.call('random') + ' * ' + js.numb(10))}
-    ${js.consoleLog(js.useVar('choose'))}`
+    ${js.consoleLog(js.useVar('choose'))}`,
 
+    q7: `
+    ${js.function(js.op('*') + 'example')}{
+        ${js.var('var', 'idx', 0)}
+        ${js.op('while')}(${js.useVar('idx')} < ${js.numb(2)}){${js.op('yield') + js.useVar(' idx')}++}
+    }
+
+    ${js.var('var', 'iterator')}= ${js.call('example')}
+
+    ${js.consoleLog(js.useVar('iterator') + '.' + js.call('next'))}
+    ${js.consoleLog(js.useVar('iterator') + '.' + js.call('next'))}
+    ${js.consoleLog(js.useVar('iterator') + '.' + js.call('next'))}`,
+
+    q13: `
+    ${js.var('const', 'myObj')}= {
+        ${js.useVar('name')}: ${js.str('Luca')},
+        ${js.useVar('age')}: ${js.numb(23)},
+        ${js.useVar('gender')}: ${js.str('Male')}
+    }
+    
+    ${js.useVar('Object')}.${js.call('keys', js.useConst('myObj'))}.${js.call('forEach', `(${js.param('item')})=>{
+        ${js.consoleLog(js.useConst('myObj') + `[${js.useVar('item')}]`)}
+    }`)}`,
+
+
+    q14: `
+    ${js.var('let', 'myProps')}= {}
+    
+    ${js.useVar('Object')}.${js.call('defineProperty', js.useVar('myProps') + ', ' + js.str('prop1') + ', ' + `{
+        ${js.useVar('value')}: ${js.str('Olá')},
+        ${js.useVar('writable')}: ${js.bool(false)},
+        ${js.useVar('configurable')}: ${js.bool(false)}
+    }`)}
+    
+    ${js.useVar('myProps')}.${js.useVar('prop1')} = ${js.numb(12)}
+    ${js.op('delete')} ${js.useVar('myProps')}.${js.useVar('prop1')}
+    
+    ${js.consoleLog(js.useVar('myProps') + '.' + js.useVar('prop1'))}`
+
+}
+
+
+
+const codePro = {
+    q1: `
+    ${js.useVar('HTMLElement')}.${js.useConst('prototype')}.${js.useVar('myFn')} = ${js.function('', 'txt')}{
+        ${js.op('return')} ${js.this('innerHTML')} = ${js.useVar('text')}
+    }`,
+
+    q2: `
+    ${js.function('myFn')}{${js.op('return') + js.numb(' 0')}}
+    ${js.consoleLog(js.useVar('myFn') + '.' + js.useVar('name'))}`,
+    
+    q9: `
+    ${js.str('use strict')}
+    
+    ${js.useVar('x')} = ${js.numb(1.5)}`,
+
+
+    q11: `
+    ${js.op('(') + js.function('', 'x')}{${js.consoleLog(js.useVar('x'))}}${js.op(')(')}${js.numb(5) + js.op(')')}`,
+
+    q13: `
+    ${js.function('fn', 'x')}{
+        ${js.consoleLog(js.useVar('x'))}
+        ${js.call('fn', js.useVar('x'))}
+    }
+
+    ${js.call('fn', js.str('Hello'))}
+    `,
+
+
+    q16: `
+    ${js.var('const', 'myEvents')}= {
+        ${js.prop('foo', js.str('FOO'))}
+        ${js.prop('event', js.function() + `{${js.consoleLog(js.numb(0))}}`)}
+        ${js.prop('handleEvent', "()=>" + `{${js.consoleLog(js.numb(1))}}`)}
+        ${js.prop('callback', js.function() + `{${js.consoleLog(js.numb(2))}}`)}
+    }
+    ${js.useVar('document')}.${js.call('querySelector', js.str('.btn'))}.${js.call('addEventListenner', js.str('click') + ', ' + js.useConst('myEvents'))}`,
+    
+    q17: `
+    ${js.var('const', 'module')}= {
+        ${js.prop('myNumb', js.numb('23'))}
+        ${js.prop('myMethod', js.function() + `{
+            ${js.op('return')} ${js.this('myNumb')}
+        }`)}
+    }
+    
+    ${js.var('const', 'foo')}= ${js.useVar('module')}.${js.useVar('myMethod')}
+    ${js.var('const', 'bar')}= ${js.useVar('foo')}.${js.call('bind', js.useConst('module'))}
+    ${js.consoleLog(js.call('bar'))}`
 }
 
 export function frag(content) {
     return `<code class="frag">${content}</code>`
 }
 
-export {codeBasic, codeMedium, codeAdvanced}
+export {codeBasic, codeMedium, codeAdvanced, codePro}

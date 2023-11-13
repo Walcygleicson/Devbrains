@@ -279,7 +279,9 @@ const jsBasic = {
             b: 'Variáveis declaradas que só podem ser acessadas de dentro da função.',
             c: 'Variáveis que permitem pasar valores para dentro da função.',
             d: 'Todas as alternativas acima.'
-        }
+        },
+
+        correct: 'd'
     },
 
     q24: {

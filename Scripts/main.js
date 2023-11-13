@@ -77,7 +77,7 @@ function langSlideCards() {
                     <div class="logo-container">
                         <img class="lang-logo" src="${lang[id]['img']}" alt="logo de linguagem">
 
-                        <a href="play-challenger.html" class="go-to-challenger" id="${id}">Começar</a>
+                        <a href="${id=='js'? 'play-challenger.html': '##unavaliable'}" class="go-to-challenger" id="${id}">Começar</a>
                     </div>
 
                     <div class="lang-content ${best_score(id).className}">
@@ -106,10 +106,15 @@ function langSlideCards() {
 
         // Botão de iniciar desafio
         strElement.$('.go-to-challenger').onclick = function () {
-
-            // Salva a o nome da linguagem do desafio selecionado pelo usuário
-            traffic.define({ quizLang: id, langName: lang[id]['name'] })
-            traffic.set({ quizLang: id, langName: lang[id]['name'] })
+            if (id == 'js') {
+                // Salva a o nome da linguagem do desafio selecionado pelo usuário
+                traffic.define({ quizLang: id, langName: lang[id]['name'] })
+                traffic.set({ quizLang: id, langName: lang[id]['name'] })
+                
+            } else {
+                //Alerta para linguagens que ainda não possuem desafios
+                AlertModalDefault('O desafio ' + lang[id]['name'] + ' não está disponível no momento. Tente outra linguagem!', 'Ops!')
+            }
         }
 
         //Botão de Ver Ranking

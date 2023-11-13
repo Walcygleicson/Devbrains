@@ -45,7 +45,7 @@ function insertCards() {
             </div>
 
             <div class="a-container">
-                <a href="play-challenger.html" class="go-to-challenge" id="${key}">Começar</a>
+                <a href="${key=='js'? 'play-challenger.html': '##unavaliable'}" class="go-to-challenge" id="${key}">Começar</a>
             </div>
 
         </div>
@@ -69,12 +69,21 @@ function insertCards() {
                 AlertModalDefault('Você ainda não jogou este desafio! Inicie para ter acesso ao ranking!', 'Ops!')
             }
         })
+
         // Botão de iniciar desafio
         element.$('.go-to-challenge').onclick = function () {
-    
-            // Salva a o nome da linguagem do desafio selecionado pelo usuário
-            traffic.define({ quizLang: key, langName: lang[key]})
-            traffic.set({ quizLang: key, langName: lang[key]})
+            console.log(key)
+            //If provisório enquando só ha o quiz de JS
+            if (key == 'js') {
+                // Salva a o nome da linguagem do desafio selecionado pelo usuário
+                traffic.define({ quizLang: key, langName: lang[key]})
+                traffic.set({ quizLang: key, langName: lang[key] })
+                
+            } else {
+                //Alerta para linguagens que ainda não possuem desafios
+                AlertModalDefault('O desafio ' + lang[key] + ' não está disponível no momento. Tente outra linguagem!', 'Ops!')
+            }
+
         }
 
         $('.challenges-list').appendChild(element)

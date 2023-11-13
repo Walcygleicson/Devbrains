@@ -307,7 +307,12 @@ header {
 .code-capsule .statement,
 .code-capsule .template-str,
 .code-capsule .brace {
-    color: rgb(248, 59, 59)
+    color: rgb(248, 59, 59);
+}
+
+.code-capsule .this{
+    color: rgb(248, 59, 59);
+    font-family: var(--font-code-italic);
 }
 
 .quest-card > .code-empty {
