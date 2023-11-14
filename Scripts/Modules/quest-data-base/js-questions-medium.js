@@ -168,7 +168,7 @@ const jsMedium = {
             d:'Nenhuma das alternativas acima.'
         },
 
-        correct: 'd'
+        correct: 'a'
     },
 
     q13: {
